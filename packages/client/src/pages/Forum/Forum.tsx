@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-const ForumPage: FC = () => {
+const Forum: FC = () => {
   return <div>ForumPage</div>
 }
 
-export default ForumPage
+export default Forum

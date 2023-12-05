@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-const GamePage: FC = () => {
+const Game: FC = () => {
   return <div>GamePage</div>
 }
 
-export default GamePage
+export default Game

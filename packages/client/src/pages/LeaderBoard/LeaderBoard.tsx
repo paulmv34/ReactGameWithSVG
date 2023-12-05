@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-const LeaderBoardPage: FC = () => {
+const LeaderBoard: FC = () => {
   return <div>LeaderBoardPage</div>
 }
 
-export default LeaderBoardPage
+export default LeaderBoard
