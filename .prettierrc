@@ -1,7 +1,8 @@
 {
+  "printWidth": 120,
   "singleQuote": true,
   "semi": false,
-  "arrowParens": "avoid",
+  "arrowParens": "always",
   "bracketSameLine": true,
-  "width": 50
+  "trailingComma": "es5"
 }

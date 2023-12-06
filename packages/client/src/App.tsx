@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import { ROUTES } from './routes/Routes'
 
-import './App.css'
 import Error from './pages/Error/Error'
 import Login from './pages/Login/Login'
 import Registration from './pages/Registration/Registration'
