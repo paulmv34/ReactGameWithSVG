@@ -19,7 +19,18 @@ body {
   font-family: 'Press Start 2P', serif;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+}
+
 .wrapper {
   max-width: var(--content-size);
   margin: 0 auto;
+}
+
+.page {
+  min-height: 100vh;
 }

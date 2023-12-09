@@ -1,8 +1,6 @@
 import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { ROUTES } from './routes/Routes'
-
 import Error from './pages/Error/Error'
 import Login from './pages/Login/Login'
 import Registration from './pages/Registration/Registration'
@@ -12,6 +10,7 @@ import Game from './pages/Game/Game'
 import LeaderBoard from './pages/LeaderBoard/LeaderBoard'
 import Forum from './pages/Forum/Forum'
 import TopicForum from './pages/TopicForum/TopicForum'
+import { ROUTES } from '@/types/types'
 
 function App() {
   useEffect(() => {
@@ -39,7 +38,6 @@ function App() {
         <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
         <Route path="*" element={<Error codeError={404} />} />
       </Routes>
-      Вот тут будет жить ваше приложение :D
     </div>
   )
 }

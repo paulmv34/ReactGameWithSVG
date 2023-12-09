@@ -1,0 +1,17 @@
+.header {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 32px;
+
+  margin-bottom: 48px;
+}
+
+.rows {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 32px;
+}
