@@ -3,6 +3,7 @@ export enum ROUTES {
   REGISTRATION = '/registration',
   PROFILE = '/profile',
   MAIN = '/main',
+  ABOUT = '/about',
   GAME = '/game',
   LEADERBOARD = '/leaderboard',
   FORUM = '/forum',
