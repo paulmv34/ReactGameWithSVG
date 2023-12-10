@@ -3,7 +3,7 @@ import Row from './components/Row/Row'
 import { v4 as uuidv4 } from 'uuid'
 import { MenuProps } from './types'
 
-const LeaderTable = ({ data }: MenuProps) => {
+const MainMenu = ({ data }: MenuProps) => {
   return (
     <nav className={styles['main-menu']}>
       <ul className={styles['main-menu-list']}>
@@ -13,4 +13,4 @@ const LeaderTable = ({ data }: MenuProps) => {
   )
 }
 
-export default LeaderTable
+export default MainMenu

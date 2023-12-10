@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { ROUTES } from '../../routes/Routes'
-import ArrowBack from '../../components/ArrowBack/ArrowBack'
+import BackLink from '../../components/BackLink/BackLink'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 
@@ -10,9 +10,9 @@ const About: FC = () => {
       <Header />
 
       <div className="wrapper wrapper-backlink">
-        <ArrowBack to={ROUTES.MAIN} />
+        <BackLink to={ROUTES.MAIN} />
 
-        <div className="text">
+        <div className="text-container">
           <h2>Об игре</h2>
           <p>
             Описание игры и изображения носят информационный характер. Финальная версия игры может отличаться от

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import styles from './ArrowBack.module.scss'
-import { ArrowBackProps } from './types'
+import styles from './BackLink.module.scss'
+import { BackLinkProps } from './types'
 
-const ArrowBack = ({ to }: ArrowBackProps) => {
+const BackLink = ({ to }: BackLinkProps) => {
   return (
     <Link className={styles.backlink} to={to}>
       <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
@@ -16,4 +16,4 @@ const ArrowBack = ({ to }: ArrowBackProps) => {
   )
 }
 
-export default ArrowBack
+export default BackLink

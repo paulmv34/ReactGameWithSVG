@@ -1,5 +1,5 @@
 import { ROUTES } from '../../routes/Routes'
 
-export interface ArrowBackProps {
+export interface BackLinkProps {
   to: ROUTES
 }

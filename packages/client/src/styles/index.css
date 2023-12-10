@@ -55,11 +55,11 @@ h3 {
   line-height: 1;
 }
 
-.text {
+.text-container {
   font-family: Inter, serif;
 }
 
-.text p {
+.text-container p {
   margin-bottom: 24px;
 
   font-size: 20px;
