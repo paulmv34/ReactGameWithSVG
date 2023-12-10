@@ -13,7 +13,7 @@ const mockData: ScoreData[] = [
     date: new Date().toLocaleDateString(),
   },
   {
-    nickname: 'DastanFromWebpack12312312312312312',
+    nickname: 'DastanFromWebpack123',
     score: 8000,
     levels: 10,
     date: new Date().toLocaleDateString(),

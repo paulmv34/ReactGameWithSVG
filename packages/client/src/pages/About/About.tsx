@@ -1,10 +1,12 @@
 import { FC } from 'react'
 import { ROUTES } from '@/types/types'
+import styles from './About.module.scss'
 import BackLink from '../../components/BackLink/BackLink'
+import clsx from 'clsx'
 
 const About: FC = () => {
   return (
-    <section className="page">
+    <section className={clsx('page', styles.page)}>
       <div className="wrapper wrapper-backlink">
         <BackLink to={ROUTES.MAIN} />
 
