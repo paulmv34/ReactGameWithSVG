@@ -2,8 +2,7 @@ import { FC } from 'react'
 import LeaderTable from '../../modules/LeaderTable/LeaderTable'
 import styles from './LeaderBoard.module.scss'
 import { ROUTES, ScoreData } from '@/types/types'
-import { Link } from 'react-router-dom'
-import ArrowBack from '@/components/ArrowBack/ArrowBack'
+import BackLink from '@/components/BackLink/BackLink'
 import clsx from 'clsx'
 
 const mockData: ScoreData[] = [
@@ -14,7 +13,7 @@ const mockData: ScoreData[] = [
     date: new Date().toLocaleDateString(),
   },
   {
-    nickname: 'DastanFromWebpack',
+    nickname: 'DastanFromWebpack12312312312312312',
     score: 8000,
     levels: 10,
     date: new Date().toLocaleDateString(),
@@ -24,14 +23,10 @@ const mockData: ScoreData[] = [
 const LeaderBoard: FC = () => {
   return (
     <section className={clsx('page', styles.page)}>
-      <div className="wrapper">
+      <div className="wrapper wrapper-backlink">
         <h2 className={styles.title}>Рейтинг игроков</h2>
-        <div className={styles.container}>
-          <Link className={styles.link} to={ROUTES.MAIN}>
-            <ArrowBack />
-          </Link>
-          <LeaderTable data={mockData} />
-        </div>
+        <BackLink to={ROUTES.MAIN} />
+        <LeaderTable data={mockData} />
       </div>
     </section>
   )

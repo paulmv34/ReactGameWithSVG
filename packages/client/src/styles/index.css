@@ -16,6 +16,12 @@
   --wrapper-padding: 30px;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   font-family: 'Press Start 2P', serif;
 }
@@ -33,9 +39,13 @@ body {
 }
 
 .page {
-  min-height: 100vh;
-
   background: var(--color-background);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
 }
 
 h2 {

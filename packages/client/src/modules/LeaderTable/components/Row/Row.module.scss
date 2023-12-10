@@ -5,3 +5,15 @@
 
   gap: 32px;
 }
+
+.td {
+  font-size: 1.25rem;
+}
+
+.nickname {
+  max-width: 320px;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

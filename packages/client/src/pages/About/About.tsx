@@ -1,14 +1,10 @@
 import { FC } from 'react'
 import { ROUTES } from '@/types/types'
 import BackLink from '../../components/BackLink/BackLink'
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
 
 const About: FC = () => {
   return (
     <section className="page">
-      <Header />
-
       <div className="wrapper wrapper-backlink">
         <BackLink to={ROUTES.MAIN} />
 
@@ -74,8 +70,6 @@ const About: FC = () => {
           </p>
         </div>
       </div>
-
-      <Footer />
     </section>
   )
 }

@@ -5,17 +5,17 @@ import { LeaderboardProps } from './types'
 
 const LeaderTable = ({ data }: LeaderboardProps) => {
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.header}>
-        <span>Игрок</span>
-        <span>Очки</span>
-        <span>Уровни</span>
-        <span>Дата</span>
+        <span className={styles.th}>Игрок</span>
+        <span className={styles.th}>Очки</span>
+        <span className={styles.th}>Уровни</span>
+        <span className={styles.th}>Дата</span>
       </div>
       <div className={styles.rows}>
         {data?.length > 0 && data.map((record) => <Row record={record} key={uuidv4()} />)}
       </div>
-    </div>
+    </>
   )
 }
 
