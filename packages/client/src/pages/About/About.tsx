@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
 import { ROUTES } from '../../routes/Routes'
 import ArrowBack from '../../components/ArrowBack/ArrowBack'
 import Header from '../../components/Header/Header'
