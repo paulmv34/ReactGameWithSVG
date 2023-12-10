@@ -1,14 +1,12 @@
 import { FC } from 'react'
-import { ROUTES } from '../../routes/Routes'
+import { ROUTES } from '@/types/types'
+import styles from './About.module.scss'
 import BackLink from '../../components/BackLink/BackLink'
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
+import clsx from 'clsx'
 
 const About: FC = () => {
   return (
-    <section className="page">
-      <Header />
-
+    <section className={clsx('page', styles.page)}>
       <div className="wrapper wrapper-backlink">
         <BackLink to={ROUTES.MAIN} />
 
@@ -74,8 +72,6 @@ const About: FC = () => {
           </p>
         </div>
       </div>
-
-      <Footer />
     </section>
   )
 }

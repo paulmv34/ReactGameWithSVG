@@ -1,0 +1,19 @@
+.row {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 32px;
+}
+
+.td {
+  font-size: 1.25rem;
+}
+
+.nickname {
+  min-width: 405px;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

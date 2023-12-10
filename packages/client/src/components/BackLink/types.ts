@@ -1,4 +1,4 @@
-import { ROUTES } from '../../routes/Routes'
+import { ROUTES } from '@/types/types'
 
 export interface BackLinkProps {
   to: ROUTES
