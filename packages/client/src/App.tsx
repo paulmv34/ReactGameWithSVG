@@ -6,6 +6,7 @@ import Login from './pages/Login/Login'
 import Registration from './pages/Registration/Registration'
 import Profile from './pages/Profile/Profile'
 import Main from './pages/Main/Main'
+import About from './pages/About/About'
 import Game from './pages/Game/Game'
 import LeaderBoard from './pages/LeaderBoard/LeaderBoard'
 import Forum from './pages/Forum/Forum'
@@ -31,6 +32,7 @@ function App() {
         <Route path={ROUTES.REGISTRATION} element={<Registration />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
         <Route path={ROUTES.MAIN} element={<Main />} />
+        <Route path={ROUTES.ABOUT} element={<About />} />
         <Route path={ROUTES.GAME} element={<Game />} />
         <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
         <Route path={ROUTES.FORUM} element={<Forum />} />

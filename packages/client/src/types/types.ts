@@ -1,4 +1,5 @@
 export enum ROUTES {
+  ABOUT = '/about',
   ERROR_500 = '/500',
   FORUM = '/forum',
   GAME = '/game',
@@ -15,4 +16,9 @@ export interface ScoreData {
   levels: number
   nickname: string
   score: number
+}
+
+export interface MenuItemData {
+  link: ROUTES
+  title: string
 }

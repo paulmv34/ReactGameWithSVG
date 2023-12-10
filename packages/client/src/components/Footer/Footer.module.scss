@@ -1,0 +1,15 @@
+.footer {
+  position: relative;
+
+  width: 100%;
+  max-width: var(--content-size);
+  padding: 50px 0;
+  margin: 124px auto 0;
+
+  font-size: 32px;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+
+  border-top: 6px solid var(--color-text-dark);
+}
