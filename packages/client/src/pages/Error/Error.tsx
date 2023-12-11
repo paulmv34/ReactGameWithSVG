@@ -5,16 +5,13 @@ import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../../routes/Routes'
-
-interface ErrorPageProps {
-  codeError: number | string
-}
+import { ErrorPageProps } from './types'
 
 const typesErrors: Record<string, string> = {
-  '404': 'Страница не найдена',
+  '500': 'Что-то пошло не так',
 }
 
-const Error: FC<ErrorPageProps> = (props: ErrorPageProps) => {
+const Error: FC<ErrorPageProps> = (props) => {
   const { codeError } = props
 
   return (
