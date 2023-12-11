@@ -1,0 +1,18 @@
+.button {
+  padding: 16px 0;
+
+  font-family: "Press Start 2P", serif;
+  font-size: 1.25rem;
+  color: var(--color-text-light);
+
+  cursor: pointer;
+
+  background-color: var(--color-text-dark);
+  border: none;
+
+  transition: opacity 0.2s ease;
+
+  &:hover, &:focus-visible {
+    opacity: 0.8;
+  }
+}

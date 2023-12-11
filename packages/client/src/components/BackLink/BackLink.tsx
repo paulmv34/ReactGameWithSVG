@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 import styles from './BackLink.module.scss'
 import { BackLinkProps } from './types'
 
-const BackLink = ({ to }: BackLinkProps) => {
+const BackLink = ({ left, to }: BackLinkProps) => {
   return (
-    <Link className={styles.backlink} to={to}>
+    <Link className={styles.backlink} to={to} style={{ left }}>
       <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
         <rect width="60" height="60" fill="var(--color-text-dark)" />
         <path

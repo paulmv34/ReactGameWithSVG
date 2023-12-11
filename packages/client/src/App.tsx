@@ -6,7 +6,7 @@ import { ROUTES } from './types/types'
 
 // Pages
 import Error from './pages/Error/Error'
-import Login from './pages/Login/Login'
+import SignIn from './pages/SignIn/SignIn'
 import Registration from './pages/Registration/Registration'
 import Profile from './pages/Profile/Profile'
 import Main from './pages/Main/Main'
@@ -40,7 +40,7 @@ function App() {
           }
         />
         <Route path={'/'} element={<Layout />}>
-          <Route path={ROUTES.LOGIN} element={<Login />} />
+          <Route path={ROUTES.LOGIN} element={<SignIn />} />
           <Route path={ROUTES.REGISTRATION} element={<Registration />} />
           <Route path={ROUTES.PROFILE} element={<Profile />} />
           <Route path={ROUTES.MAIN} element={<Main />} />
