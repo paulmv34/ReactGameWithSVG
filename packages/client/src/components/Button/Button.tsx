@@ -3,9 +3,9 @@ import styles from './Button.module.scss'
 
 import { ButtonProps } from '@/components/Button/types'
 
-const Button = ({ className = '', text, type }: ButtonProps) => {
+const Button = ({ className = '', disabled, text, type }: ButtonProps) => {
   return (
-    <button className={clsx(styles.button, className)} type={type}>
+    <button className={clsx(styles.button, className)} type={type} disabled={disabled}>
       {text}
     </button>
   )

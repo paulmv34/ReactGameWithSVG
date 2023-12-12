@@ -2,7 +2,7 @@ import { InputProps } from '@/components/Input/types'
 import clsx from 'clsx'
 import styles from './Input.module.scss'
 
-const Input = ({ className = '', id, label, name, placeholder, required, type }: InputProps) => {
+const Input = ({ className = '', id, label, name, onChange, placeholder, required, type, value }: InputProps) => {
   return (
     <div className={styles['input-container']}>
       <label className={styles.label} htmlFor={id}>
@@ -15,7 +15,9 @@ const Input = ({ className = '', id, label, name, placeholder, required, type }:
         placeholder={placeholder}
         name={name}
         id={id}
+        value={value}
         required={required}
+        onChange={onChange}
       />
     </div>
   )

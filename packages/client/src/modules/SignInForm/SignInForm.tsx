@@ -5,10 +5,26 @@ import styles from './SignInForm.module.scss'
 import Input from '@/components/Input/Input'
 import Button from '@/components/Button/Button'
 import CustomLink from '@/components/CustomLink/CustomLink'
+import { useFormik } from 'formik'
 
 const SignInForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      login: '',
+      password: '',
+    },
+    onSubmit: (values, { resetForm, setSubmitting }) => {
+      setSubmitting(true)
+      console.log(values)
+      console.log('Some kind of asynchronous operation running')
+      setTimeout(() => {
+        setSubmitting(false)
+        resetForm({})
+      }, 3000)
+    },
+  })
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={formik.handleSubmit}>
       <div className={styles.fields}>
         <Input
           className={styles.input}
@@ -17,6 +33,8 @@ const SignInForm = () => {
           type="text"
           placeholder="Введите логин"
           label="Логин"
+          onChange={formik.handleChange}
+          value={formik.values.login}
           required
         />
         <Input
@@ -26,10 +44,12 @@ const SignInForm = () => {
           type="password"
           placeholder="Введите пароль"
           label="Пароль"
+          onChange={formik.handleChange}
+          value={formik.values.password}
           required
         />
       </div>
-      <Button className={styles['submit-button']} type="submit" text="Войти" />
+      <Button className={styles['submit-button']} type="submit" text="Войти" disabled={formik.isSubmitting} />
       <CustomLink to={ROUTES.REGISTRATION}>Регистрация</CustomLink>
       <div className={styles['yandex-sign-in']}>
         <p>Можно войти с помощью</p>
