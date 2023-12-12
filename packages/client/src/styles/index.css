@@ -96,3 +96,14 @@ h3 {
   height: auto;
   max-height: 100%;
 }
+
+.page-title {
+  font-size: 2rem;
+  color: var(--color-text-dark);
+}
+
+.fields-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
