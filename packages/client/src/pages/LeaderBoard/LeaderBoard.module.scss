@@ -1,0 +1,19 @@
+.page {
+  padding-top: 64px;
+
+  background-color: var(--color-background);
+}
+
+.title {
+  margin-bottom: 70px;
+
+  font-size: 2rem;
+}
+
+.link {
+  position: fixed;
+  top: 50%;
+  left: 120px;
+
+  transform: translateY(-50%);
+}

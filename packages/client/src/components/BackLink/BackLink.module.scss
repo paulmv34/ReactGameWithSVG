@@ -1,0 +1,18 @@
+.backlink {
+  position: fixed;
+  top: calc(50% - 30px);
+  left: 20px;
+
+  width: 60px;
+  height: 60px;
+}
+
+.backlink svg rect {
+  transition: fill 300ms;
+}
+
+.backlink:hover svg rect {
+  fill: var(--color-hover);
+
+  transition: none;
+}

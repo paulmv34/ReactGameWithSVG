@@ -1,0 +1,21 @@
+.header {
+  display: grid;
+
+  grid-template-columns: 405px repeat(3, 1fr);
+
+  gap: 32px;
+
+  margin-bottom: 48px;
+}
+
+.th {
+  font-size: 1.5rem;
+}
+
+.rows {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 32px;
+}

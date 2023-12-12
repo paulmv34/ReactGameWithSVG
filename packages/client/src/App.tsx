@@ -1,17 +1,22 @@
 import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { ROUTES } from './routes/Routes'
+import Layout from './components/Layout/Layout'
+import { ROUTES } from './types/types'
 
+// Pages
 import Error from './pages/Error/Error'
-import Login from './pages/Login/Login'
+import SignIn from './pages/SignIn/SignIn'
 import Registration from './pages/Registration/Registration'
 import Profile from './pages/Profile/Profile'
 import Main from './pages/Main/Main'
+import About from './pages/About/About'
 import Game from './pages/Game/Game'
 import LeaderBoard from './pages/LeaderBoard/LeaderBoard'
 import Forum from './pages/Forum/Forum'
 import TopicForum from './pages/TopicForum/TopicForum'
+import ChangePassword from './pages/ChangePassword/ChangePassword'
+import ChangeAvatar from './pages/ChangeAvatar/ChangeAvatar'
 
 function App() {
   useEffect(() => {
@@ -26,20 +31,32 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
+    <div>
       <Routes>
-        <Route path={ROUTES.LOGIN} element={<Login />} />
-        <Route path={ROUTES.REGISTRATION} element={<Registration />} />
-        <Route path={ROUTES.PROFILE} element={<Profile />} />
-        <Route path={ROUTES.MAIN} element={<Main />} />
+        <Route
+          path="/"
+          element={
+            <section>
+              <h2>Здесь что-то будет или переместим с /main сюда</h2>
+            </section>
+          }
+        />
+        <Route path={'/'} element={<Layout />}>
+          <Route path={ROUTES.LOGIN} element={<SignIn />} />
+          <Route path={ROUTES.REGISTRATION} element={<Registration />} />
+          <Route path={ROUTES.PROFILE} element={<Profile />} />
+          <Route path={ROUTES.PROFILE_PASSWORD} element={<ChangePassword />} />
+          <Route path={ROUTES.PROFILE_AVATAR} element={<ChangeAvatar />} />
+          <Route path={ROUTES.MAIN} element={<Main />} />
+          <Route path={ROUTES.ABOUT} element={<About />} />
+          <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
+          <Route path={ROUTES.FORUM} element={<Forum />} />
+          <Route path={ROUTES.TOPIC_FORUM} element={<TopicForum />} />
+        </Route>
         <Route path={ROUTES.GAME} element={<Game />} />
-        <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
-        <Route path={ROUTES.FORUM} element={<Forum />} />
-        <Route path={ROUTES.TOPIC_FORUM} element={<TopicForum />} />
-        <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
         <Route path="*" element={<Error codeError={404} />} />
+        <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
       </Routes>
-      Вот тут будет жить ваше приложение :D
     </div>
   )
 }

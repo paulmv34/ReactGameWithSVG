@@ -13,6 +13,13 @@
   --color-text-dark: #181818;
   --color-background: #dad7cd;
   --content-size: 1440px;
+  --wrapper-padding: 30px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
@@ -21,5 +28,71 @@ body {
 
 .wrapper {
   max-width: var(--content-size);
+  padding: 0 var(--wrapper-padding);
   margin: 0 auto;
+}
+
+@media (max-width: 1640px) {
+  .wrapper-backlink {
+    padding-left: 110px;
+  }
+}
+
+.page {
+  background: var(--color-background);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+
+h2 {
+  margin-bottom: 45px;
+
+  font-family: 'Press Start 2P', serif;
+  font-size: 32px;
+  line-height: 1;
+}
+
+h3 {
+  margin-top: 45px;
+  margin-bottom: 30px;
+
+  font-family: 'Press Start 2P', serif;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.text-container {
+  font-family: Inter, serif;
+}
+
+.text-container p {
+  margin-bottom: 24px;
+
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.image-row {
+  margin: 45px 0;
+
+  text-align: center;
+}
+
+.image-row:first-child {
+  margin-top: 0;
+}
+
+.image-row:last-child {
+  margin-top: 0;
+}
+
+.image-row img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
 }

@@ -1,0 +1,32 @@
+.container {
+  margin-top: 300px;
+
+  
+
+  .inputAvatar {
+    border: 1px solid var(--color-text-dark);
+    padding: 18px 33px;
+    margin-top: 50px;
+
+    label {
+      margin-right: 10px;
+    }
+
+    input::-webkit-file-upload-button {
+      display: none;
+    }
+  }
+
+  .button {
+    background-color: var(--color-text-dark);
+    border: none;
+    border-radius: 0;
+    color: var(--color-text-light);
+    font-family: 'Press Start 2P', serif;
+    margin-top: 50px;
+  }
+  
+  .button:hover {
+    background-color: var(--color-text-dark);
+  }
+}
