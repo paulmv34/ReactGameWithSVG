@@ -4,7 +4,7 @@ export enum ROUTES {
   FORUM = '/forum',
   GAME = '/game',
   LEADERBOARD = '/leaderboard',
-  LOGIN = '/login',
+  LOGIN = '/sign-in',
   MAIN = '/main',
   PROFILE = '/profile',
   REGISTRATION = '/registration',
