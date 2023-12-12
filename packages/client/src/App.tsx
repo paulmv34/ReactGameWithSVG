@@ -12,6 +12,8 @@ import Game from './pages/Game/Game'
 import LeaderBoard from './pages/LeaderBoard/LeaderBoard'
 import Forum from './pages/Forum/Forum'
 import TopicForum from './pages/TopicForum/TopicForum'
+import ChangePassword from './pages/ChangePassword/ChangePassword'
+import ChangeAvatar from './pages/ChangeAvatar/ChangeAvatar'
 
 function App() {
   useEffect(() => {
@@ -31,6 +33,8 @@ function App() {
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.REGISTRATION} element={<Registration />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
+        <Route path={ROUTES.PROFILE_PASSWORD} element={<ChangePassword />} />
+        <Route path={ROUTES.PROFILE_AVATAR} element={<ChangeAvatar />} />
         <Route path={ROUTES.MAIN} element={<Main />} />
         <Route path={ROUTES.GAME} element={<Game />} />
         <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
@@ -39,7 +43,6 @@ function App() {
         <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
         <Route path="*" element={<Error codeError={404} />} />
       </Routes>
-      Вот тут будет жить ваше приложение :D
     </div>
   )
 }

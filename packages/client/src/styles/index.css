@@ -23,3 +23,8 @@ body {
   max-width: var(--content-size);
   margin: 0 auto;
 }
+
+.App {
+  background-color: var(--color-background);
+  height: 100vh;
+}
