@@ -7,7 +7,7 @@ import { ROUTES } from './types/types'
 // Pages
 import Error from './pages/Error/Error'
 import SignIn from './pages/SignIn/SignIn'
-import Registration from './pages/Registration/Registration'
+import SignUp from './pages/SignUp/SignUp'
 import Profile from './pages/Profile/Profile'
 import Main from './pages/Main/Main'
 import About from './pages/About/About'
@@ -31,7 +31,7 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <>
       <Routes>
         <Route
           path="/"
@@ -43,7 +43,7 @@ function App() {
         />
         <Route path={'/'} element={<Layout />}>
           <Route path={ROUTES.LOGIN} element={<SignIn />} />
-          <Route path={ROUTES.REGISTRATION} element={<Registration />} />
+          <Route path={ROUTES.REGISTRATION} element={<SignUp />} />
           <Route path={ROUTES.PROFILE} element={<Profile />} />
           <Route path={ROUTES.PROFILE_PASSWORD} element={<ChangePassword />} />
           <Route path={ROUTES.PROFILE_AVATAR} element={<ChangeAvatar />} />
@@ -57,7 +57,7 @@ function App() {
         <Route path="*" element={<Error codeError={404} />} />
         <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
       </Routes>
-    </div>
+    </>
   )
 }
 

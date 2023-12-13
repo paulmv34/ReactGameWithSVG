@@ -11,7 +11,7 @@ const SignIn: FC = () => {
     <section className={clsx(styles.page, 'page')}>
       <div className="wrapper wrapper-backlink">
         <BackLink to={ROUTES.MAIN} left="13%" />
-        <h2 className={styles.title}>Вход</h2>
+        <h2 className={clsx(styles.title, 'page-title')}>Вход</h2>
         <SignInForm />
       </div>
     </section>

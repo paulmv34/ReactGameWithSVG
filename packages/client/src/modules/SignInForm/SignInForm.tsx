@@ -25,7 +25,7 @@ const SignInForm = () => {
   })
   return (
     <form className={styles.form} onSubmit={formik.handleSubmit}>
-      <div className={styles.fields}>
+      <div className="fields-group">
         <Input
           className={styles.input}
           id="login"
@@ -50,10 +50,12 @@ const SignInForm = () => {
         />
       </div>
       <Button className={styles['submit-button']} type="submit" text="Войти" disabled={formik.isSubmitting} />
-      <CustomLink to={ROUTES.REGISTRATION}>Регистрация</CustomLink>
+      <CustomLink className={styles.link} to={ROUTES.REGISTRATION}>
+        Регистрация
+      </CustomLink>
       <div className={styles['yandex-sign-in']}>
         <p>Можно войти с помощью</p>
-        <Button type="button" text="Яндекс ID" />
+        <Button className={styles.button} type="button" text="Яндекс ID" />
       </div>
     </form>
   )

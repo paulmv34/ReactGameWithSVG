@@ -8,6 +8,6 @@ export interface InputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   placeholder?: string
   required: boolean
-  type: string
+  type: 'email' | 'tel' | 'text' | 'password'
   value: string
 }
