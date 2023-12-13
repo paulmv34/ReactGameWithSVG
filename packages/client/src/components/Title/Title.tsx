@@ -4,15 +4,14 @@ import styles from './Title.module.scss'
 
 interface HeaderProps {
   title: string
-  className?: string
 }
 
 const Title: FC<HeaderProps> = (props: HeaderProps) => {
-  const { title, className } = props
+  const { title } = props
 
   return (
     <div>
-      <div className={`${styles.headerTitle} ${className}`}>{title}</div>
+      <div className={`${styles.headerTitle}`}>{title}</div>
     </div>
   )
 }
