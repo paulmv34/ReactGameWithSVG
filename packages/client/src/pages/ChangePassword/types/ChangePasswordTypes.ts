@@ -1,5 +1,5 @@
 export interface IChangePassword {
-  oldPassword: string
   newPassword: string
-  newPasswordRepeat: string
+  oldPassword: string
+  repeatNewPassword: string
 }

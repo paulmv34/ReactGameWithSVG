@@ -8,18 +8,24 @@ import styles from './ProfileInfo.module.scss'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '@/types/types'
 import Input from '@/components/Input/Input'
+import { TUserData } from './types'
+import { userApi } from '@/api/userApi'
 
 const ProfileInfo: FC = () => {
   const formik = useFormik({
     initialValues: {
+      first_name: '',
+      second_name: '',
+      display_name: '',
+      phone: '',
       login: '',
       email: '',
-      phone: '',
     },
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: (values: TUserData, { resetForm, setSubmitting }) => {
       setSubmitting(true)
       console.log(values)
       console.log('Some kind of asynchronous operation running')
+      userApi.changeUserProfileData(values)
       setTimeout(() => {
         setSubmitting(false)
         resetForm({})
@@ -43,6 +49,39 @@ const ProfileInfo: FC = () => {
           label="Логин"
           onChange={formik.handleChange}
           value={formik.values.login}
+          required={false}
+        />
+        <Input
+          className={styles.input}
+          id="first_name"
+          name="first_name"
+          type="text"
+          placeholder="Имя"
+          label="Имя"
+          onChange={formik.handleChange}
+          value={formik.values.first_name}
+          required={false}
+        />
+        <Input
+          className={styles.input}
+          id="second_name"
+          name="second_name"
+          type="text"
+          placeholder="Фамилия"
+          label="Фамилия"
+          onChange={formik.handleChange}
+          value={formik.values.second_name}
+          required={false}
+        />
+        <Input
+          className={styles.input}
+          id="display_name"
+          name="display_name"
+          type="text"
+          placeholder="Имя в системе"
+          label="Имя в системе"
+          onChange={formik.handleChange}
+          value={formik.values.display_name}
           required={false}
         />
         <Input

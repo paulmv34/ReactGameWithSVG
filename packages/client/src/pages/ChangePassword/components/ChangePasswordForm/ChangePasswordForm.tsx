@@ -6,18 +6,20 @@ import { useFormik } from 'formik'
 import { Button } from '@mui/material'
 import { IChangePassword } from '../../types/ChangePasswordTypes'
 import Input from '@/components/Input/Input'
+import { userApi } from '@/api/userApi'
 
 const ChangePasswordForm: FC = () => {
   const formik = useFormik({
     initialValues: {
       oldPassword: '',
       newPassword: '',
-      newPasswordRepeat: '',
+      repeatNewPassword: '',
     },
     onSubmit: (values: IChangePassword, { resetForm, setSubmitting }) => {
       setSubmitting(true)
       console.log(values)
       console.log('Some kind of asynchronous operation running')
+      userApi.changeUserPasswordData(values)
       setTimeout(() => {
         setSubmitting(false)
         resetForm({})
@@ -53,13 +55,13 @@ const ChangePasswordForm: FC = () => {
         />
         <Input
           className={styles.input}
-          id="newPasswordRepeat"
-          name="newPasswordRepeat"
-          type="text"
+          id="repeatNewPassword"
+          name="repeatNewPassword"
+          type="password"
           placeholder="Подтвержение пароля"
           label="Подтвержение пароля"
           onChange={formik.handleChange}
-          value={formik.values.newPasswordRepeat}
+          value={formik.values.repeatNewPassword}
           required
         />
         <Button variant="contained" fullWidth className={styles.button} type="submit" disabled={formik.isSubmitting}>
