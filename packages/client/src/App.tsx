@@ -7,7 +7,7 @@ import { ROUTES } from './types/types'
 // Pages
 import Error from './pages/Error/Error'
 import SignIn from './pages/SignIn/SignIn'
-import Registration from './pages/Registration/Registration'
+import SignUp from './pages/SignUp/SignUp'
 import Profile from './pages/Profile/Profile'
 import Main from './pages/Main/Main'
 import About from './pages/About/About'
@@ -41,7 +41,7 @@ function App() {
         />
         <Route path={'/'} element={<Layout />}>
           <Route path={ROUTES.LOGIN} element={<SignIn />} />
-          <Route path={ROUTES.REGISTRATION} element={<Registration />} />
+          <Route path={ROUTES.REGISTRATION} element={<SignUp />} />
           <Route path={ROUTES.PROFILE} element={<Profile />} />
           <Route path={ROUTES.MAIN} element={<Main />} />
           <Route path={ROUTES.ABOUT} element={<About />} />
