@@ -1,13 +1,14 @@
 import { FC } from 'react'
-import Title from '../../components/Title/Title'
 import ChangeAvatarForm from './components/ChangeAvatarForm/ChangeAvatarForm'
 
 import styles from './ChangeAvatar.module.scss'
+import { ROUTES } from '@/types/types'
+import BackLink from '@/components/BackLink/BackLink'
 
 const ChangeAvatar: FC = () => {
   return (
     <div className={styles.containerAvatarPage}>
-      <Title title="ТАНЧИКИ" />
+      <BackLink to={ROUTES.PROFILE} />
       <ChangeAvatarForm />
     </div>
   )

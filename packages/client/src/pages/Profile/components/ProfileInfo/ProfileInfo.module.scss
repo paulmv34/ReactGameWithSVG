@@ -1,6 +1,6 @@
 .profileInfoContainer {
   width: 610px;
-  margin-top: 120px;
+  margin-bottom: 42px;
 
   .headerProfile {
     display: flex;
@@ -11,11 +11,17 @@
   .formProfile {
     margin-top: 60px;
 
-    :nth-child(2) {
-      margin-top: 28px;
-    }
-    :nth-child(3) {
-      margin-top: 28px;
+    
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .input {
+      width: clamp(100%, 80vw, 610px);
+      margin-bottom: 20px;
     }
   }
 

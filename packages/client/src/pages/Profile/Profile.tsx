@@ -1,13 +1,14 @@
 import { FC } from 'react'
-import Title from '../../components/Title/Title'
 import ProfileInfo from './components/ProfileInfo/ProfileInfo'
 
 import styles from './Profile.module.scss'
+import BackLink from '@/components/BackLink/BackLink'
+import { ROUTES } from '@/types/types'
 
 const Profile: FC = () => {
   return (
     <div className={styles.containerProfilePage}>
-      <Title title="ТАНЧИКИ" />
+      <BackLink to={ROUTES.MAIN} />
       <ProfileInfo />
     </div>
   )

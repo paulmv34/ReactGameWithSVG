@@ -1,13 +1,14 @@
 import { FC } from 'react'
 
 import styles from './ChangePassword.module.scss'
-import Title from '../../components/Title/Title'
 import ChangePasswordForm from './components/ChangePasswordForm/ChangePasswordForm'
+import BackLink from '@/components/BackLink/BackLink'
+import { ROUTES } from '@/types/types'
 
 const ChangePassword: FC = () => {
   return (
     <div className={styles.containerPasswordPage}>
-      <Title title="ТАНЧИКИ" />
+      <BackLink to={ROUTES.PROFILE} />
       <ChangePasswordForm />
     </div>
   )

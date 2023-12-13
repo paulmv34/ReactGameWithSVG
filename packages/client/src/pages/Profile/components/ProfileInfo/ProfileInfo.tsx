@@ -2,21 +2,30 @@ import { FC } from 'react'
 import Title from '../../../../components/Title/Title'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import { Formik, Form, FormikHelpers } from 'formik'
+import { useFormik } from 'formik'
 
 import styles from './ProfileInfo.module.scss'
-import { IProfile } from './types'
-import CustomInput from '../../../../components/CustomInput/CustomInput'
 import { Link } from 'react-router-dom'
-import { ROUTES } from '../../../../routes/Routes'
+import { ROUTES } from '@/types/types'
+import Input from '@/components/Input/Input'
 
 const ProfileInfo: FC = () => {
-  const submitForm = (values: IProfile, { setSubmitting }: FormikHelpers<IProfile>) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2))
-      setSubmitting(false)
-    }, 500)
-  }
+  const formik = useFormik({
+    initialValues: {
+      login: '',
+      email: '',
+      phone: '',
+    },
+    onSubmit: (values, { resetForm, setSubmitting }) => {
+      setSubmitting(true)
+      console.log(values)
+      console.log('Some kind of asynchronous operation running')
+      setTimeout(() => {
+        setSubmitting(false)
+        resetForm({})
+      }, 3000)
+    },
+  })
 
   return (
     <div className={styles.profileInfoContainer}>
@@ -24,22 +33,44 @@ const ProfileInfo: FC = () => {
         <Title title="Профиль" />
         <Avatar variant="square" />
       </div>
-      <Formik
-        initialValues={{
-          login: 'Дщпшт',
-          email: '',
-          phone: '',
-        }}
-        onSubmit={submitForm}>
-        <Form className={styles.formProfile}>
-          <CustomInput name={'login'} placeholder="Логин" />
-          <CustomInput name={'email'} placeholder="Email" />
-          <CustomInput name={'phone'} placeholder="Телефон" />
-          <Button variant="contained" fullWidth className={styles.button} type="submit">
-            Сохранить
-          </Button>
-        </Form>
-      </Formik>
+      <form className={styles.form} onSubmit={formik.handleSubmit}>
+        <Input
+          className={styles.input}
+          id="login"
+          name="login"
+          type="text"
+          placeholder="Логин"
+          label="Логин"
+          onChange={formik.handleChange}
+          value={formik.values.login}
+          required={false}
+        />
+        <Input
+          className={styles.input}
+          id="email"
+          name="email"
+          type="text"
+          placeholder="Email"
+          label="Email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          required={false}
+        />
+        <Input
+          className={styles.input}
+          id="phone"
+          name="phone"
+          type="text"
+          placeholder="Телефон"
+          label="Телефон"
+          onChange={formik.handleChange}
+          value={formik.values.phone}
+          required={false}
+        />
+        <Button variant="contained" fullWidth className={styles.button} type="submit" disabled={formik.isSubmitting}>
+          Сохранить
+        </Button>
+      </form>
       <Link to={ROUTES.PROFILE_PASSWORD}>
         <Button variant="contained" fullWidth className={styles.button} type="submit">
           Изменить пароль
