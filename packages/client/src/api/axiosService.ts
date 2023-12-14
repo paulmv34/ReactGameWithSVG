@@ -4,5 +4,5 @@ import { BASE_URL } from './types'
 export const axiosService = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
-  timeout: 1000,
+  timeout: 5000,
 })

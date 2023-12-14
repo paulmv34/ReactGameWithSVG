@@ -23,8 +23,6 @@ const ProfileInfo: FC = () => {
     },
     onSubmit: (values: TUserData, { resetForm, setSubmitting }) => {
       setSubmitting(true)
-      console.log(values)
-      console.log('Some kind of asynchronous operation running')
       userApi.changeUserProfileData(values)
       setTimeout(() => {
         setSubmitting(false)
@@ -106,17 +104,30 @@ const ProfileInfo: FC = () => {
           value={formik.values.phone}
           required={false}
         />
-        <Button variant="contained" fullWidth className={styles.button} type="submit" disabled={formik.isSubmitting}>
+        <Button
+          variant="contained"
+          fullWidth
+          className={styles.button}
+          type="submit"
+          disabled={formik.isSubmitting}>
           Сохранить
         </Button>
       </form>
       <Link to={ROUTES.PROFILE_PASSWORD}>
-        <Button variant="contained" fullWidth className={styles.button} type="submit">
+        <Button
+          variant="contained"
+          fullWidth
+          className={styles.button}
+          type="submit">
           Изменить пароль
         </Button>
       </Link>
       <Link to={ROUTES.PROFILE_AVATAR}>
-        <Button variant="contained" fullWidth className={styles.button} type="submit">
+        <Button
+          variant="contained"
+          fullWidth
+          className={styles.button}
+          type="submit">
           Изменить аватар
         </Button>
       </Link>

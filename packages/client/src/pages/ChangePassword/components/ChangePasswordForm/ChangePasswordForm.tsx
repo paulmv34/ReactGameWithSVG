@@ -17,8 +17,6 @@ const ChangePasswordForm: FC = () => {
     },
     onSubmit: (values: IChangePassword, { resetForm, setSubmitting }) => {
       setSubmitting(true)
-      console.log(values)
-      console.log('Some kind of asynchronous operation running')
       userApi.changeUserPasswordData(values)
       setTimeout(() => {
         setSubmitting(false)
@@ -64,7 +62,12 @@ const ChangePasswordForm: FC = () => {
           value={formik.values.repeatNewPassword}
           required
         />
-        <Button variant="contained" fullWidth className={styles.button} type="submit" disabled={formik.isSubmitting}>
+        <Button
+          variant="contained"
+          fullWidth
+          className={styles.button}
+          type="submit"
+          disabled={formik.isSubmitting}>
           Сохранить
         </Button>
       </form>

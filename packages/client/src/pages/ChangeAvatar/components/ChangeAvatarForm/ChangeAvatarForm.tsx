@@ -29,9 +29,19 @@ const ChangeAvatarForm: FC = () => {
       <div>
         <div className={styles.inputAvatar}>
           <label htmlFor="avatar">Загрузить</label>
-          <input type="file" id="avatar" name="avatar" multiple onChange={handleChange} />
+          <input
+            type="file"
+            id="avatar"
+            name="avatar"
+            multiple
+            onChange={handleChange}
+          />
         </div>
-        <Button variant="contained" fullWidth className={styles.button} onClick={onClickButton}>
+        <Button
+          variant="contained"
+          fullWidth
+          className={styles.button}
+          onClick={onClickButton}>
           Сохранить
         </Button>
       </div>
