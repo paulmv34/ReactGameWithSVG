@@ -1,5 +1,5 @@
 .input {
-  width: clamp(100%, 80vw, 610px);
+  min-width: 610px;
 }
 
 .submit-button {

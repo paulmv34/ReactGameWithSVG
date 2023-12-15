@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import Layout from './components/Layout/Layout'
 import { ROUTES } from './types/types'
+
+import Layout from './components/Layout/Layout'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 // Pages
 import Error from './pages/Error/Error'
@@ -33,29 +35,23 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <section>
-              <h2>Здесь что-то будет или переместим с /main сюда</h2>
-            </section>
-          }
-        />
         <Route path={'/'} element={<Layout />}>
           <Route path={ROUTES.LOGIN} element={<SignIn />} />
           <Route path={ROUTES.REGISTRATION} element={<SignUp />} />
-          <Route path={ROUTES.PROFILE} element={<Profile />} />
-          <Route path={ROUTES.PROFILE_PASSWORD} element={<ChangePassword />} />
-          <Route path={ROUTES.PROFILE_AVATAR} element={<ChangeAvatar />} />
-          <Route path={ROUTES.MAIN} element={<Main />} />
           <Route path={ROUTES.ABOUT} element={<About />} />
-          <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
-          <Route path={ROUTES.FORUM} element={<Forum />} />
-          <Route path={ROUTES.TOPIC_FORUM} element={<TopicForum />} />
+          <Route path={ROUTES.MAIN} element={<Main />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path={ROUTES.GAME} element={<Game />} />
+            <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
+            <Route path={ROUTES.FORUM} element={<Forum />} />
+            <Route path={ROUTES.TOPIC_FORUM} element={<TopicForum />} />
+            <Route path={ROUTES.PROFILE} element={<Profile />} />
+            <Route path={ROUTES.PROFILE_PASSWORD} element={<ChangePassword />} />
+            <Route path={ROUTES.PROFILE_AVATAR} element={<ChangeAvatar />} />
+          </Route>
+          <Route path="*" element={<Error codeError={404} />} />
+          <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
         </Route>
-        <Route path={ROUTES.GAME} element={<Game />} />
-        <Route path="*" element={<Error codeError={404} />} />
-        <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
       </Routes>
     </>
   )
