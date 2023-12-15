@@ -1,0 +1,34 @@
+.profileInfoContainer {
+  width: 610px;
+  margin-bottom: 42px;
+
+  .headerProfile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .input {
+      width: clamp(100%, 80vw, 610px);
+      margin-bottom: 20px;
+    }
+  }
+
+  .button {
+    background-color: var(--color-text-dark);
+    border: none;
+    border-radius: 0;
+    color: var(--color-text-light);
+    font-family: 'Press Start 2P', serif;
+    margin-top: 20px;
+  }
+
+  .button:hover {
+    background-color: var(--color-text-dark);
+  }
+}

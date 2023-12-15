@@ -7,6 +7,8 @@ export enum ROUTES {
   LOGIN = '/sign-in',
   MAIN = '/main',
   PROFILE = '/profile',
+  PROFILE_AVATAR = '/profile/changeAvatar',
+  PROFILE_PASSWORD = '/profile/changePassword',
   REGISTRATION = '/sign-up',
   TOPIC_FORUM = '/forum/*',
 }
