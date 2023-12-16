@@ -26,11 +26,11 @@ const SignUpForm = ({ onRegister }: SignUpFormProps) => {
       setSubmitting(true)
       try {
         await AuthService.register(values)
+        resetForm({})
         onRegister()
       } catch (error) {
         console.error('Signing up failed:', error)
       } finally {
-        resetForm({})
         setSubmitting(false)
       }
     },
