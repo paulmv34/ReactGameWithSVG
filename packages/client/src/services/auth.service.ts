@@ -1,6 +1,7 @@
 import AuthAPI from '@/api/Auth/AuthAPI'
 import { SignInData, SignUpData } from '@/api/Auth/types'
 import store from '@/store/store'
+import { handleError } from '@/utils/handleError'
 
 class AuthService {
   async register(data: SignUpData) {
@@ -9,7 +10,8 @@ class AuthService {
       store.set('isLoggedIn', true)
       await this.getUserInfo()
     } catch (error) {
-      console.log(error)
+      handleError(error)
+      throw error
     }
   }
 
@@ -19,7 +21,8 @@ class AuthService {
       store.set('isLoggedIn', true)
       await this.getUserInfo()
     } catch (error) {
-      console.log(error)
+      handleError(error)
+      throw error
     }
   }
 
@@ -29,17 +32,14 @@ class AuthService {
       store.set('user', null)
       store.set('isLoggedIn', false)
     } catch (error) {
-      console.log(error)
+      handleError(error)
+      throw error
     }
   }
 
   async getUserInfo() {
-    try {
-      const { data: user } = await AuthAPI.getUser()
-      store.set('user', user)
-    } catch (error) {
-      console.log(error)
-    }
+    const { data: user } = await AuthAPI.getUser()
+    store.set('user', user)
   }
 }
 

@@ -18,10 +18,15 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
     },
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       setSubmitting(true)
-      setSubmitting(false)
-      await AuthService.login(values)
-      resetForm({})
-      onAuth()
+      try {
+        await AuthService.login(values)
+        onAuth()
+      } catch (err) {
+        console.log('Authorization failed', err)
+      } finally {
+        resetForm({})
+        setSubmitting(false)
+      }
     },
   })
   return (
