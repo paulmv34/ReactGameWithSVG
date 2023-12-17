@@ -8,7 +8,10 @@ import Input from '@/components/Input/Input'
 import Button from '@/components/Button/Button'
 import CustomLink from '@/components/CustomLink/CustomLink'
 
-const SignUpForm = () => {
+import AuthService from '@/services/auth.service'
+import { SignUpFormProps } from '@/modules/SignUpForm/types'
+
+const SignUpForm = ({ onRegister }: SignUpFormProps) => {
   const formik = useFormik({
     initialValues: {
       first_name: '',
@@ -19,14 +22,17 @@ const SignUpForm = () => {
       password: '',
       confirm_password: '',
     },
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       setSubmitting(true)
-      console.log(values)
-      console.log('Some kind of asynchronous operation running')
-      setTimeout(() => {
-        setSubmitting(false)
+      try {
+        await AuthService.register(values)
         resetForm({})
-      }, 3000)
+        onRegister()
+      } catch (error) {
+        console.error('Signing up failed:', error)
+      } finally {
+        setSubmitting(false)
+      }
     },
   })
   return (

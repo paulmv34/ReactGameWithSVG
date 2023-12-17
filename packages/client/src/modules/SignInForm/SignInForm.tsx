@@ -1,26 +1,32 @@
 import { ROUTES } from '@/types/types'
 import styles from './SignInForm.module.scss'
+import { useFormik } from 'formik'
 
 // Components
 import Input from '@/components/Input/Input'
 import Button from '@/components/Button/Button'
 import CustomLink from '@/components/CustomLink/CustomLink'
-import { useFormik } from 'formik'
 
-const SignInForm = () => {
+import AuthService from '@/services/auth.service'
+import { SignInFormProps } from '@/modules/SignInForm/types'
+
+const SignInForm = ({ onAuth }: SignInFormProps) => {
   const formik = useFormik({
     initialValues: {
       login: '',
       password: '',
     },
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       setSubmitting(true)
-      console.log(values)
-      console.log('Some kind of asynchronous operation running')
-      setTimeout(() => {
-        setSubmitting(false)
+      try {
+        await AuthService.login(values)
         resetForm({})
-      }, 3000)
+        onAuth()
+      } catch (err) {
+        console.log('Authorization failed', err)
+      } finally {
+        setSubmitting(false)
+      }
     },
   })
   return (

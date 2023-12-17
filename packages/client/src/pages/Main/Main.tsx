@@ -25,10 +25,6 @@ const mainMenu: MenuItemData[] = [
     link: ROUTES.LEADERBOARD,
     title: 'Топ игроков',
   },
-  {
-    link: ROUTES.LOGIN,
-    title: 'Выход',
-  },
 ]
 
 const Main: FC = () => {

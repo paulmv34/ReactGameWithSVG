@@ -5,7 +5,7 @@ export enum ROUTES {
   GAME = '/game',
   LEADERBOARD = '/leaderboard',
   LOGIN = '/sign-in',
-  MAIN = '/main',
+  MAIN = '/',
   PROFILE = '/profile',
   PROFILE_AVATAR = '/profile/changeAvatar',
   PROFILE_PASSWORD = '/profile/changePassword',
@@ -23,4 +23,10 @@ export interface ScoreData {
 export interface MenuItemData {
   link: ROUTES
   title: string
+}
+
+export enum Sizes {
+  LARGE = 'large',
+  MEDIUM = 'medium',
+  SMALL = 'small',
 }
