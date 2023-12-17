@@ -1,0 +1,16 @@
+.containerForumItem {
+  display: block;
+  border: 1px solid var(--color-text-dark);
+  margin-top: 10px;
+  padding: 10px;
+  text-decoration: none;
+  color: var(--color-text-dark);
+  position: relative;
+}
+
+.forumDate {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 10px;
+}

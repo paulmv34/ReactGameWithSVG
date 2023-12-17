@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 700px;
+}
+
+.emptyComments {
+  margin-top: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.button {
+  margin-left: 10px;
+}
