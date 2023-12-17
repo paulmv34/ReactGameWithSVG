@@ -1,0 +1,11 @@
+.game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 64px;
+  height: 100vh;
+}
+
+.layout__game {
+  user-select: none;
+}
