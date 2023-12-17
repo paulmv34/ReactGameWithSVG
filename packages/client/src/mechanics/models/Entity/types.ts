@@ -38,7 +38,10 @@ export type Size = {
 
 export type Rect = Pos & Size
 
-export type PosState = { hasCollision: boolean | undefined; nextRect: Rect }
+export type PosState = {
+  hasCollision: boolean | undefined
+  nextRect: Rect
+}
 
 export enum EntityEvent {
   AnimationEnded = 'ANIMATION_ENDED',

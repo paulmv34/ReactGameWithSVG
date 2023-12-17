@@ -1,6 +1,7 @@
 import { ROUTES } from '@/types/types'
 import styles from './SignInForm.module.scss'
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 // Components
 import Input from '@/components/Input/Input'
@@ -9,6 +10,7 @@ import CustomLink from '@/components/CustomLink/CustomLink'
 
 import AuthService from '@/services/auth.service'
 import { SignInFormProps } from '@/modules/SignInForm/types'
+import { validators } from '@/utils/validate'
 
 const SignInForm = ({ onAuth }: SignInFormProps) => {
   const formik = useFormik({
@@ -16,6 +18,12 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
       login: '',
       password: '',
     },
+    validateOnChange: true,
+    validateOnBlur: true,
+    validationSchema: Yup.object().shape({
+      login: validators.login(),
+      password: validators.password(),
+    }),
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       setSubmitting(true)
       try {
@@ -39,9 +47,11 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
           type="text"
           placeholder="Введите логин"
           label="Логин"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.login}
-          required
+          errorText={formik.touched.login && formik.errors.login ? formik.errors.login : ''}
+          error={formik.touched.login && !!formik.errors.login}
         />
         <Input
           className={styles.input}
@@ -50,9 +60,11 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
           type="password"
           placeholder="Введите пароль"
           label="Пароль"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.password}
-          required
+          errorText={formik.touched.password && formik.errors.password ? formik.errors.password : ''}
+          error={formik.touched.password && !!formik.errors.password}
         />
       </div>
       <Button className={styles['submit-button']} type="submit" text="Войти" disabled={formik.isSubmitting} />
