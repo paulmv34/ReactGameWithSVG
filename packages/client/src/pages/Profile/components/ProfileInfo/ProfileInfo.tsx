@@ -3,7 +3,6 @@ import Title from '../../../../components/Title/Title'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
 
 import styles from './ProfileInfo.module.scss'
 import { Link } from 'react-router-dom'
@@ -11,7 +10,7 @@ import { ROUTES } from '@/types/types'
 import Input from '@/components/Input/Input'
 import { TUserData } from './types'
 import { userApi } from '@/api/userApi'
-import { validators } from '@/utils/validate'
+import { profileValidationSchema } from '@/utils/validationSchema'
 
 const ProfileInfo: FC = () => {
   const formik = useFormik({
@@ -25,14 +24,7 @@ const ProfileInfo: FC = () => {
     },
     validateOnChange: false,
     validateOnBlur: true,
-    validationSchema: Yup.object().shape({
-      first_name: validators.name(),
-      second_name: validators.name(),
-      display_name: validators.name(),
-      login: validators.login(),
-      email: validators.email(),
-      phone: validators.phone(),
-    }),
+    validationSchema: profileValidationSchema,
     onSubmit: (values: TUserData, { resetForm, setSubmitting }) => {
       setSubmitting(true)
       userApi

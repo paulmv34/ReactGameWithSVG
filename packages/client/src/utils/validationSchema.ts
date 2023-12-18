@@ -40,3 +40,37 @@ export const validators = {
         return value && imgFormat.includes(value.type)
       }),
 }
+
+export const avatarFormValidationSchema = Yup.object().shape({
+  avatar: validators.image(),
+})
+
+export const changePasswordValidationSchema = Yup.object().shape({
+  oldPassword: validators.password(),
+  newPassword: validators.password(),
+  repeatNewPassword: validators.passwordRepeat('newPassword'),
+})
+
+export const profileValidationSchema = Yup.object().shape({
+  first_name: validators.name(),
+  second_name: validators.name(),
+  display_name: validators.name(),
+  login: validators.login(),
+  email: validators.email(),
+  phone: validators.phone(),
+})
+
+export const signInValidationSchema = Yup.object().shape({
+  login: validators.login(),
+  password: validators.password(),
+})
+
+export const signUpValidationSchema = Yup.object().shape({
+  first_name: validators.name(),
+  second_name: validators.name(),
+  login: validators.login(),
+  email: validators.email(),
+  phone: validators.phone(),
+  password: validators.password(),
+  confirm_password: validators.passwordRepeat('password'),
+})

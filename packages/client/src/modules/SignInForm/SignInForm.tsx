@@ -1,7 +1,6 @@
 import { ROUTES } from '@/types/types'
 import styles from './SignInForm.module.scss'
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
 
 // Components
 import Input from '@/components/Input/Input'
@@ -10,7 +9,7 @@ import CustomLink from '@/components/CustomLink/CustomLink'
 
 import AuthService from '@/services/auth.service'
 import { SignInFormProps } from '@/modules/SignInForm/types'
-import { validators } from '@/utils/validate'
+import { signInValidationSchema } from '@/utils/validationSchema'
 
 const SignInForm = ({ onAuth }: SignInFormProps) => {
   const formik = useFormik({
@@ -20,10 +19,7 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
     },
     validateOnChange: true,
     validateOnBlur: true,
-    validationSchema: Yup.object().shape({
-      login: validators.login(),
-      password: validators.password(),
-    }),
+    validationSchema: signInValidationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       setSubmitting(true)
       try {

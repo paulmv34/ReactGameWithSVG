@@ -7,7 +7,7 @@ import Title from '../../../../components/Title/Title'
 import { userApi } from '@/api/userApi'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { validators } from '@/utils/validate'
+import { avatarFormValidationSchema } from '@/utils/validationSchema'
 import { IChangeAvatar } from '@/pages/ChangeAvatar/types/ChangeAvatarTypes'
 import clsx from 'clsx'
 import { ROUTES } from '@/types/types'
@@ -20,15 +20,17 @@ const ChangeAvatarForm: FC = () => {
       fileInputRef.current.value = ''
     }
   }
+  const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.files && event.currentTarget.files.length ? event.currentTarget.files[0] : ''
+    formik.setFieldValue('avatar', value, true)
+  }
   const formik = useFormik({
     initialValues: {
       avatar: undefined,
     },
     validateOnChange: true,
     validateOnBlur: true,
-    validationSchema: Yup.object().shape({
-      avatar: validators.image(),
-    }),
+    validationSchema: avatarFormValidationSchema,
     onSubmit: (values: IChangeAvatar, { setSubmitting }) => {
       if (!values.avatar) {
         return
@@ -72,11 +74,7 @@ const ChangeAvatarForm: FC = () => {
                 name="avatar"
                 ref={fileInputRef}
                 className={styles.fieldFile}
-                onChange={(event) => {
-                  const value =
-                    event.currentTarget.files && event.currentTarget.files.length ? event.currentTarget.files[0] : ''
-                  formik.setFieldValue('avatar', value, true)
-                }}
+                onChange={onFileInputChange}
               />
               <span className={styles.error}>{formik.errors.avatar}</span>
             </div>

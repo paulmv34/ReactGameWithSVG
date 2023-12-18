@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import * as Yup from 'yup'
 
 import styles from './ChangePasswordForm.module.scss'
 import Title from '../../../../components/Title/Title'
@@ -8,7 +7,7 @@ import { Button } from '@mui/material'
 import { IChangePassword } from '../../types/ChangePasswordTypes'
 import Input from '@/components/Input/Input'
 import { userApi } from '@/api/userApi'
-import { validators } from '@/utils/validate'
+import { changePasswordValidationSchema } from '@/utils/validationSchema'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/types/types'
 
@@ -22,11 +21,7 @@ const ChangePasswordForm: FC = () => {
     },
     validateOnChange: false,
     validateOnBlur: true,
-    validationSchema: Yup.object().shape({
-      oldPassword: validators.password(),
-      newPassword: validators.password(),
-      repeatNewPassword: validators.passwordRepeat('newPassword'),
-    }),
+    validationSchema: changePasswordValidationSchema,
     onSubmit: (values: IChangePassword, { resetForm, setSubmitting }) => {
       setSubmitting(true)
       userApi
