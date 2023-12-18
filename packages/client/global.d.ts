@@ -16,10 +16,7 @@ declare global {
   export type TupleArray<T, len extends number> = [T, ...T[]] & { length: len }
   interface Array<T> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    findLast(
-      predicate: (value: T, index: number, obj: T[]) => unknown,
-      thisArg?: any
-    ): T
+    findLast(predicate: (value: T, index: number, obj: T[]) => unknown, thisArg?: any): T
   }
 }
 

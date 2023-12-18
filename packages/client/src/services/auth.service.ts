@@ -38,8 +38,14 @@ class AuthService {
   }
 
   async getUserInfo() {
-    const { data: user } = await AuthAPI.getUser()
-    store.set('user', user)
+    try {
+      const { data: user } = await AuthAPI.getUser()
+      store.set('user', user)
+    } catch (error) {
+      store.set('user', null)
+      store.set('isLoggedIn', false)
+      throw error
+    }
   }
 }
 
