@@ -2,16 +2,13 @@ import BackLink from '@/components/BackLink/BackLink'
 import styles from './Game.module.scss'
 import clsx from 'clsx'
 import { ROUTES } from '@/types/types'
-;<BackLink to={ROUTES.MAIN} left="13%" />
 
 import { createContext, useEffect, useRef, useState } from 'react'
 
 import { Tanchiki } from '../../mechanics'
 import { type GameCreateContext } from './types'
 
-export const GameContext = createContext<GameCreateContext>(
-  {} as GameCreateContext
-)
+export const GameContext = createContext<GameCreateContext>({} as GameCreateContext)
 
 export const Game = () => {
   const gameRoot = useRef(null)
@@ -46,16 +43,11 @@ export const Game = () => {
 }
 
 function setViewportAttributes({ isScalable }: Record<string, boolean>) {
-  const scalableContent = isScalable
-    ? ''
-    : ', maximum-scale=1, user-scalable=no'
+  const scalableContent = isScalable ? '' : ', maximum-scale=1, user-scalable=no'
   const viewport = document.querySelector('meta[name="viewport"]')
 
   if (viewport) {
-    viewport.setAttribute(
-      'content',
-      `width=device-width, initial-scale=1.0${scalableContent}`
-    )
+    viewport.setAttribute('content', `width=device-width, initial-scale=1.0${scalableContent}`)
   }
 }
 

@@ -36,12 +36,13 @@ function App() {
     }
 
     const fetchUser = async () => {
-      try {
-        await AuthService.getUserInfo()
-        navigate(ROUTES.MAIN)
-      } catch (error) {
-        navigate(ROUTES.LOGIN)
-      }
+      AuthService.getUserInfo()
+        .then(() => {
+          navigate(ROUTES.MAIN)
+        })
+        .catch(() => {
+          navigate(ROUTES.LOGIN)
+        })
     }
 
     fetchServerData()

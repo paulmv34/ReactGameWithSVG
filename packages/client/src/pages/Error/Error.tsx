@@ -4,7 +4,7 @@ import styles from './Error.module.scss'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import { Link } from 'react-router-dom'
-import { ROUTES } from '../../routes/Routes'
+import { ROUTES } from '@/types/types'
 import { ErrorPageProps } from './types'
 
 const typesErrors: Record<string, string> = {

@@ -1,33 +1,73 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-top: 168px;
-  margin-bottom: 200px;
+  width: 610px;
+
+  .headerForm {
+    margin-bottom: 64px;
+  }
 
   .inputAvatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+
     border: 1px solid var(--color-text-dark);
     padding: 18px 33px;
-    margin-top: 50px;
-
-    label {
-      margin-right: 10px;
-    }
 
     input::-webkit-file-upload-button {
       display: none;
     }
   }
 
+  .inputAvatarError {
+    border: 1px solid var(--color-text-error);
+  }
+
+  .fieldFile {
+    font-size: 14px;
+  }
+
   .button {
+    margin-top: 24px;
+    padding: 16px 0;
+  }
+
+  .buttonFile {
+    padding: 12px 36px;
+    margin-right: 33px;
+    flex-shrink: 0;
+  }
+
+  .buttonFile,
+  .button {
+    font-family: 'Press Start 2P', serif;
+    color: var(--color-text-light);
+
     background-color: var(--color-text-dark);
     border: none;
     border-radius: 0;
-    color: var(--color-text-light);
-    font-family: 'Press Start 2P', serif;
-    margin-top: 50px;
+
+    font-size: 1.25rem;
+    line-height: 1;
+    text-transform: none;
+    &:hover {
+      background-color: var(--color-text-dark);
+    }
   }
-  
-  .button:hover {
-    background-color: var(--color-text-dark);
+
+
+  .error {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    text-align: left;
+
+    padding: 1px 0;
+
+    font-family: Inter, sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-text-error);
   }
 }
