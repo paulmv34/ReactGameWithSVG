@@ -21,7 +21,7 @@
   }
 
   .inputAvatarError {
-    border: 1px solid var(--color-text-red);
+    border: 1px solid var(--color-text-error);
   }
 
   .fieldFile {
@@ -68,6 +68,6 @@
 
     font-family: Inter, sans-serif;
     font-size: 0.85rem;
-    color: var(--color-text-red);
+    color: var(--color-text-error);
   }
 }
