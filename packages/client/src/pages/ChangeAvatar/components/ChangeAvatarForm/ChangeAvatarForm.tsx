@@ -1,49 +1,92 @@
-import { FC, useState } from 'react'
+import { FC, useRef } from 'react'
 import { Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 import styles from './ChangeAvatarForm.module.scss'
 import Title from '../../../../components/Title/Title'
 import { userApi } from '@/api/userApi'
+import { useFormik } from 'formik'
+import { avatarFormValidationSchema } from '@/utils/validationSchema'
+import { IChangeAvatar } from '@/pages/ChangeAvatar/types/ChangeAvatarTypes'
+import clsx from 'clsx'
+import { ROUTES } from '@/types/types'
 
 const ChangeAvatarForm: FC = () => {
-  const [fileAvatar, setFileAvatar] = useState<string | Blob>('')
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.currentTarget
-
-    if (files) {
-      const file = files[0]
-      setFileAvatar(file)
+  const navigate = useNavigate()
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const resetFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
     }
   }
-
-  const onClickButton = () => {
-    const formData = new FormData()
-    formData.append('avatar', fileAvatar)
-    userApi.setNewAvatarData(formData)
+  const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.files && event.currentTarget.files.length ? event.currentTarget.files[0] : ''
+    formik.setFieldValue('avatar', value, true)
   }
+  const formik = useFormik({
+    initialValues: {
+      avatar: undefined,
+    },
+    validateOnChange: true,
+    validateOnBlur: true,
+    validationSchema: avatarFormValidationSchema,
+    onSubmit: (values: IChangeAvatar, { setSubmitting }) => {
+      if (!values.avatar) {
+        return
+      }
+      setSubmitting(true)
+      const formData = new FormData()
+      formData.append('avatar', values.avatar)
+      userApi
+        .setNewAvatarData(formData)
+        .then(() => {
+          resetFileInput()
+          navigate(ROUTES.PROFILE)
+        })
+        .catch((err) => {
+          console.log('Avatar changing failed', err)
+        })
+        .finally(() => {
+          setSubmitting(false)
+        })
+    },
+  })
 
   return (
     <div className={styles.container}>
-      <Title title="Смена аватара" />
+      <div className={styles.headerForm}>
+        <Title title="Смена аватара" />
+      </div>
       <div>
-        <div className={styles.inputAvatar}>
-          <label htmlFor="avatar">Загрузить</label>
-          <input
-            type="file"
-            id="avatar"
-            name="avatar"
-            multiple
-            onChange={handleChange}
-          />
-        </div>
-        <Button
-          variant="contained"
-          fullWidth
-          className={styles.button}
-          onClick={onClickButton}>
-          Сохранить
-        </Button>
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
+          <div className="fields-group">
+            <div
+              className={clsx(styles.inputAvatar, {
+                [styles.inputAvatar]: formik.touched.avatar && formik.errors.avatar,
+              })}>
+              <Button variant="contained" htmlFor="avatar" component="label" className={styles.buttonFile}>
+                Загрузить
+              </Button>
+              <input
+                type="file"
+                id="avatar"
+                name="avatar"
+                ref={fileInputRef}
+                className={styles.fieldFile}
+                onChange={onFileInputChange}
+              />
+              <span className={styles.error}>{formik.errors.avatar}</span>
+            </div>
+            <Button
+              variant="contained"
+              fullWidth
+              className={styles.button}
+              type="submit"
+              disabled={formik.isSubmitting}>
+              Сохранить
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   )

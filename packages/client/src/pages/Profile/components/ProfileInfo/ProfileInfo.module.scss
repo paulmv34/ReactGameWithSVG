@@ -1,29 +1,17 @@
 .profileInfoContainer {
   width: 610px;
-  margin-bottom: 42px;
 
   .headerProfile {
     display: flex;
 
     align-items: center;
     justify-content: space-between;
-  }
 
-  .form {
-    display: flex;
-
-    flex-direction: column;
-
-    margin-top: 20px;
-
-    .input {
-      min-width: 610px;
-      margin-bottom: 20px;
-    }
+    margin-bottom: 64px;
   }
 
   .button {
-    margin-top: 20px;
+    margin-top: 24px;
 
     font-family: 'Press Start 2P', serif;
     color: var(--color-text-light);
@@ -31,9 +19,19 @@
     background-color: var(--color-text-dark);
     border: none;
     border-radius: 0;
+
+    font-size: 1.25rem;
+    line-height: 1;
+    text-transform: none;
+    padding: 16px 0;
   }
 
   .button:hover {
     background-color: var(--color-text-dark);
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
   }
 }

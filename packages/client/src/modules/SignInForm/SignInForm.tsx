@@ -9,6 +9,7 @@ import CustomLink from '@/components/CustomLink/CustomLink'
 
 import AuthService from '@/services/auth.service'
 import { SignInFormProps } from '@/modules/SignInForm/types'
+import { signInValidationSchema } from '@/utils/validationSchema'
 
 const SignInForm = ({ onAuth }: SignInFormProps) => {
   const formik = useFormik({
@@ -16,6 +17,9 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
       login: '',
       password: '',
     },
+    validateOnChange: true,
+    validateOnBlur: true,
+    validationSchema: signInValidationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       setSubmitting(true)
       try {
@@ -39,9 +43,11 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
           type="text"
           placeholder="Введите логин"
           label="Логин"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.login}
-          required
+          errorText={formik.touched.login && formik.errors.login ? formik.errors.login : ''}
+          error={formik.touched.login && !!formik.errors.login}
         />
         <Input
           className={styles.input}
@@ -50,9 +56,11 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
           type="password"
           placeholder="Введите пароль"
           label="Пароль"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.password}
-          required
+          errorText={formik.touched.password && formik.errors.password ? formik.errors.password : ''}
+          error={formik.touched.password && !!formik.errors.password}
         />
       </div>
       <Button className={styles['submit-button']} type="submit" text="Войти" disabled={formik.isSubmitting} />
