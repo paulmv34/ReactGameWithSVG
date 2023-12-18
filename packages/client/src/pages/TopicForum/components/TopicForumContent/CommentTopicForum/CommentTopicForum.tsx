@@ -11,11 +11,11 @@ const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }: CommentTopic
         <Avatar variant="square" />
       </div>
       <div className={styles.containerComment}>
-        <div>{comment.nameAuthor}</div>
-        <div className={styles.bodyComment}>{comment.bodyComment}</div>
+        <div>{comment.author}</div>
+        <div className={styles.bodyComment}>{comment.body}</div>
         <div className={styles.dateComment}>
-          {comment.dateComment}
-          <div className={styles.commentsCountIcon}></div>
+          {comment.date}
+          <img src="/message.svg" alt="" className={styles.commentsCountIcon} />
           <div>Ответить</div>
         </div>
       </div>

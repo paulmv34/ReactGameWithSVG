@@ -3,17 +3,17 @@ export interface ForumItemProps {
 }
 
 export interface ForumItem {
-  auhtorForum: string
-  bodyForum: string
+  author: string
+  body: string
   comments: CommentItem[]
-  dateForum: string
+  date: string
   id: number
-  titleForum: string
+  title: string
 }
 
 export interface CommentItem {
-  bodyComment: string
-  dateComment: string
+  author: string
+  body: string
+  date: string
   id: number
-  nameAuthor: string
 }

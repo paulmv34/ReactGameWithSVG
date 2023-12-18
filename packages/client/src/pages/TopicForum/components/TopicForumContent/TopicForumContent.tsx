@@ -14,9 +14,9 @@ const TopicForumContent: FC<TopicForumProps> = ({ forum }: TopicForumProps) => {
   const addComment = () => {
     const comment: CommentItem = {
       id: forum.comments.length + 1,
-      bodyComment: newComment,
-      dateComment: new Date().getDate().toString(),
-      nameAuthor: 'Автор 1',
+      body: newComment,
+      date: new Date().getDate().toString(),
+      author: 'Автор 1',
     }
     const tmplComments = comments
     tmplComments.push(comment)

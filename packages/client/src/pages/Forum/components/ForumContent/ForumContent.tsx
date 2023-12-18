@@ -7,7 +7,7 @@ const ForumContent: FC = () => {
   return (
     <div>
       {mockData.forums.map((forum) => {
-        return <ForumItem forum={forum} />
+        return <ForumItem forum={forum} key={forum.id} />
       })}
     </div>
   )

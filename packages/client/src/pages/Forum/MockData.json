@@ -2,32 +2,32 @@
   "forums":[
     {
       "id": 1,
-      "titleForum": "Форум 1",
-      "bodyForum": "Вопрос форума 1",
-      "auhtorForum": "Автор 1",
-      "dateForum": "16.12.2023",
+      "title": "Форум 1",
+      "body": "Вопрос форума 1",
+      "author": "Автор 1",
+      "date": "16.12.2023",
       "comments": [
         {
           "id": 1,
-          "nameAuthor": "Автор 1",
-          "bodyComment": "Комментарий 1",
-          "dateComment": "17.12.2023"
+          "author": "Автор 1",
+          "body": "Комментарий 1",
+          "date": "17.12.2023"
         },
         {
           "id": 2,
-          "nameAuthor": "Автор 2",
-          "bodyComment": "Комментарий 2",
-          "dateComment": "17.12.2023"
+          "author": "Автор 2",
+          "body": "Комментарий 2",
+          "date": "17.12.2023"
         }
       ]
       
     },
     {
       "id": 2,
-      "titleForum": "Форум 2",
-      "bodyForum": "Вопрос форума 2",
-      "auhtorForum": "Автор 3",
-      "dateForum": "17.12.2023",
+      "title": "Форум 2",
+      "body": "Вопрос форума 2",
+      "author": "Автор 3",
+      "date": "17.12.2023",
       "comments": []
     }
   ]

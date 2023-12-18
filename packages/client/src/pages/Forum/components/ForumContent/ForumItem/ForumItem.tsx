@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom'
 const ForumItem: FC<ForumItemProps> = ({ forum }: ForumItemProps) => {
   return (
     <Link to={`/forum/${forum.id}`} className={styles.containerForumItem}>
-      <div>{forum.titleForum}</div>
-      <div className={styles.bodyForum}>{forum.bodyForum}</div>
-      <div className={styles.forumDate}>
-        {forum.dateForum}
-        <div className={styles.commentsCountIcon}></div>
+      <div>{forum.title}</div>
+      <div className={styles.bodyForum}>{forum.body}</div>
+      <div className={styles.date}>
+        {forum.date}
+        <img src="/message.svg" alt="" className={styles.commentsCountIcon} />
         <div>{forum.comments.length}</div>
       </div>
     </Link>

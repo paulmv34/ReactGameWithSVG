@@ -8,9 +8,10 @@ import styles from './TopicForum.module.scss'
 import BackLink from '@/components/BackLink/BackLink'
 import { ROUTES } from '@/types/types'
 import NewTopic from './components/NewTopic/NewTopic'
+import { useLocation } from 'react-router'
 
 const TopicForum: FC = () => {
-  const idForum = window.location.pathname.split('/')[2]
+  const idForum = useLocation().pathname.split('/')[2]
   const forumData = data.forums.find((forum) => forum.id === Number(idForum))
 
   return (
