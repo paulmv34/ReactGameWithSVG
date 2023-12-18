@@ -1,9 +1,17 @@
 .containerNewTopic {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   width: var(--content-size);
 }
 
-.button {
-  margin-left: 10px;
+.formGroup {
+  margin-top: 20px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.textField {
+  height: 300px;
 }

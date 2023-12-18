@@ -11,11 +11,11 @@
 
 .inputGroup {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
 .button {
-  margin-left: 10px;
+  margin-top: 10px;
 }

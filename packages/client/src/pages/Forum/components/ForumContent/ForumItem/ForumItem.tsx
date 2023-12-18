@@ -8,8 +8,12 @@ const ForumItem: FC<ForumItemProps> = ({ forum }: ForumItemProps) => {
   return (
     <Link to={`/forum/${forum.id}`} className={styles.containerForumItem}>
       <div>{forum.titleForum}</div>
-      <div>{forum.bodyForum}</div>
-      <div className={styles.forumDate}>{forum.dateForum}</div>
+      <div className={styles.bodyForum}>{forum.bodyForum}</div>
+      <div className={styles.forumDate}>
+        {forum.dateForum}
+        <div className={styles.commentsCountIcon}></div>
+        <div>{forum.comments.length}</div>
+      </div>
     </Link>
   )
 }

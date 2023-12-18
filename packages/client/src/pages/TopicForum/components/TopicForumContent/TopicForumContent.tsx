@@ -21,7 +21,6 @@ const TopicForumContent: FC<TopicForumProps> = ({ forum }: TopicForumProps) => {
     const tmplComments = comments
     tmplComments.push(comment)
     setComments(tmplComments)
-    console.log(comments)
   }
 
   return (
@@ -36,13 +35,7 @@ const TopicForumContent: FC<TopicForumProps> = ({ forum }: TopicForumProps) => {
         )}
       </div>
       <div className={styles.inputGroup}>
-        <TextField
-          id="comment"
-          name="comment"
-          onChange={(e) => setNewComment(e.target.value)}
-          type="text"
-          value={newComment}
-        />
+        <TextField id="comment" name="comment" onChange={(e) => setNewComment(e.target.value)} value={newComment} />
         <Button text="Отправить" type="button" className={styles.button} onClick={addComment} />
       </div>
     </div>

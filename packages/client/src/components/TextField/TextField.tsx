@@ -2,12 +2,16 @@ import clsx from 'clsx'
 import styles from './TextField.module.scss'
 import { TextFieldProps } from './types'
 
-const TextField = ({ className = '', id, name, onChange, placeholder, type, value }: TextFieldProps) => {
+const TextField = ({ className = '', id, label, name, onChange, placeholder, value }: TextFieldProps) => {
   return (
     <div className={styles['input-container']}>
-      <input
+      {label && (
+        <label className={styles.label} htmlFor={id}>
+          {label}
+        </label>
+      )}
+      <textarea
         className={clsx(styles.input, className)}
-        type={type}
         placeholder={placeholder}
         name={name}
         id={id}
