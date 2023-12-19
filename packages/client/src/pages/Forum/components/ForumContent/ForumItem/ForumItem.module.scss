@@ -1,0 +1,32 @@
+.containerForumItem {
+  display: block;
+  border: 1px solid var(--color-text-dark);
+  margin-top: 10px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--color-text-dark);
+  font-size: 24px;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.bodyForum {
+  font-family: 'Inter', Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.date {
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+}
+
+.commentsCountIcon {
+  margin-left: 30px;
+  margin-right: 5px;
+}

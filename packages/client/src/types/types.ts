@@ -11,6 +11,7 @@ export enum ROUTES {
   PROFILE_PASSWORD = '/profile/changePassword',
   REGISTRATION = '/sign-up',
   TOPIC_FORUM = '/forum/*',
+  TOPIC_NEW = '/forum/new',
 }
 
 export interface ScoreData {
