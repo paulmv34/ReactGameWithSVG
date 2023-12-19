@@ -12,7 +12,9 @@ const NewTopic: FC = () => {
 
   return (
     <div className={styles.containerNewTopic}>
-      <Title title="Добавить тему" />
+      <div className={styles.header}>
+        <Title title="Добавить тему" />
+      </div>
       <div className={styles.formGroup}>
         <Input
           id="topicName"
@@ -23,6 +25,7 @@ const NewTopic: FC = () => {
           label="Название темы"
           placeholder="Название темы"
           type="text"
+          className={styles.input}
         />
         <TextField
           id="questTopic"

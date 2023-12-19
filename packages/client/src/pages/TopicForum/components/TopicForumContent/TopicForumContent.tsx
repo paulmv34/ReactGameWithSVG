@@ -35,8 +35,15 @@ const TopicForumContent: FC<TopicForumProps> = ({ forum }: TopicForumProps) => {
         )}
       </div>
       <div className={styles.inputGroup}>
-        <TextField id="comment" name="comment" onChange={(e) => setNewComment(e.target.value)} value={newComment} />
-        <Button text="Отправить" type="button" className={styles.button} onClick={addComment} />
+        <TextField
+          id="comment"
+          name="comment"
+          onChange={(e) => setNewComment(e.target.value)}
+          value={newComment}
+          label="Комментарий"
+          className={styles.textField}
+        />
+        <Button text="Добавить комментарий" type="button" className={styles.button} onClick={addComment} />
       </div>
     </div>
   )

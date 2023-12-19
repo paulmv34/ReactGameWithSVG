@@ -8,16 +8,18 @@ const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }: CommentTopic
   return (
     <div className={styles.container}>
       <div>
-        <Avatar variant="square" />
+        <Avatar variant="square" className={styles.avatar} />
       </div>
       <div className={styles.containerComment}>
-        <div>{comment.author}</div>
-        <div className={styles.bodyComment}>{comment.body}</div>
-        <div className={styles.dateComment}>
-          {comment.date}
-          <img src="/message.svg" alt="" className={styles.commentsCountIcon} />
-          <div>Ответить</div>
+        <div className={styles.header}>
+          <div>{comment.author}</div>
+          <div className={styles.dateComment}>
+            {comment.date}
+            <img src="/message.svg" alt="" className={styles.commentsCountIcon} />
+            <div>Ответить</div>
+          </div>
         </div>
+        <div className={styles.bodyComment}>{comment.body}</div>
       </div>
     </div>
   )
