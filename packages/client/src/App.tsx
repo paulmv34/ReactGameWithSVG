@@ -17,6 +17,7 @@ import Forum from './pages/Forum/Forum'
 import TopicForum from './pages/TopicForum/TopicForum'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
 import ChangeAvatar from './pages/ChangeAvatar/ChangeAvatar'
+import GameStart from '@/pages/GameStart/GameStart'
 
 function App() {
   useEffect(() => {
@@ -54,6 +55,7 @@ function App() {
           <Route path={ROUTES.TOPIC_FORUM} element={<TopicForum />} />
         </Route>
         <Route path={ROUTES.GAME} element={<Game />} />
+        <Route path={ROUTES.GAME_START} element={<GameStart />} />
         <Route path="*" element={<Error codeError={404} />} />
         <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
       </Routes>

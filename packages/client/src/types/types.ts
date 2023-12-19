@@ -3,6 +3,7 @@ export enum ROUTES {
   ERROR_500 = '/500',
   FORUM = '/forum',
   GAME = '/game',
+  GAME_START = '/game/start',
   LEADERBOARD = '/leaderboard',
   LOGIN = '/sign-in',
   MAIN = '/main',
