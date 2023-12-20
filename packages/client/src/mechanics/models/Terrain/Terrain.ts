@@ -10,6 +10,7 @@ import { type TerrainVariant } from './types'
 
 export class Terrain extends Entity {
   variant: TerrainVariant = 'WHOLE'
+  damagedCells: Record<string, boolean> = {}
 
   constructor(props: EntitySettings) {
     super(props)
@@ -59,9 +60,34 @@ export class Terrain extends Entity {
   }
 
   registerTerrainEvents() {
+    if (this.type === 'water') {
+      this.on(EntityEvent.Spawn, () => {
+        this.startAnimation({
+          delay: 350,
+          spriteCoordinates: spriteCoordinates['terrain.water'],
+          looped: true,
+        })
+      })
+    }
+
     if (this.type === 'brickWall') {
       this.on(EntityEvent.Damaged, (damagedRect: DamageSettings) => {
         this.emit(EntityEvent.Destroyed, damagedRect)
+      })
+    }
+
+    if (this.type === 'concreteWall') {
+      this.on(EntityEvent.Damaged, (damagedRect: DamageSettings) => {
+        const bulletPower = damagedRect.source.explosionForce
+        if (!bulletPower || bulletPower < 2) {
+          return
+        }
+
+        const cellHash = damagedRect.posX + 'X' + damagedRect.posY
+        if (this.damagedCells[cellHash]) {
+          this.emit(EntityEvent.Destroyed, damagedRect)
+        }
+        this.damagedCells[cellHash] = true
       })
     }
   }

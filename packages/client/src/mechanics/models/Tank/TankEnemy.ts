@@ -13,6 +13,7 @@ import { type EnemyVariant, type TankEnemySettings } from './types'
 export class TankEnemy extends Tank {
   lastDirection = Direction.Down
   variant: EnemyVariant = 'BASIC'
+  flashing = false
   minReactionTime = 500
   maxReactionTime = 1000
   turnChance = 1
@@ -96,6 +97,22 @@ export class TankEnemy extends Tank {
         this.autoMove()
       }
     }, rand(this.minReactionTime, this.maxReactionTime))
+  }
+
+  setFlashing() {
+    const flashingIntervalMs = 200
+    const flashingIntervalName = 'flashing' + rand(0, 999999)
+
+    this.setLoopInterval(
+      () => {
+        const tempSpriteCoordinates = this.mainSpriteCoordinates
+        this.mainSpriteCoordinates = this.secondarySpriteCoordinates
+        this.secondarySpriteCoordinates = tempSpriteCoordinates
+        this.refreshSprite()
+      },
+      flashingIntervalMs,
+      flashingIntervalName
+    )
   }
 
   autoShoot() {

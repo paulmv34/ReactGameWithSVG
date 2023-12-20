@@ -49,10 +49,11 @@ export class View extends EventEmitter {
     this.root = root
     if (this.isRootEmpty()) {
       this.floorLayer = this.createLayer('floor')
-      this.floorLayer.style.background = SpriteName.Brick
+      this.floorLayer.style.background = Color.Black
       this.createLayer('tanks')
       this.createLayer('bullets')
       this.createLayer('ceiling')
+      this.createLayer('explosions')
       this.createLayer('overlay').style.position = 'relative'
     }
 
@@ -102,6 +103,9 @@ export class View extends EventEmitter {
       case 'trees':
       case 'indicator':
         layer = 'ceiling'
+        break
+      case 'explosion':
+        layer = 'explosions'
         break
       default:
         layer = 'floor'

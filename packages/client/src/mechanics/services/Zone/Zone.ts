@@ -1,21 +1,23 @@
 import {
   type Entity,
+  type Powerup,
   EntityDynamic,
   Bullet,
   Tank,
   TankPlayer,
-} from '@/mechanics/models'
+} from '../../models'
 import {
   type PosState,
   type Rect,
   EntityEvent,
-} from '@/mechanics/models/Entity/types'
-import { type Game } from '..'
+} from '../../models/Entity/types'
+import { type Game } from '../'
 
 enum ZoneLayers {
   Main = 0,
   Secondary = 1,
   Bullets = 2,
+  Powerups = 3,
 }
 
 export class Zone {
@@ -46,6 +48,8 @@ export class Zone {
         return ZoneLayers.Secondary
       case 'bullet':
         return ZoneLayers.Bullets
+      case 'powerup':
+        return ZoneLayers.Powerups
       default:
         return ZoneLayers.Main
     }
@@ -105,7 +109,7 @@ export class Zone {
   }
 
   registerEntity(entity: Entity) {
-    if (entity.type === 'score') {
+    if (entity.type === 'score' || entity.type === 'explosion') {
       return
     }
 
@@ -116,6 +120,10 @@ export class Zone {
       } else {
         const layer = this.getLayerByEntityType(entity)
         this.updateMatrix(layer, rect, entity)
+
+        if (entity instanceof Tank && entity.sliding) {
+          entity.sliding = this.shouldSlide(rect)
+        }
       }
     })
 
@@ -145,6 +153,16 @@ export class Zone {
         this.doAreaDamage(rect, entity)
       }
     })
+
+    if (entity instanceof Tank) {
+      entity.on(EntityEvent.Stop, () => {
+        entity.slide(
+          this.shouldSlide(
+            entity.nextRect || entity.lastRect || entity.getRect()
+          )
+        )
+      })
+    }
 
     if (entity.type === 'brickWall' || entity.type === 'concreteWall') {
       entity.on(EntityEvent.Destroyed, (rect: Rect) => {
@@ -189,7 +207,7 @@ export class Zone {
     return false
   }
 
-  doAreaDamage(rect: Rect, source: Bullet | TankPlayer) {
+  doAreaDamage(rect: Rect, source: Bullet | TankPlayer | Powerup) {
     for (let x = rect.posX + rect.width - 1; x >= rect.posX; --x) {
       for (let y = rect.posY + rect.height - 1; y >= rect.posY; --y) {
         const mainLayerCell = this.matrix[ZoneLayers.Main][x]?.[y]
@@ -212,13 +230,26 @@ export class Zone {
     }
   }
 
+  shouldSlide(rect: Rect) {
+    for (let x = rect.posX + rect.width - 1; x >= rect.posX; --x) {
+      for (let y = rect.posY + rect.height - 1; y >= rect.posY; --y) {
+        const secondaryLayerCell = this.matrix[ZoneLayers.Secondary][x]?.[y]
+        if (!secondaryLayerCell || secondaryLayerCell.type !== 'ice') {
+          return false
+        }
+      }
+    }
+    return true
+  }
+
   hasCollisionsWithMatrix(rect: Rect, entity: Entity) {
     for (let x = rect.posX + rect.width - 1; x >= rect.posX; --x) {
       for (let y = rect.posY + rect.height - 1; y >= rect.posY; --y) {
         const mainLayerCell = this.matrix[ZoneLayers.Main][x]?.[y]
         const bulletLayerCell = this.matrix[ZoneLayers.Bullets][x]?.[y]
+        const powerupLayerCell = this.matrix[ZoneLayers.Powerups][x]?.[y]
 
-        if (!mainLayerCell && !bulletLayerCell) {
+        if (!mainLayerCell && !bulletLayerCell && !powerupLayerCell) {
           continue
         }
         if (entity instanceof Tank) {
@@ -228,6 +259,10 @@ export class Zone {
             !mainLayerCell.crossable
           ) {
             return true
+          }
+          if (powerupLayerCell !== null && entity instanceof TankPlayer) {
+            const damagedRect = { posX: x, posY: y, width: 1, height: 1 }
+            powerupLayerCell.takeDamage(entity, damagedRect)
           }
         }
         if (entity instanceof Bullet) {

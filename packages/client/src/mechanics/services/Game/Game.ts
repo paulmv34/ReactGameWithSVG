@@ -119,6 +119,7 @@ export class Game extends EventEmitter {
 
   initMenu() {
     this.reset()
+
     this.state.screen = ScreenType.MainMenu
     this.overlay.show(this.state.screen, this.state.mainMenuItem)
     this.controllerAll
@@ -138,8 +139,79 @@ export class Game extends EventEmitter {
           return
         }
 
+        await this.initLevelSelector()
+
         this.initGameLevel(true)
       })
+  }
+
+  initLevelSelector() {
+    return new Promise<void>((resolve) => {
+      this.reset()
+
+      this.state.screen = ScreenType.LevelSelector
+      this.overlay.show(ScreenType.LevelSelector, {
+        level: this.state.level,
+        showHints: true,
+      })
+
+      let changeLevelInterval: ReturnType<typeof setInterval>
+
+      const resetLevelInterval = () =>
+        changeLevelInterval && clearInterval(changeLevelInterval)
+      const handleMove = (direction: Direction) => {
+        let shouldTrigger = false
+        if (
+          (direction === Direction.Up || direction === Direction.Right) &&
+          this.state.level < this.state.maxLevels
+        ) {
+          this.state.level++
+          shouldTrigger = true
+        } else if (
+          (direction === Direction.Down || direction === Direction.Left) &&
+          this.state.level > 1
+        ) {
+          this.state.level--
+          shouldTrigger = true
+        } else {
+          resetLevelInterval()
+        }
+        if (shouldTrigger) {
+          this.overlay.show(ScreenType.LevelSelector, {
+            level: this.state.level,
+          })
+        }
+      }
+
+      this.controllerAll
+        .on(ControllerEvent.Stop, () => {
+          if (this.state.screen === ScreenType.LevelSelector) {
+            resetLevelInterval()
+          }
+        })
+        .on(ControllerEvent.Move, (direction: Direction) => {
+          if (this.state.screen !== ScreenType.LevelSelector) {
+            return
+          }
+
+          resetLevelInterval()
+          handleMove.call(this, direction)
+
+          changeLevelInterval = setInterval(
+            handleMove.bind(this, direction),
+            130
+          )
+        })
+        .on(ControllerEvent.Shoot, () => {
+          if (this.state.screen !== ScreenType.LevelSelector) {
+            return
+          }
+          resolve()
+        })
+        .on(ControllerEvent.Escape, () => {
+          this.initMenu()
+        })
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
