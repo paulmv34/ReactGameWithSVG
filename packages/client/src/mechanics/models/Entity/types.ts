@@ -15,6 +15,8 @@ export type EntityType =
   | 'trees'
   | 'water'
   | 'ice'
+  | 'powerup'
+  | 'explosion'
   | 'score'
   | 'indicator'
   | 'custom'
@@ -53,18 +55,16 @@ export enum EntityEvent {
   DidUpdate = 'ENTITY_DID_UPDATE',
   Exploding = 'EXPLODING',
   Move = 'MOVE',
-
   Ready = 'READY',
   SetLoopDelay = 'SET_LOOP_DELAY',
   SetLoopInterval = 'SET_LOOP_INTERVAL',
-
   Shoot = 'SHOOT',
   ShouldBeDestroyed = 'ENTITY_SHOULD_BE_DESTROYED',
   ShouldRenderText = 'ENTITY_SHOULD_RENDER_TEXT',
   ShouldUpdate = 'ENTITY_SHOULD_UPDATE',
+  Slide = 'SLIDE',
   Spawn = 'SPAWN',
   Stop = 'STOP',
-
   WillDoDamage = 'ENTITY_WILL_DO_DAMAGE',
   WillHaveNewPos = 'ENTITY_WILL_HAVE_NEW_POS',
 }

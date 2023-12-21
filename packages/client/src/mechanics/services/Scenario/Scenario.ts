@@ -2,7 +2,10 @@ import {
   type Entity,
   type PlayerVariant,
   type Bullet,
+  type Tank,
+  Explosion,
   Flag,
+  Powerup,
   TankEnemy,
   TankPlayer,
   Terrain,
@@ -13,9 +16,9 @@ import {
   EntityEvent,
 } from '@/mechanics/models/Entity/types'
 import { EventEmitter } from '@/mechanics/utils'
-import { type Game, MapManager } from '..'
+import { type Game, IndicatorManager, MapManager } from '..'
 import { ControllerEvent } from '../Controller/data'
-import { spawnPlaces } from '../MapManager/data'
+import { Cell, spawnPlaces } from '../MapManager/data'
 import { Player, playerInitialSettings } from './data'
 import { ScenarioEvent } from './types'
 
@@ -23,8 +26,9 @@ export { ScenarioEvent }
 
 export class Scenario extends EventEmitter<ScenarioEvent> {
   mapManager: MapManager
-
+  indicatorManager: IndicatorManager
   activeEnemies: TankEnemy[] = []
+  activePowerup: Powerup | null = null
   maxTotalEnemies = 20
   maxActiveEnemies = 4
   enemiesSpawnDelay = 1000
@@ -33,6 +37,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
   constructor(private game: Game) {
     super()
     this.mapManager = new MapManager(game)
+    this.indicatorManager = new IndicatorManager(game)
 
     this.createTerrain()
     this.createEnemies()
@@ -41,6 +46,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
 
   createTerrain() {
     this.createBoundaries()
+    /** Размещаем объекты на карте */
     const map = this.mapManager.getMap()
     const entities = this.mapManager.mapDataToEntitySettings(map)
     entities.forEach((settings) => {
@@ -126,9 +132,18 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
 
   createTankEnemy() {
     ++this.enemiesSpawnCounter
+    const tankEnemiesLeft = this.maxTotalEnemies - this.enemiesSpawnCounter
+    this.indicatorManager.renderTankEnemiesLeft(tankEnemiesLeft)
 
     const tankEnemySettings = {
       variant: this.mapManager.getMapTankEnemyVariant(this.enemiesSpawnCounter),
+      flashing: this.game.state.flashingEnemyTanksWithPowerups.includes(
+        this.enemiesSpawnCounter
+      ),
+    }
+
+    if (tankEnemySettings.flashing && this.activePowerup) {
+      this.activePowerup.despawn()
     }
 
     const entity = new TankEnemy(tankEnemySettings)
@@ -140,6 +155,12 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
         this.createBullet(bullet)
       })
       .on(EntityEvent.Destroyed, () => {
+        this.createExplosion(entity)
+
+        if (entity.flashing) {
+          this.createPowerup()
+        }
+
         this.activeEnemies = this.activeEnemies.filter(
           (enemy) => enemy !== entity
         )
@@ -153,6 +174,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
   }
 
   trySpawnTankEnemy(entity: TankEnemy) {
+    /** Выбираем случайным образом одну из 3 позиций противника. */
     const spawnPlaceKey = Math.floor(Math.random() * spawnPlaces[0].length)
     const spawnPlace = this.mapManager.coordsToRect(
       spawnPlaces[0][spawnPlaceKey],
@@ -166,6 +188,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
       )
     }
   }
+
   createPlayers() {
     if (this.game.state.mode === 'SINGLEPLAYER') {
       this.createPlayerTank(Player.Player1)
@@ -179,16 +202,22 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
     const settings = playerInitialSettings[playerType]
 
     const playerState = this.getPlayerState(playerType)
-    settings.upgradeTier = 1
+    settings.upgradeTier = playerState.upgradeTier
 
     const entity = new TankPlayer(settings)
     this.game.addEntity(entity)
 
     entity
+      .on(EntityEvent.Spawn, () => {
+        this.indicatorManager.renderPlayerLives(playerType, playerState.lives)
+      })
       .on(EntityEvent.Shoot, (bullet) => {
         this.createBullet(bullet)
       })
       .on(EntityEvent.Destroyed, () => {
+        this.createExplosion(entity)
+
+        playerState.upgradeTier = 1
         --playerState.lives
 
         const playerOneIsOut = this.game.state.playerOne.lives < 0
@@ -201,6 +230,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
         }
 
         if (playerState.lives >= 0) {
+          this.indicatorManager.renderPlayerLives(playerType, playerState.lives)
           this.createPlayerTank(playerType)
         }
       })
@@ -233,7 +263,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
       })
       .offAll(ControllerEvent.Shoot)
       .on(ControllerEvent.Shoot, () => {
-        entity.shoot()
+        !this.game.state.paused && entity.shoot()
       })
   }
 
@@ -272,5 +302,146 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
     this.game.addEntity(bullet)
     bullet.spawn({ posX: bullet.posX, posY: bullet.posY })
     bullet.update()
+
+    bullet.on(EntityEvent.Exploding, () => {
+      this.createExplosion(bullet)
+    })
+  }
+
+  createExplosion(entity: Tank | Bullet) {
+    const explosion = new Explosion({ parent: entity })
+    this.game.addEntity(explosion)
+    explosion.spawn()
+  }
+
+  createPowerup() {
+    if (this.activePowerup) {
+      this.activePowerup.despawn()
+    }
+    const powerup = new Powerup()
+    this.game.addEntity(powerup)
+    const pos = this.mapManager.getRandomEmptyCell()
+    powerup.spawn(pos)
+    this.activePowerup = powerup
+
+    powerup.on(EntityEvent.Destroyed, () => {
+      const playerTank = powerup.destroyedBy
+      if (!(playerTank instanceof TankPlayer)) {
+        return
+      }
+      const playerType = playerTank.variant
+      const playerState = this.getPlayerState(playerType)
+
+      if (powerup.variant === 'STAR') {
+        ++playerState.upgradeTier
+        playerTank.upgrade()
+      }
+
+      if (powerup.variant === 'HELMET') {
+        playerTank.useShield(this.game.state.shieldPowerupDuration)
+      }
+
+      if (powerup.variant === 'TANK' && playerState.lives < 9) {
+        ++playerState.lives
+        this.indicatorManager.renderPlayerLives(
+          playerType as Player,
+          playerState.lives
+        )
+      }
+
+      if (powerup.variant === 'GRENADE') {
+        this.activeEnemies.forEach((enemyTank) => {
+          enemyTank.beDestroyed(playerTank)
+        })
+      }
+
+      if (powerup.variant === 'CLOCK') {
+        const freezeIntervalName = 'ENEMY_FREEZE_INTERVAL'
+        // Делаем заморозку через каждые 100 мс, чтобы работало и для врагов, которые отспавнились позже
+        let freezeTicksLeft = 100
+        const freezeSubDuration = Math.round(
+          this.game.state.freezePowerupDuration / freezeTicksLeft
+        )
+
+        const setAllEnemiesFrozen = (frozen: boolean) => {
+          this.activeEnemies.forEach((enemyTank) => {
+            enemyTank.frozen = frozen
+          })
+        }
+
+        this.game.loop.clearLoopInterval(freezeIntervalName)
+        setAllEnemiesFrozen(true)
+        this.game.loop.setLoopInterval(
+          () => {
+            setAllEnemiesFrozen(true)
+            if (--freezeTicksLeft <= 0) {
+              this.game.loop.clearLoopInterval(freezeIntervalName)
+              setAllEnemiesFrozen(false)
+            }
+          },
+          freezeSubDuration,
+          freezeIntervalName
+        )
+      }
+
+      if (powerup.variant === 'SHOVEL') {
+        const wallCells = [
+          ['BottomRight', 11, 5],
+          ['Bottom', 11, 6],
+          ['BottomLeft', 11, 7],
+          ['Right', 12, 5],
+          ['Left', 12, 7],
+        ]
+
+        const constructWalls = (wallMaterial: 'Brick' | 'Concrete') => {
+          for (const [cellVariant, y, x] of wallCells) {
+            const cell = Cell[(wallMaterial + cellVariant) as keyof typeof Cell]
+            const settings = this.mapManager.cellToEntitySettings(
+              cell,
+              x as number,
+              y as number
+            )
+            if (!settings) {
+              continue
+            }
+            this.game.zone.doAreaDamage(settings, powerup)
+            this.createEntity(settings)
+          }
+        }
+
+        constructWalls('Concrete')
+
+        const mainIntervalName = 'REINFORCED_WALLS_INTERVAL_MAIN'
+        const mainIntervalDuration = this.game.state.wallsPowerupDuration
+        const finishingIntervalName = 'REINFORCED_WALLS_INTERVAL_FINISHING'
+        const finishingIntervalDuration = 200
+        let finishingIntervalCountdown = 10
+
+        this.game.loop.clearLoopInterval(mainIntervalName)
+        this.game.loop.clearLoopInterval(finishingIntervalName)
+        this.game.loop.setLoopInterval(
+          () => {
+            this.game.loop.clearLoopInterval(mainIntervalName)
+            this.game.loop.setLoopInterval(
+              () => {
+                const shouldPlaceConcreteWalls =
+                  --finishingIntervalCountdown % 2 === 0
+                if (finishingIntervalCountdown <= 0) {
+                  this.game.loop.clearLoopInterval(finishingIntervalName)
+                } else if (shouldPlaceConcreteWalls) {
+                  constructWalls('Concrete')
+                } else {
+                  constructWalls('Brick')
+                }
+              },
+              finishingIntervalDuration,
+              finishingIntervalName
+            )
+          },
+          mainIntervalDuration,
+          mainIntervalName
+        )
+      }
+    })
   }
 }

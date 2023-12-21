@@ -58,7 +58,9 @@ export class Overlay extends EventEmitter {
     return elem
   }
 
-  renderSplashScreen(backgroundColor: Color.Black | Color.Grey = Color.Black) {
+  renderSplashScreen(
+    backgroundColor: Color.Black | Color.Grey | Color.White = Color.Black
+  ) {
     this.renderElement({
       posX: 0,
       posY: 0,

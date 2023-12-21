@@ -122,26 +122,27 @@ export class Tank extends EntityDynamic {
       return
     }
 
-    const bullet = new Bullet({
+    const projectile = new Bullet({
       parent: this,
-      ...this.calculateBulletInitPos(),
+      ...this.calculateProjectileInitPos(),
       role: this.role,
       direction: this.direction,
       moveSpeed: this.shootSpeed,
+      explosionForce: this.shootForce,
     })
 
     ++this.bulletsFlying
 
-    bullet.on(EntityEvent.Exploding, () => {
+    projectile.on(EntityEvent.Exploding, () => {
       --this.bulletsFlying
     })
 
-    this.emit(EntityEvent.Shoot, bullet)
+    this.emit(EntityEvent.Shoot, projectile)
 
     this.shooting = false
   }
 
-  calculateBulletInitPos() {
+  calculateProjectileInitPos() {
     const defaultSize = { width: 2, height: 2 }
     const rect = this.nextRect || this.lastRect || this.getRect()
     const offsetX = Math.round((rect.width - defaultSize.width) / 2)
@@ -162,6 +163,18 @@ export class Tank extends EntityDynamic {
           posX: rect.posX + rect.width - defaultSize.width,
           posY: rect.posY + offsetY,
         }
+    }
+  }
+
+  slide(shouldSlide = true) {
+    if (shouldSlide) {
+      if (!this.sliding) {
+        this.emit(EntityEvent.Slide)
+      }
+      this.sliding = true
+      this.slidingStepsProgress = 0
+    } else {
+      this.sliding = false
     }
   }
 }

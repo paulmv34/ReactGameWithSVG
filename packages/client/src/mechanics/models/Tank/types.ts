@@ -9,5 +9,6 @@ export type TankPlayerSettings = {
 } & Partial<EntityDynamicSettings>
 
 export type TankEnemySettings = {
+  flashing?: boolean
   variant: EnemyVariant
 } & Partial<EntityDynamicSettings>

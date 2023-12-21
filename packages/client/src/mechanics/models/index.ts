@@ -10,3 +10,6 @@ export {
   TankPlayer,
 } from './Tank/TankPlayer'
 export { Terrain } from './Terrain/Terrain'
+export { Powerup } from './Powerup/Powerup'
+export { Score } from './Score/Score'
+export { Explosion } from './Explosion/Explosion'
