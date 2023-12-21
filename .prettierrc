@@ -3,6 +3,6 @@
   "semi": false,
   "arrowParens": "always",
   "bracketSameLine": true,
-  "width": 50,
+  "printWidth": 120,
   "trailingComma": "es5"
 }

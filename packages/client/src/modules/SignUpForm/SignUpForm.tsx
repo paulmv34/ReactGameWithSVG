@@ -1,14 +1,17 @@
-import React from 'react'
-import { useFormik } from 'formik'
-import styles from './SignUpForm.module.scss'
 import { ROUTES } from '@/types/types'
+import styles from './SignUpForm.module.scss'
+import { useFormik } from 'formik'
 
 // Components
 import Input from '@/components/Input/Input'
 import Button from '@/components/Button/Button'
 import CustomLink from '@/components/CustomLink/CustomLink'
 
-const SignUpForm = () => {
+import AuthService from '@/services/auth.service'
+import { SignUpFormProps } from '@/modules/SignUpForm/types'
+import { signUpValidationSchema } from '@/utils/validationSchema'
+
+const SignUpForm = ({ onRegister }: SignUpFormProps) => {
   const formik = useFormik({
     initialValues: {
       first_name: '',
@@ -19,14 +22,20 @@ const SignUpForm = () => {
       password: '',
       confirm_password: '',
     },
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    validateOnChange: false,
+    validateOnBlur: true,
+    validationSchema: signUpValidationSchema,
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       setSubmitting(true)
-      console.log(values)
-      console.log('Some kind of asynchronous operation running')
-      setTimeout(() => {
-        setSubmitting(false)
+      try {
+        await AuthService.register(values)
         resetForm({})
-      }, 3000)
+        onRegister()
+      } catch (error) {
+        console.error('Signing up failed:', error)
+      } finally {
+        setSubmitting(false)
+      }
     },
   })
   return (
@@ -38,9 +47,11 @@ const SignUpForm = () => {
           name="first_name"
           type="text"
           label="Имя"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.first_name}
-          required
+          errorText={formik.touched.first_name && formik.errors.first_name ? formik.errors.first_name : ''}
+          error={formik.touched.first_name && !!formik.errors.first_name}
         />
         <Input
           className={styles.input}
@@ -48,9 +59,11 @@ const SignUpForm = () => {
           name="second_name"
           type="text"
           label="Фамилия"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.second_name}
-          required
+          errorText={formik.touched.second_name && formik.errors.second_name ? formik.errors.second_name : ''}
+          error={formik.touched.second_name && !!formik.errors.second_name}
         />
         <Input
           className={styles.input}
@@ -58,9 +71,11 @@ const SignUpForm = () => {
           name="login"
           type="text"
           label="Логин"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.login}
-          required
+          errorText={formik.touched.login && formik.errors.login ? formik.errors.login : ''}
+          error={formik.touched.login && !!formik.errors.login}
         />
         <Input
           className={styles.input}
@@ -68,9 +83,11 @@ const SignUpForm = () => {
           name="email"
           type="email"
           label="E-mail"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.email}
-          required
+          errorText={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
+          error={formik.touched.email && !!formik.errors.email}
         />
         <Input
           className={styles.input}
@@ -78,9 +95,11 @@ const SignUpForm = () => {
           name="phone"
           type="tel"
           label="Телефон"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.phone}
-          required
+          errorText={formik.touched.phone && formik.errors.phone ? formik.errors.phone : ''}
+          error={formik.touched.phone && !!formik.errors.phone}
         />
         <Input
           className={styles.input}
@@ -88,9 +107,11 @@ const SignUpForm = () => {
           name="password"
           type="password"
           label="Пароль"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.password}
-          required
+          errorText={formik.touched.password && formik.errors.password ? formik.errors.password : ''}
+          error={formik.touched.password && !!formik.errors.password}
         />
         <Input
           className={styles.input}
@@ -98,9 +119,13 @@ const SignUpForm = () => {
           name="confirm_password"
           type="password"
           label="Подтвердить пароль"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.confirm_password}
-          required
+          errorText={
+            formik.touched.confirm_password && formik.errors.confirm_password ? formik.errors.confirm_password : ''
+          }
+          error={formik.touched.confirm_password && !!formik.errors.confirm_password}
         />
       </div>
       <Button

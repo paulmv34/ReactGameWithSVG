@@ -1,0 +1,37 @@
+.container {
+  border: 1px solid var(--color-text-dark);
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  font-size: 20px;
+}
+
+.containerComment {
+  margin-left: 10px;
+}
+
+.avatar {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.bodyComment {
+  font-family: 'Inter', Helvetica, sans-serif;
+}
+
+.dateComment {
+  display: flex;
+  align-items: center;
+}
+
+.commentsCountIcon {
+  cursor: pointer;
+  margin-left: 30px;
+  margin-right: 5px;
+}
