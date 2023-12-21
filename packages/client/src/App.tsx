@@ -23,6 +23,7 @@ import TopicForum from './pages/TopicForum/TopicForum'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
 import ChangeAvatar from './pages/ChangeAvatar/ChangeAvatar'
 import AuthService from '@/services/auth.service'
+import GameStart from '@/pages/GameStart/GameStart'
 
 function App() {
   const navigate = useNavigate()
@@ -59,6 +60,7 @@ function App() {
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.MAIN} element={<Main />} />
             <Route path={ROUTES.GAME} element={<Game />} />
+            <Route path={ROUTES.GAME_START} element={<GameStart />} />
             <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
             <Route path={ROUTES.FORUM} element={<Forum />} />
             <Route path={ROUTES.TOPIC_FORUM} element={<TopicForum />} />
