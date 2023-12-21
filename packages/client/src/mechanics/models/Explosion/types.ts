@@ -1,1 +1,1 @@
-export type ExplosionVariant = 'TANK_EXPLOSION' | 'PROJECTILE_EXPLOSION'
+export type ExplosionVariant = 'TANK_EXPLOSION' | 'BULLET_EXPLOSION'

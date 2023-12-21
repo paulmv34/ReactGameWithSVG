@@ -59,7 +59,6 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.MAIN} element={<Main />} />
-            <Route path={ROUTES.GAME} element={<Game />} />
             <Route path={ROUTES.GAME_START} element={<GameStart />} />
             <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
             <Route path={ROUTES.FORUM} element={<Forum />} />
@@ -71,6 +70,7 @@ function App() {
           <Route path="*" element={<Error codeError={404} />} />
           <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
         </Route>
+        <Route path={ROUTES.GAME} element={<Game />} />
       </Routes>
       <ToastContainer />
     </>

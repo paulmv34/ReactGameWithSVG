@@ -1,5 +1,5 @@
-import { type Direction } from '../../models/Entity/types'
-import { type EventEmitter } from '../../utils'
+import { type Direction } from '@/mechanics/models/Entity/types'
+import { type EventEmitter } from '@/mechanics/utils'
 import { type Binding } from './KeyBindings'
 
 export type Controller = EventEmitter & {

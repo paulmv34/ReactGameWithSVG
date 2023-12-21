@@ -1,5 +1,5 @@
-import { Color } from '../../services/View/colors'
-import { spriteCoordinates } from '../../services/View/spriteCoordinates'
+import { Color } from '@/mechanics/services/View/colors'
+import { spriteCoordinates } from '@/mechanics/services/View/spriteCoordinates'
 import { type Tank, EntityDynamic } from '../'
 import { Direction, EntityEvent } from '../Entity/types'
 import { type BulletSettings } from './types'

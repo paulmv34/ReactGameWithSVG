@@ -1,4 +1,4 @@
-import { UIElement } from '../../ui'
+import { UIElement } from '@/mechanics/ui'
 import { type UIElementSettings } from '@/mechanics/ui/UIElement/types'
 import { isOdd } from '@/mechanics/utils/isOdd'
 import { type Game } from '../'
@@ -100,23 +100,15 @@ export class IndicatorManager {
 
   removeEntity(indicatorName: string) {
     // findLast() не работает на старых айфонах
-    const canvasLayerItem = [...this.game.view.layers[this.layerName].entities]
-      .reverse()
-      .find((item) => {
-        if (
-          item.instance instanceof UIElement &&
-          item.instance.indicatorName === indicatorName
-        ) {
-          return true
-        }
-      })
+    const canvasLayerItem = [...this.game.view.layers[this.layerName].entities].reverse().find((item) => {
+      if (item.instance instanceof UIElement && item.instance.indicatorName === indicatorName) {
+        return true
+      }
+    })
 
     const targetEntity = canvasLayerItem?.instance
 
-    if (
-      targetEntity instanceof UIElement &&
-      targetEntity.indicatorName === indicatorName
-    ) {
+    if (targetEntity instanceof UIElement && targetEntity.indicatorName === indicatorName) {
       this.game.view.eraseFromLayer(targetEntity, this.layerName)
       this.game.view.removeEntityFromLayer(targetEntity, this.layerName)
     }

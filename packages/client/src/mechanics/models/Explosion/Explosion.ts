@@ -1,4 +1,4 @@
-import { Color } from '../../services/View/colors'
+import { Color } from '@/mechanics/services/View/colors'
 import { spriteCoordinates } from '@/mechanics/services/View/spriteCoordinates'
 import { type Bullet, type Tank, Entity } from '../'
 import { Direction, EntityEvent } from '../Entity/types'
@@ -7,7 +7,7 @@ import { type ExplosionVariant } from './types'
 type ExplosionSettings = { parent: Tank | Bullet }
 
 export class Explosion extends Entity {
-  variant: ExplosionVariant = 'PROJECTILE_EXPLOSION'
+  variant: ExplosionVariant = 'BULLET_EXPLOSION'
   parent: ExplosionSettings['parent']
   despawnTime = 200
 
@@ -22,8 +22,8 @@ export class Explosion extends Entity {
 
     let animationDelay = 0
     switch (this.variant) {
-      case 'PROJECTILE_EXPLOSION':
-        this.mainSpriteCoordinates = spriteCoordinates.projectileExplosion
+      case 'BULLET_EXPLOSION':
+        this.mainSpriteCoordinates = spriteCoordinates.bulletExplosion
         break
       case 'TANK_EXPLOSION':
         this.mainSpriteCoordinates = spriteCoordinates.tankExplosion
@@ -49,20 +49,13 @@ export class Explosion extends Entity {
 
   calculateProps({ parent }: ExplosionSettings) {
     const size = parent.type === 'bullet' ? 4 : 8
-    const variant =
-      parent.type === 'bullet' ? 'PROJECTILE_EXPLOSION' : 'TANK_EXPLOSION'
+    const variant = parent.type === 'bullet' ? 'BULLET_EXPLOSION' : 'TANK_EXPLOSION'
     let posX = parent.posX
     let posY = parent.posY
 
-    const correction =
-      parent.direction === Direction.Up || parent.direction === Direction.Left
-        ? -2
-        : 0
+    const correction = parent.direction === Direction.Up || parent.direction === Direction.Left ? -2 : 0
 
-    if (
-      parent.direction === Direction.Up ||
-      parent.direction === Direction.Down
-    ) {
+    if (parent.direction === Direction.Up || parent.direction === Direction.Down) {
       if (parent.type === 'tank') {
         if (parent.direction === Direction.Up) {
           posX += correction
