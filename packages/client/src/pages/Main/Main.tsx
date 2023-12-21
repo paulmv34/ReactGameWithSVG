@@ -6,7 +6,7 @@ import clsx from 'clsx'
 
 const mainMenu: MenuItemData[] = [
   {
-    link: ROUTES.GAME,
+    link: ROUTES.GAME_START,
     title: 'Игра',
   },
   {
