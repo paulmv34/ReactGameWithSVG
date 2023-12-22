@@ -55,11 +55,7 @@ export class Tank extends EntityDynamic {
     })
 
     this.on(EntityEvent.Damaged, ({ source }) => {
-      if (
-        !this.invincible &&
-        this.role !== source.role &&
-        --this.durability <= 0
-      ) {
+      if (!this.invincible && this.role !== source.role && --this.durability <= 0) {
         this.beDestroyed(source)
       }
     })
@@ -94,12 +90,7 @@ export class Tank extends EntityDynamic {
   }
 
   shoot() {
-    if (
-      !this.spawned ||
-      this.frozen ||
-      !this.canShoot ||
-      this.bulletsFlying >= this.bulletsLimit
-    ) {
+    if (!this.spawned || this.frozen || !this.canShoot || this.bulletsFlying >= this.bulletsLimit) {
       return
     }
 
@@ -108,10 +99,7 @@ export class Tank extends EntityDynamic {
 
   stateCheck() {
     if (this.sliding) {
-      if (
-        !this.canMove ||
-        ++this.slidingStepsProgress > this.slidingStepsTotal
-      ) {
+      if (!this.canMove || ++this.slidingStepsProgress > this.slidingStepsTotal) {
         this.sliding = false
       } else {
         this.stopping = true
@@ -122,9 +110,9 @@ export class Tank extends EntityDynamic {
       return
     }
 
-    const projectile = new Bullet({
+    const bullet = new Bullet({
       parent: this,
-      ...this.calculateProjectileInitPos(),
+      ...this.calculateBulletInitPos(),
       role: this.role,
       direction: this.direction,
       moveSpeed: this.shootSpeed,
@@ -133,16 +121,16 @@ export class Tank extends EntityDynamic {
 
     ++this.bulletsFlying
 
-    projectile.on(EntityEvent.Exploding, () => {
+    bullet.on(EntityEvent.Exploding, () => {
       --this.bulletsFlying
     })
 
-    this.emit(EntityEvent.Shoot, projectile)
+    this.emit(EntityEvent.Shoot, bullet)
 
     this.shooting = false
   }
 
-  calculateProjectileInitPos() {
+  calculateBulletInitPos() {
     const defaultSize = { width: 2, height: 2 }
     const rect = this.nextRect || this.lastRect || this.getRect()
     const offsetX = Math.round((rect.width - defaultSize.width) / 2)

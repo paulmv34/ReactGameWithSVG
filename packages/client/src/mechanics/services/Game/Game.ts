@@ -3,7 +3,7 @@ import { Direction } from '@/mechanics/models/Entity/types'
 import { Overlay } from '@/mechanics/ui'
 import { ScreenType } from '@/mechanics/ui/screens/data'
 import { MainMenuItem } from '@/mechanics/ui/screens/UIScreens/data'
-import { EventEmitter, sleep } from '../../utils'
+import { EventEmitter, sleep } from '@/mechanics/utils'
 import {
   ControllerKeyboard,
   ControllerManager,
@@ -17,11 +17,7 @@ import {
   Zone,
 } from '..'
 import { type Controller, ControllerEvent } from '../Controller'
-import {
-  type BindingConfig,
-  KeyBindingsArrows,
-  KeyBindingsWasd,
-} from '../Controller/KeyBindings'
+import { type BindingConfig, KeyBindingsArrows, KeyBindingsWasd } from '../Controller/KeyBindings'
 
 export { type GameMode } from './types'
 
@@ -157,20 +153,13 @@ export class Game extends EventEmitter {
 
       let changeLevelInterval: ReturnType<typeof setInterval>
 
-      const resetLevelInterval = () =>
-        changeLevelInterval && clearInterval(changeLevelInterval)
+      const resetLevelInterval = () => changeLevelInterval && clearInterval(changeLevelInterval)
       const handleMove = (direction: Direction) => {
         let shouldTrigger = false
-        if (
-          (direction === Direction.Up || direction === Direction.Right) &&
-          this.state.level < this.state.maxLevels
-        ) {
+        if ((direction === Direction.Up || direction === Direction.Right) && this.state.level < this.state.maxLevels) {
           this.state.level++
           shouldTrigger = true
-        } else if (
-          (direction === Direction.Down || direction === Direction.Left) &&
-          this.state.level > 1
-        ) {
+        } else if ((direction === Direction.Down || direction === Direction.Left) && this.state.level > 1) {
           this.state.level--
           shouldTrigger = true
         } else {
@@ -197,10 +186,7 @@ export class Game extends EventEmitter {
           resetLevelInterval()
           handleMove.call(this, direction)
 
-          changeLevelInterval = setInterval(
-            handleMove.bind(this, direction),
-            130
-          )
+          changeLevelInterval = setInterval(handleMove.bind(this, direction), 130)
         })
         .on(ControllerEvent.Shoot, () => {
           if (this.state.screen !== ScreenType.LevelSelector) {
@@ -219,9 +205,7 @@ export class Game extends EventEmitter {
     this.reset()
 
     this.state.mode =
-      this.state.mainMenuItem === MainMenuItem.Singleplayer
-        ? MainMenuItem.Singleplayer
-        : MainMenuItem.Multiplayer
+      this.state.mainMenuItem === MainMenuItem.Singleplayer ? MainMenuItem.Singleplayer : MainMenuItem.Multiplayer
 
     if (this.state.level < this.state.maxLevels) {
       this.state.level++

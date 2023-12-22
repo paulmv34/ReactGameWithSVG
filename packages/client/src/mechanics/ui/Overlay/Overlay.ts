@@ -1,7 +1,7 @@
-import { Direction } from '../../models/Entity/types'
-import { type Game, type View } from '../../services'
-import { Color } from '../../services/View/colors'
-import { EventEmitter } from '../../utils'
+import { Direction } from '@/mechanics/models/Entity/types'
+import { type Game, type View } from '@/mechanics/services'
+import { Color } from '@/mechanics/services/View/colors'
+import { EventEmitter } from '@/mechanics/utils'
 import { UIElement } from '..'
 import { type Screen } from '../screens'
 import { type ScreenType } from '../screens/data'
@@ -58,9 +58,7 @@ export class Overlay extends EventEmitter {
     return elem
   }
 
-  renderSplashScreen(
-    backgroundColor: Color.Black | Color.Grey | Color.White = Color.Black
-  ) {
+  renderSplashScreen(backgroundColor: Color.Black | Color.Grey | Color.White = Color.Black) {
     this.renderElement({
       posX: 0,
       posY: 0,
@@ -70,10 +68,7 @@ export class Overlay extends EventEmitter {
     })
   }
 
-  animate(
-    animateFunction: (counter: number) => boolean,
-    animateIntervalMs = 25
-  ) {
+  animate(animateFunction: (counter: number) => boolean, animateIntervalMs = 25) {
     let stageCount = 0
 
     const animateProcess = setInterval(() => {

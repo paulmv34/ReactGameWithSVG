@@ -1,16 +1,9 @@
-import { spriteCoordinates } from '../../services/View/spriteCoordinates'
+import { spriteCoordinates } from '@/mechanics/services/View/spriteCoordinates'
 import { Entity } from '../'
 import { EntityEvent } from '../Entity/types'
 import { type PowerupVariant } from './types'
 
-const powerupVariants: PowerupVariant[] = [
-  'STAR',
-  'TANK',
-  'HELMET',
-  'GRENADE',
-  'SHOVEL',
-  'CLOCK',
-]
+const powerupVariants: PowerupVariant[] = ['STAR', 'TANK', 'HELMET', 'GRENADE', 'SHOVEL', 'CLOCK']
 
 export class Powerup extends Entity {
   width = 4

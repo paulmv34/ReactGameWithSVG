@@ -1,7 +1,6 @@
 import { type AssetPathList } from './types'
 
-export const errorMsg =
-  'Не удалось загрузить данные для игры. Попробуйте обновить страницу.'
+export const errorMsg = 'Не удалось загрузить данные для игры. Попробуйте обновить страницу.'
 
 export enum SpriteName {
   Brick = 'BRICK',
@@ -10,6 +9,7 @@ export enum SpriteName {
 
 export const ImagePathList = {
   [SpriteName.Sprite]: 'sprites/sprite.png',
+  [SpriteName.Brick]: 'sprites/bricks.png',
 }
 
 export const assetPathList: AssetPathList = { ...ImagePathList }

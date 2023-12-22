@@ -1,4 +1,4 @@
-import { spriteCoordinates } from '../../services/View/spriteCoordinates'
+import { spriteCoordinates } from '@/mechanics/services/View/spriteCoordinates'
 import { type Powerup, type TankEnemy, Entity } from '../'
 import { EntityEvent } from '../Entity/types'
 import { type ScoreVariant } from './types'

@@ -5,7 +5,7 @@ import { ROUTES } from '@/types/types'
 
 import { createContext, useEffect, useRef, useState } from 'react'
 
-import { Tanchiki } from '../../mechanics'
+import { Tanchiki } from '@/mechanics'
 import { type GameCreateContext } from './types'
 
 export const GameContext = createContext<GameCreateContext>({} as GameCreateContext)

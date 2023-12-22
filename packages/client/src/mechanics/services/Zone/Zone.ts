@@ -1,16 +1,5 @@
-import {
-  type Entity,
-  type Powerup,
-  EntityDynamic,
-  Bullet,
-  Tank,
-  TankPlayer,
-} from '../../models'
-import {
-  type PosState,
-  type Rect,
-  EntityEvent,
-} from '../../models/Entity/types'
+import { type Entity, type Powerup, EntityDynamic, Bullet, Tank, TankPlayer } from '@/mechanics/models'
+import { type PosState, type Rect, EntityEvent } from '@/mechanics/models/Entity/types'
 import { type Game } from '../'
 
 enum ZoneLayers {
@@ -57,11 +46,7 @@ export class Zone {
 
   reset() {
     for (let z = 0; z < this.matrix.length; ++z) {
-      this.updateMatrix(
-        z,
-        { posX: 0, posY: 0, width: this.width, height: this.height },
-        null
-      )
+      this.updateMatrix(z, { posX: 0, posY: 0, width: this.width, height: this.height }, null)
     }
   }
 
@@ -156,11 +141,7 @@ export class Zone {
 
     if (entity instanceof Tank) {
       entity.on(EntityEvent.Stop, () => {
-        entity.slide(
-          this.shouldSlide(
-            entity.nextRect || entity.lastRect || entity.getRect()
-          )
-        )
+        entity.slide(this.shouldSlide(entity.nextRect || entity.lastRect || entity.getRect()))
       })
     }
 
@@ -173,12 +154,7 @@ export class Zone {
   }
 
   isLegalRect(rect: Rect) {
-    if (
-      rect.posX % 1 === 0 &&
-      rect.posY % 1 === 0 &&
-      rect.width % 1 === 0 &&
-      rect.height % 1 === 0
-    ) {
+    if (rect.posX % 1 === 0 && rect.posY % 1 === 0 && rect.width % 1 === 0 && rect.height % 1 === 0) {
       return true
     }
     return false
@@ -215,10 +191,7 @@ export class Zone {
         const damagedRect = { posX: x, posY: y, width: 1, height: 1 }
         if (mainLayerCell && mainLayerCell.hittable) {
           if (!(source instanceof Bullet) || mainLayerCell !== source.parent) {
-            if (
-              mainLayerCell.type !== 'tank' ||
-              this.currentRectsOverlap(source, mainLayerCell)
-            ) {
+            if (mainLayerCell.type !== 'tank' || this.currentRectsOverlap(source, mainLayerCell)) {
               mainLayerCell.takeDamage(source, damagedRect)
             }
           }
@@ -253,11 +226,7 @@ export class Zone {
           continue
         }
         if (entity instanceof Tank) {
-          if (
-            mainLayerCell !== null &&
-            mainLayerCell !== entity &&
-            !mainLayerCell.crossable
-          ) {
+          if (mainLayerCell !== null && mainLayerCell !== entity && !mainLayerCell.crossable) {
             return true
           }
           if (powerupLayerCell !== null && entity instanceof TankPlayer) {
@@ -266,11 +235,7 @@ export class Zone {
           }
         }
         if (entity instanceof Bullet) {
-          if (
-            mainLayerCell !== null &&
-            mainLayerCell.hittable &&
-            mainLayerCell !== entity.parent
-          ) {
+          if (mainLayerCell !== null && mainLayerCell.hittable && mainLayerCell !== entity.parent) {
             if (entity.role === 'enemy' && entity.role === mainLayerCell.role) {
               continue
             }
@@ -287,10 +252,7 @@ export class Zone {
             return true
           }
           if (bulletLayerCell !== null && bulletLayerCell !== entity) {
-            if (
-              entity.role === 'enemy' &&
-              entity.role === bulletLayerCell.role
-            ) {
+            if (entity.role === 'enemy' && entity.role === bulletLayerCell.role) {
               continue
             }
             return true
@@ -301,11 +263,7 @@ export class Zone {
     return false
   }
 
-  currentRectsOverlap(
-    rectOne: Entity | Rect,
-    rectTwo: Entity | Rect,
-    margin = 0.25
-  ) {
+  currentRectsOverlap(rectOne: Entity | Rect, rectTwo: Entity | Rect, margin = 0.25) {
     const rectOneStartX = rectOne.posX + margin
     const rectOneEndX = rectOne.posX + rectOne.width - margin
     const rectOneStartY = rectOne.posY + margin
@@ -321,19 +279,11 @@ export class Zone {
     const rectOneBottomOfRectTwo = rectOneStartY >= rectTwoEndY
     const rectOneTopOfRectTwo = rectOneEndY <= rectTwoStartY
 
-    return !(
-      rectOneRightOfRectTwo ||
-      rectOneLeftOfRectTwo ||
-      rectOneBottomOfRectTwo ||
-      rectOneTopOfRectTwo
-    )
+    return !(rectOneRightOfRectTwo || rectOneLeftOfRectTwo || rectOneBottomOfRectTwo || rectOneTopOfRectTwo)
   }
 
   hasCollision(rect: Rect, entity: Entity) {
-    if (
-      this.isBeyondMatrix(rect) ||
-      this.hasCollisionsWithMatrix(rect, entity)
-    ) {
+    if (this.isBeyondMatrix(rect) || this.hasCollisionsWithMatrix(rect, entity)) {
       return true
     }
     return false

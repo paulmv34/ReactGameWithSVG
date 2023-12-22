@@ -2,6 +2,7 @@ import { Color } from '@/mechanics/services/View/colors'
 import { spriteCoordinates } from '@/mechanics/services/View/spriteCoordinates'
 import { Screen } from '../Screen'
 import { MainMenuItem } from './data'
+import { SpriteName } from '@/mechanics/services/Resources/data'
 
 export class MainMenuScreen extends Screen<MainMenuItem> {
   tankElemInterval: string | null = null
@@ -38,10 +39,10 @@ export class MainMenuScreen extends Screen<MainMenuItem> {
       posX: 0,
       posY: 7,
       width: view.width,
-      height: 4,
+      height: 5,
+      backImg: this.overlay.game.resources.getImage(SpriteName.Brick),
       text: 'ТАНЧИКИ',
       align: 'center',
-      color: Color.Lime,
     })
 
     this.overlay.renderElement({
@@ -60,6 +61,66 @@ export class MainMenuScreen extends Screen<MainMenuItem> {
       height: 2.2,
       color: Color.White,
       text: '2 ИГРОКА',
+    })
+
+    this.overlay.renderElement({
+      posX: 0,
+      posY: 40,
+      width: view.width,
+      height: 1,
+      color: Color.LightGrey,
+      text: '1 ИГРОК',
+      align: 'center',
+    })
+
+    this.overlay.renderElement({
+      posX: 0,
+      posY: 42,
+      width: view.width,
+      height: 1,
+      color: Color.LightGrey,
+      text: 'WASD или СТРЕЛКИ для движения',
+      align: 'center',
+    })
+
+    this.overlay.renderElement({
+      posX: 0,
+      posY: 44,
+      width: view.width,
+      height: 1,
+      color: Color.LightGrey,
+      text: 'ПРОБЕЛ или ENTER для стрельбы',
+      align: 'center',
+    })
+
+    this.overlay.renderElement({
+      posX: 0,
+      posY: 48,
+      width: view.width,
+      height: 1,
+      color: Color.LightGrey,
+      text: '2 ИГРОКА',
+      align: 'center',
+    })
+
+    this.overlay.renderElement({
+      posX: 0,
+      posY: 50,
+      width: view.width,
+      height: 1,
+      color: Color.LightGrey,
+      text: '1 - WASD для движения, ПРОБЕЛ для стрельбы',
+      align: 'center',
+    })
+
+    this.overlay.renderElement({
+      posX: 0,
+      posY: 52,
+      width: view.width,
+      height: 1,
+      color: Color.LightGrey,
+      text: '2 - СТРЕЛКИ для движения, ENTER для стрельбы',
+      align: 'center',
     })
   }
 }
