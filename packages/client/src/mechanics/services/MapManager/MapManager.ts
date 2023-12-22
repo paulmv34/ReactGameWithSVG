@@ -1,8 +1,4 @@
-import {
-  type EntitySettings,
-  type EntityType,
-  type Pos,
-} from '@/mechanics/models/Entity/types'
+import { type EntitySettings, type EntityType, type Pos } from '@/mechanics/models/Entity/types'
 import { type EnemyVariant } from '@/mechanics/models/Tank/types'
 import { rand } from '@/mechanics/utils/rand'
 import { type Game } from '..'
@@ -18,7 +14,7 @@ export class MapManager {
   private mapEnemies = enemies
 
   constructor(private game: Game) {
-    this.mapLevelIndex = this.game.state.level - 1
+    this.mapLevelIndex = this.game.state.level - 2
   }
 
   fixMapData(map: MapData): MapData {
@@ -58,10 +54,7 @@ export class MapManager {
       y = rand(0, maxY)
       x = rand(0, maxX)
       cell = this.map[y][x]
-    } while (
-      cell !== Cell.Blank ||
-      (spawnPlaces[y] && spawnPlaces[y].includes(x))
-    )
+    } while (cell !== Cell.Blank || (spawnPlaces[y] && spawnPlaces[y].includes(x)))
 
     return this.coordsToRect(x, y)
   }

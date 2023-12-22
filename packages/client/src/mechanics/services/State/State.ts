@@ -8,7 +8,7 @@ export class State {
   paused = false
   debugging = false
 
-  level = 0
+  level = 1
   maxLevels = levels.length
   mode: GameMode = MainMenuItem.Singleplayer
   username = ''
