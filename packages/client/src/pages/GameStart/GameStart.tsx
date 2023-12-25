@@ -1,3 +1,4 @@
+import BackLink from '@/components/BackLink/BackLink'
 import { FC } from 'react'
 import styles from './GameStart.module.scss'
 import keyboardImage from '/public/keyboard.png'
@@ -9,6 +10,7 @@ import CustomLink from '@/components/CustomLink/CustomLink'
 const GameStart: FC = () => {
   return (
     <section className={styles['game-start']}>
+      <BackLink to={ROUTES.MAIN} />
       <div className={styles['window']}>
         <div className={styles['wrapper-text']}>
           <h2 className={styles['title']}>Цель игры:</h2>

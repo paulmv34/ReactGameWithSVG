@@ -9,6 +9,7 @@ declare global {
   const __SLACK_FEEDBACK_WEBHOOK_URL__: string
   interface Window {
     __PRELOADED_STATE__?: Record<string, Record<string, unknown>>
+    webkitAudioContext: typeof AudioContext
   }
 
   export type Nullable<T> = T | null

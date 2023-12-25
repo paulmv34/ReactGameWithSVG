@@ -15,6 +15,7 @@ import {
   State,
   View,
   Zone,
+  AudioManager,
 } from '..'
 import { type Controller, ControllerEvent } from '../Controller'
 import { type BindingConfig, KeyBindingsArrows, KeyBindingsWasd } from '../Controller/KeyBindings'
@@ -33,6 +34,7 @@ export class Game extends EventEmitter {
   controllerAll: Controller
   controllerPlayerOne: Controller
   controllerPlayerTwo: Controller
+  audioManager: AudioManager
 
   private constructor() {
     super()
@@ -48,6 +50,7 @@ export class Game extends EventEmitter {
     })
     this.controllerPlayerOne = this.createController(KeyBindingsWasd)
     this.controllerPlayerTwo = new ControllerKeyboard(KeyBindingsArrows)
+    this.audioManager = new AudioManager(this)
   }
 
   static create() {
@@ -69,6 +72,7 @@ export class Game extends EventEmitter {
     this.view.load(root)
     this.overlay.load()
     this.loop.load()
+    this.audioManager.load()
     this.controllerAll.load()
     this.controllerPlayerOne.load()
     this.controllerPlayerTwo.load()
@@ -80,6 +84,7 @@ export class Game extends EventEmitter {
     this.loop.unload()
     this.view.unload()
     this.overlay.unload()
+    this.audioManager.unload()
     this.controllerAll.unload()
     this.controllerPlayerOne.unload()
     this.controllerPlayerTwo.unload()
@@ -94,6 +99,7 @@ export class Game extends EventEmitter {
     this.zone.reset()
     this.view.reset()
     this.overlay.reset()
+    this.audioManager.reset()
     this.controllerAll.reset()
     this.controllerPlayerOne.reset()
     this.controllerPlayerTwo.reset()
@@ -103,6 +109,7 @@ export class Game extends EventEmitter {
     this.loop.add(entity)
     this.view.add(entity)
     this.zone.add(entity)
+    this.audioManager.add(entity)
   }
 
   initLoading() {
@@ -213,6 +220,8 @@ export class Game extends EventEmitter {
       this.state.level = 1
     }
 
+    this.audioManager.emit('levelIntro')
+
     this.scenario = new Scenario(this)
       .on(ScenarioEvent.GameOver, async () => {
         this.state.resetSession()
@@ -234,6 +243,7 @@ export class Game extends EventEmitter {
       this.state.screen = ScreenType.GameOverPopup
       this.state.level = 0
       this.overlay.show(this.state.screen)
+      this.audioManager.emit('gameOver')
 
       this.controllerAll.reset()
       this.controllerPlayerOne.reset()
