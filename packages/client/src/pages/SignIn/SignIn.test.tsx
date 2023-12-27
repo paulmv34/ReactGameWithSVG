@@ -2,12 +2,13 @@ import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
 import SignIn from '@/pages/SignIn/SignIn'
 import App from '@/App'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ROUTES } from '@/types/types'
+import Layout from '@/components/Layout/Layout'
 
 const mockedUsedNavigate = jest.fn()
-
 jest.mock('react-router-dom', () => ({
-  ...(jest.requireActual('react-router-dom') as any),
+  ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockedUsedNavigate,
 }))
 
@@ -31,10 +32,6 @@ jest.mock('react-router-dom', () => ({
 // проверка валидации на форме (корректная)
 
 test('Example test', async () => {
-  render(
-    <BrowserRouter>
-      <SignIn />
-    </BrowserRouter>
-  )
+  render(<SignIn />)
   // expect(screen.getByRole('form')).toBeDefined()
 })

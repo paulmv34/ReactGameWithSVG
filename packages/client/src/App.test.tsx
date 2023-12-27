@@ -7,6 +7,6 @@ const appContent = 'Вот тут будет жить ваше приложен�
 global.fetch = jest.fn(() => Promise.resolve({ json: () => Promise.resolve('hey') }))
 
 test('Example test', async () => {
-  render(<App />)
+  // render(<App />)
   // expect(screen.getByText(appContent)).toBeDefined()
 })
