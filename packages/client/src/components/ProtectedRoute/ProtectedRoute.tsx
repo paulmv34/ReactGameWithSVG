@@ -1,11 +1,10 @@
 import React from 'react'
-// import store from '@/store/store'
 import { Outlet } from 'react-router'
 
 import { ProtectedRouteProps } from '@/components/ProtectedRoute/types'
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  // const { isLoggedIn } = store.getState()
+  // const { isLoggedIn } = useAuth()
   // const location = useLocation()
   // if (!isLoggedIn) {
   //   return <Navigate to={ROUTES.LOGIN} replace state={{ path: location.pathname }} />

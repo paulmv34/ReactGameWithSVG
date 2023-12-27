@@ -21,6 +21,7 @@ export const useAuth = () => {
 
   const logout = async () => {
     await AuthService.logout()
+    dispatch(fetchUser())
   }
 
   return {

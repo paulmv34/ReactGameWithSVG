@@ -9,13 +9,16 @@ const initialState: UserState = {
   error: null,
 }
 
-export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
+export const fetchUser = createAsyncThunk('user/fetchUser', async (_, { rejectWithValue }) => {
   try {
     const { data: user } = await authAPI.getUser()
     return user
   } catch (error) {
     if (error instanceof AxiosError) {
-      throw error.response?.status
+      return rejectWithValue({
+        code: error.response?.status,
+        message: error.message,
+      })
     }
   }
 })
@@ -26,13 +29,17 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(fetchUser.pending, (state) => {
+        state.error = null
+      })
       .addCase(fetchUser.fulfilled, (state, { payload }) => {
         state.user = payload!
         state.isLoggedIn = true
       })
-      .addCase(fetchUser.rejected, (state, { error }) => {
+      .addCase(fetchUser.rejected, (state, { payload }) => {
         state.isLoggedIn = false
-        state.error = error
+        state.user = null
+        state.error = payload
       })
   },
 })
