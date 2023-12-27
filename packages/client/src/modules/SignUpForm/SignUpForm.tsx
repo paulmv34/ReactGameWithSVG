@@ -6,12 +6,12 @@ import { useFormik } from 'formik'
 import Input from '@/components/Input/Input'
 import Button from '@/components/Button/Button'
 import CustomLink from '@/components/CustomLink/CustomLink'
-
-import AuthService from '@/services/auth.service'
 import { SignUpFormProps } from '@/modules/SignUpForm/types'
 import { signUpValidationSchema } from '@/utils/validationSchema'
+import { useAuth } from '@/hooks/useAuth'
 
 const SignUpForm = ({ onRegister }: SignUpFormProps) => {
+  const { signUp } = useAuth()
   const formik = useFormik({
     initialValues: {
       first_name: '',
@@ -28,7 +28,7 @@ const SignUpForm = ({ onRegister }: SignUpFormProps) => {
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       setSubmitting(true)
       try {
-        await AuthService.register(values)
+        await signUp(values)
         resetForm({})
         onRegister()
       } catch (error) {

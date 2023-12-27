@@ -17,7 +17,7 @@ export interface UserInfo {
   display_name: string
   email: string
   first_name: string
-  id: number
+  id: number | null
   login: string
   phone: string
   second_name: string

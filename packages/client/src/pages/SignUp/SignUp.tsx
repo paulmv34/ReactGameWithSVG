@@ -6,11 +6,11 @@ import styles from '@/pages/SignIn/SignIn.module.scss'
 import BackLink from '@/components/BackLink/BackLink'
 import { ROUTES } from '@/types/types'
 import SignUpForm from '@/modules/SignUpForm/SignUpForm'
-import store from '@/store/store'
+import { useAuth } from '@/hooks/useAuth'
 
 const SignUp: FC = () => {
   const navigate = useNavigate()
-  const { isLoggedIn } = store.getState()
+  const { isLoggedIn } = useAuth()
   const { state } = useLocation()
 
   const onRegister = () => {

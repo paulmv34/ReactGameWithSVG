@@ -1,32 +1,12 @@
-import { set } from '@/utils/set'
-import { UserInfo } from '@/api/Auth/types'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
-export interface State {
-  isLoggedIn: boolean
-  user: UserInfo | null
-}
+import userReducer from '@/features/user/userSlice'
 
-class Store {
-  private readonly state: State
+export const store = configureStore({
+  reducer: combineReducers({
+    user: userReducer,
+  }),
+})
 
-  constructor() {
-    const storedState = localStorage.getItem('appState')
-    this.state = storedState
-      ? JSON.parse(storedState)
-      : {
-          user: null,
-          isLoggedIn: false,
-        }
-  }
-
-  getState(): State {
-    return this.state
-  }
-
-  set(path: string, value: unknown) {
-    set(this.state, path, value)
-    localStorage.setItem('appState', JSON.stringify(this.state))
-  }
-}
-
-export default new Store()
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

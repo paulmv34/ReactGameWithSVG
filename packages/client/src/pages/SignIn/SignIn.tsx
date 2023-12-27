@@ -6,12 +6,12 @@ import { useLocation, useNavigate } from 'react-router'
 import { ROUTES } from '@/types/types'
 
 import SignInForm from '@/modules/SignInForm/SignInForm'
-import store from '@/store/store'
+import { useAuth } from '@/hooks/useAuth'
 
 const SignIn: FC = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
-  const { isLoggedIn } = store.getState()
+  const { isLoggedIn } = useAuth()
 
   const onAuth = () => {
     navigate(state?.path || ROUTES.MAIN)

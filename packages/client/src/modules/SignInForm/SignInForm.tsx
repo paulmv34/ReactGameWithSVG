@@ -6,12 +6,12 @@ import { useFormik } from 'formik'
 import Input from '@/components/Input/Input'
 import Button from '@/components/Button/Button'
 import CustomLink from '@/components/CustomLink/CustomLink'
-
-import AuthService from '@/services/auth.service'
 import { SignInFormProps } from '@/modules/SignInForm/types'
 import { signInValidationSchema } from '@/utils/validationSchema'
+import { useAuth } from '@/hooks/useAuth'
 
 const SignInForm = ({ onAuth }: SignInFormProps) => {
+  const { signIn } = useAuth()
   const formik = useFormik({
     initialValues: {
       login: '',
@@ -23,7 +23,7 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       setSubmitting(true)
       try {
-        await AuthService.login(values)
+        await signIn(values)
         resetForm({})
         onAuth()
       } catch (err) {
