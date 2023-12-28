@@ -6,6 +6,8 @@ import SignIn from '@/pages/SignIn/SignIn'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { fieldErrorMessages } from '@/utils/validationSchema'
 import { sleep } from '@/mechanics/utils'
+import { Provider } from 'react-redux'
+import { store } from '@/store/store'
 
 jest.mock('clsx', () => ({
   default: jest.fn(),
@@ -14,7 +16,14 @@ jest.mock('clsx', () => ({
 const testApp = (
   <BrowserRouter>
     <Routes>
-      <Route path={'*'} element={<SignIn />} />
+      <Route
+        path={'*'}
+        element={
+          <Provider store={store}>
+            <SignIn />
+          </Provider>
+        }
+      />
     </Routes>
   </BrowserRouter>
 )
