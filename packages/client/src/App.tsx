@@ -47,7 +47,7 @@ function App() {
     }
 
     fetchServerData()
-    fetchUser()
+    // fetchUser()
   }, [])
 
   return (
