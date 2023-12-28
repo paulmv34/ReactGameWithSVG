@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react'
 import styles from './SignIn.module.scss'
 import clsx from 'clsx'
-import { useLocation, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 
 import { ROUTES } from '@/types/types'
 
@@ -10,18 +10,19 @@ import { useAuth } from '@/hooks/useAuth'
 
 const SignIn: FC = () => {
   const navigate = useNavigate()
-  const { state } = useLocation()
   const { isLoggedIn } = useAuth()
 
   const onAuth = () => {
-    navigate(state?.path || ROUTES.MAIN)
+    console.log('hey, onAuth has just been triggered')
+    // navigate(ROUTES.MAIN)
   }
 
   useEffect(() => {
+    console.log('I have been triggered in SignIn.tsx')
     if (isLoggedIn) {
-      navigate(state?.path || ROUTES.MAIN)
+      navigate(ROUTES.MAIN)
     }
-  }, [])
+  }, [isLoggedIn])
 
   return (
     <section className={clsx(styles.page, 'page')}>

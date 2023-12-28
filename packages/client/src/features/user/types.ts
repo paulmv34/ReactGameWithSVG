@@ -5,6 +5,6 @@ export interface UserState {
     code: number
     message: string
   } | null
-  isLoggedIn: boolean
+  isLoggedIn: boolean | null
   user: null | UserInfo
 }

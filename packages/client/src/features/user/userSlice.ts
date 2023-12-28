@@ -5,7 +5,7 @@ import { AxiosError } from 'axios'
 
 const initialState: UserState = {
   user: null,
-  isLoggedIn: false,
+  isLoggedIn: null,
   error: null,
 }
 
@@ -31,6 +31,7 @@ export const userSlice = createSlice({
     builder
       .addCase(fetchUser.pending, (state) => {
         state.error = null
+        state.isLoggedIn = null
       })
       .addCase(fetchUser.fulfilled, (state, { payload }) => {
         state.user = payload!

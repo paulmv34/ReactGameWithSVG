@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { useNavigate } from 'react-router'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -26,11 +25,8 @@ import GameStart from '@/pages/GameStart/GameStart'
 
 import { fetchUser } from '@/features/user/userSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
-import { useAuth } from '@/hooks/useAuth'
 
 function App() {
-  const { isLoggedIn } = useAuth()
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -42,20 +38,13 @@ function App() {
     }
 
     const getUser = async () => {
-      dispatch(fetchUser())
+      console.log('getting user')
+      await dispatch(fetchUser())
     }
 
     fetchServerData()
     getUser()
   }, [])
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate(ROUTES.MAIN)
-    } else {
-      navigate(ROUTES.LOGIN)
-    }
-  }, [isLoggedIn])
 
   return (
     <>
