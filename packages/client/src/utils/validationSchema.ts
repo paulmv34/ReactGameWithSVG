@@ -74,3 +74,5 @@ export const signUpValidationSchema = Yup.object().shape({
   password: validators.password(),
   confirm_password: validators.passwordRepeat('password'),
 })
+
+export { messages as fieldErrorMessages }
