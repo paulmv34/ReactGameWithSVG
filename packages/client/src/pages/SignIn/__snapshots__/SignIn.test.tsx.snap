@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should be equal snapshot 1`] = `
+exports[`should be equal to snapshot 1`] = `
 <section>
   <div
     className="wrapper wrapper-backlink"
