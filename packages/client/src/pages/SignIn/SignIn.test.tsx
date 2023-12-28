@@ -1,37 +1,80 @@
 import React from 'react'
-import { render, fireEvent, screen } from '@testing-library/react'
+import * as renderer from 'react-test-renderer'
+import userEvent from '@testing-library/user-event'
+import { render, screen } from '@testing-library/react'
 import SignIn from '@/pages/SignIn/SignIn'
-import App from '@/App'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { ROUTES } from '@/types/types'
-import Layout from '@/components/Layout/Layout'
+import { fieldErrorMessages } from '@/utils/validationSchema'
+import { sleep } from '@/mechanics/utils'
 
-const mockedUsedNavigate = jest.fn()
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockedUsedNavigate,
+jest.mock('clsx', () => ({
+  default: jest.fn(),
 }))
 
-// снапшот
-// describe('pages/SignIn', () => {
-//   it('test snapshot', () => {
-//     const tree = renderer.create(
-//       <SignIn />
-//     ).toJSON();
-//     expect(tree).toMatchSnapshot();
-//   })
-// })
+const testApp = (
+  <BrowserRouter>
+    <Routes>
+      <Route path={'*'} element={<SignIn />} />
+    </Routes>
+  </BrowserRouter>
+)
 
-// проверка форма авторизации отобразилась
+const setup = () => {
+  const user = userEvent.setup()
+  const formPage = render(testApp)
 
-// проверка точечной валидации (логин)
-// проверка валидации на форме (пустая)
-// fireEvent.click(screen.getByText('Load Greeting'))
-// expect(screen.getByRole('heading')).toHaveTextContent('hello there')
-// проверка валидации на форме (некорректная)
-// проверка валидации на форме (корректная)
+  const loginInput = screen.getByLabelText('Логин')
+  const passwordInput = screen.getByLabelText('Пароль')
+  const submitButton = screen.getByRole('button', { name: /войти/i })
 
-test('Example test', async () => {
-  render(<SignIn />)
-  // expect(screen.getByRole('form')).toBeDefined()
+  return {
+    user,
+    formPage,
+    loginInput,
+    passwordInput,
+    submitButton,
+  }
+}
+
+test('should correctly displayed', async () => {
+  const { loginInput, passwordInput, submitButton } = setup()
+  expect(loginInput).toBeDefined()
+  expect(passwordInput).toBeDefined()
+  expect(submitButton).toBeDefined()
+})
+
+test('should correctly validate single input interaction', async () => {
+  const { loginInput, passwordInput, user } = setup()
+  await user.type(loginInput, '111ThisLoginIsIncorrect')
+  await user.click(passwordInput)
+  expect(screen.getAllByText(fieldErrorMessages.wrongFormat)).toHaveLength(1)
+})
+
+test('should correctly validate empty form submit', async () => {
+  const { submitButton, user } = setup()
+  await user.click(submitButton)
+  await sleep(10)
+  expect(screen.getAllByText(fieldErrorMessages.required)).toHaveLength(2)
+})
+
+test('should correctly validate incorrect form submit', async () => {
+  const { loginInput, passwordInput, submitButton, user } = setup()
+  await user.type(loginInput, '111ThisLoginIsIncorrect')
+  await user.type(passwordInput, 'thispasswordisincorrect')
+  await user.click(submitButton)
+  await sleep(10)
+  expect(screen.getAllByText(fieldErrorMessages.wrongFormat)).toHaveLength(2)
+})
+
+test('should submit correct form', async () => {
+  const { loginInput, passwordInput, submitButton, user } = setup()
+  await user.type(loginInput, 'login')
+  await user.type(passwordInput, 'Password1')
+  await user.click(submitButton)
+  await sleep(200)
+})
+
+test('should be equal to snapshot', async () => {
+  const tree = renderer.create(testApp).toJSON()
+  expect(tree).toMatchSnapshot()
 })

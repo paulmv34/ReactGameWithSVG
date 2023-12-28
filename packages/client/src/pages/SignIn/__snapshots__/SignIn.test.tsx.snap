@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should be equal snapshot 1`] = `
+<section>
+  <div
+    className="wrapper wrapper-backlink"
+  >
+    <h2>
+      Вход
+    </h2>
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="fields-group"
+      >
+        <div>
+          <label
+            htmlFor="login"
+          >
+            Логин
+          </label>
+          <input
+            autoComplete="off"
+            id="login"
+            name="login"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="Введите логин"
+            type="text"
+            value=""
+          />
+          <span />
+        </div>
+        <div>
+          <label
+            htmlFor="password"
+          >
+            Пароль
+          </label>
+          <input
+            autoComplete="off"
+            id="password"
+            name="password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="Введите пароль"
+            type="password"
+            value=""
+          />
+          <span />
+        </div>
+      </div>
+      <button
+        disabled={false}
+        type="submit"
+      >
+        Войти
+      </button>
+      <a
+        href="/sign-up"
+        onClick={[Function]}
+      >
+        Регистрация
+      </a>
+      <div>
+        <p>
+          Можно войти с помощью
+        </p>
+        <button
+          type="button"
+        >
+          Яндекс ID
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+`;
