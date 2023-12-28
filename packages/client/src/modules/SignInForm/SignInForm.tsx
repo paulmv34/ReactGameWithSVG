@@ -6,11 +6,10 @@ import { useFormik } from 'formik'
 import Input from '@/components/Input/Input'
 import Button from '@/components/Button/Button'
 import CustomLink from '@/components/CustomLink/CustomLink'
-import { SignInFormProps } from '@/modules/SignInForm/types'
 import { signInValidationSchema } from '@/utils/validationSchema'
 import { useAuth } from '@/hooks/useAuth'
 
-const SignInForm = ({ onAuth }: SignInFormProps) => {
+const SignInForm = () => {
   const { signIn } = useAuth()
   const formik = useFormik({
     initialValues: {
@@ -25,7 +24,6 @@ const SignInForm = ({ onAuth }: SignInFormProps) => {
       try {
         await signIn(values)
         resetForm({})
-        onAuth()
       } catch (err) {
         console.log('Authorization failed', err)
       } finally {

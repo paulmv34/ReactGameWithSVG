@@ -38,8 +38,7 @@ function App() {
     }
 
     const getUser = async () => {
-      console.log('getting user')
-      await dispatch(fetchUser())
+      dispatch(fetchUser())
     }
 
     fetchServerData()
