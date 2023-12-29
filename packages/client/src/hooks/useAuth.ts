@@ -6,7 +6,7 @@ import { SignInData, SignUpData } from '@/api/Auth/types'
 import { fetchUser } from '@/features/user/userSlice'
 
 export const useAuth = () => {
-  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn)
+  const { isLoggedIn } = useAppSelector((state) => state.user)
   const dispatch = useAppDispatch()
 
   const signUp = async (data: SignUpData) => {
