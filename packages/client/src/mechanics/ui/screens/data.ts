@@ -4,5 +4,4 @@ export enum ScreenType {
   LevelSelector = 'LEVEL_SELECTOR',
   Loading = 'LOADING',
   MainMenu = 'MAIN_MENU',
-  Score = 'SCORE',
 }

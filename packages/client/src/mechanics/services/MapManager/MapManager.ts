@@ -14,7 +14,7 @@ export class MapManager {
   private mapEnemies = enemies
 
   constructor(private game: Game) {
-    this.mapLevelIndex = this.game.state.level - 1
+    this.mapLevelIndex = this.game.state.level - 2
   }
 
   fixMapData(map: MapData): MapData {
