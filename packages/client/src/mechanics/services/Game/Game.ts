@@ -16,12 +16,9 @@ import {
   View,
   Zone,
   AudioManager,
-  Statistics,
 } from '..'
 import { type Controller, ControllerEvent } from '../Controller'
 import { type BindingConfig, KeyBindingsArrows, KeyBindingsWasd } from '../Controller/KeyBindings'
-import { GameEvents } from './data'
-import { type StatisticsData } from '../Statistics/types'
 
 export { type GameMode } from './types'
 
@@ -38,7 +35,6 @@ export class Game extends EventEmitter {
   controllerPlayerOne: Controller
   controllerPlayerTwo: Controller
   audioManager: AudioManager
-  statistics: Statistics
 
   private constructor() {
     super()
@@ -55,7 +51,6 @@ export class Game extends EventEmitter {
     this.controllerPlayerOne = this.createController(KeyBindingsWasd)
     this.controllerPlayerTwo = new ControllerKeyboard(KeyBindingsArrows)
     this.audioManager = new AudioManager(this)
-    this.statistics = new Statistics(this)
   }
 
   static create() {
@@ -81,7 +76,6 @@ export class Game extends EventEmitter {
     this.controllerAll.load()
     this.controllerPlayerOne.load()
     this.controllerPlayerTwo.load()
-    this.statistics.load()
   }
 
   unload() {
@@ -94,7 +88,6 @@ export class Game extends EventEmitter {
     this.controllerAll.unload()
     this.controllerPlayerOne.unload()
     this.controllerPlayerTwo.unload()
-    this.statistics.unload()
   }
 
   reset() {
@@ -110,7 +103,6 @@ export class Game extends EventEmitter {
     this.controllerAll.reset()
     this.controllerPlayerOne.reset()
     this.controllerPlayerTwo.reset()
-    this.statistics.reset()
   }
 
   addEntity(entity: Entity) {
@@ -118,13 +110,6 @@ export class Game extends EventEmitter {
     this.view.add(entity)
     this.zone.add(entity)
     this.audioManager.add(entity)
-    this.statistics.add(entity)
-  }
-
-  updateLeaderboard(data: StatisticsData) {
-    if (this.state.username) {
-      this.emit(GameEvents.UpdateLeaderboard, { username: this.state.username, ...data })
-    }
   }
 
   initLoading() {
@@ -229,59 +214,24 @@ export class Game extends EventEmitter {
     this.state.mode =
       this.state.mainMenuItem === MainMenuItem.Singleplayer ? MainMenuItem.Singleplayer : MainMenuItem.Multiplayer
 
-    if (_firstInit) {
-      this.statistics.startSession(this.state.mode)
+    if (this.state.level < this.state.maxLevels) {
+      this.state.level++
     } else {
-      if (this.state.level < this.state.maxLevels) {
-        this.state.level++
-      } else {
-        this.state.level = 1
-      }
+      this.state.level = 1
     }
 
     this.audioManager.emit('levelIntro')
 
-    this.statistics.startMap()
-
     this.scenario = new Scenario(this)
       .on(ScenarioEvent.GameOver, async () => {
-        this.statistics.finishSession()
         this.state.resetSession()
         await this.initGameOverPopup()
-        await this.initGameScore()
         this.initMenu()
       })
       .on(ScenarioEvent.MissionAccomplished, async () => {
-        this.statistics.finishMap()
         await sleep(this.state.missionAccomplishedRedirectTimeout)
-        await this.initGameScore()
         this.initGameLevel()
       })
-  }
-
-  initGameScore() {
-    return new Promise<void>((resolve) => {
-      const meta = { level: this.state.level, username: this.state.username }
-      const stats = this.statistics.getCurrentStatistics()
-      this.reset()
-      this.state.screen = ScreenType.Score
-      this.overlay.show(this.state.screen, { ...meta, ...stats })
-
-      this.overlay.on('score', () => {
-        this.audioManager.emit('score')
-      })
-
-      const skip = () => {
-        this.overlay.show(this.state.screen, { ...meta, ...stats, skip: true })
-        this.controllerAll.offAll(ControllerEvent.Escape)
-        this.controllerAll.on(ControllerEvent.Escape, resolve)
-        this.controllerAll.offAll(ControllerEvent.Shoot)
-        this.controllerAll.on(ControllerEvent.Shoot, resolve)
-      }
-
-      this.controllerAll.on(ControllerEvent.Escape, skip).on(ControllerEvent.Shoot, skip)
-      setTimeout(resolve, this.state.scoreScreenTimeout)
-    })
   }
 
   initGameOverPopup() {
