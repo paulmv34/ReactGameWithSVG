@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { useNavigate } from 'react-router'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -22,11 +21,13 @@ import Forum from './pages/Forum/Forum'
 import TopicForum from './pages/TopicForum/TopicForum'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
 import ChangeAvatar from './pages/ChangeAvatar/ChangeAvatar'
-import AuthService from '@/services/auth.service'
 import GameStart from '@/pages/GameStart/GameStart'
 
+import { fetchUser } from '@/features/user/userSlice'
+import { useAppDispatch } from '@/hooks/useAppDispatch'
+
 function App() {
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const fetchServerData = async () => {
@@ -36,18 +37,12 @@ function App() {
       console.log(data)
     }
 
-    const fetchUser = async () => {
-      AuthService.getUserInfo()
-        .then(() => {
-          navigate(ROUTES.MAIN)
-        })
-        .catch(() => {
-          navigate(ROUTES.LOGIN)
-        })
+    const getUser = async () => {
+      dispatch(fetchUser())
     }
 
     fetchServerData()
-    fetchUser()
+    getUser()
   }, [])
 
   return (

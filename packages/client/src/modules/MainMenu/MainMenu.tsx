@@ -4,14 +4,15 @@ import { v4 as uuidv4 } from 'uuid'
 import { MenuProps } from './types'
 import Button from '@/components/Button/Button'
 import { ROUTES, Sizes } from '@/types/types'
-import authService from '@/services/auth.service'
 import { useNavigate } from 'react-router'
+import { useAuth } from '@/hooks/useAuth'
 
 const MainMenu = ({ data }: MenuProps) => {
   const navigate = useNavigate()
+  const { logout } = useAuth()
 
   const handleLogout = () => {
-    authService.logout().then(() => navigate(ROUTES.LOGIN))
+    logout().then(() => navigate(ROUTES.LOGIN))
   }
 
   return (

@@ -1,7 +1,7 @@
 import BackLink from '@/components/BackLink/BackLink'
 import { FC } from 'react'
 import styles from './GameStart.module.scss'
-import keyboardImage from '/public/keyboard.png'
+import keyboardImage from '@/assets/images/keyboard.png'
 import { ROUTES } from '@/types/types'
 
 // Components
