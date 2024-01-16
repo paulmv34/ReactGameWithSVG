@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --config vite.config.ts",
+    "build:ssr": "tsc && vite build --config ssr.config.ts",
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:styles": "stylelint --fix '**/*.module.scss'",
@@ -16,6 +17,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.20",
     "@reduxjs/toolkit": "^2.0.1",
+    "@svgr/rollup": "8.1.0",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
     "dotenv": "^16.0.2",
