@@ -8,58 +8,34 @@ import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary'
 import { Provider } from 'react-redux'
 import { store } from '@/store/store'
 
-// const root = document.getElementById('root')
-// if (root && root.innerHTML !== '') {
-//   ReactDOM.hydrateRoot(
-//     document.getElementById('root') as HTMLElement,
-//     <React.StrictMode>
-//       <BrowserRouter>
-//         <ErrorBoundary>
-//           <Provider store={store}>
-//             <App />
-//           </Provider>
-//         </ErrorBoundary>
-//       </BrowserRouter>
-//     </React.StrictMode>
-//   )
-// } else {
-// render(
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <ErrorBoundary>
-//         <Provider store={store}>
-//           <App />
-//         </Provider>
-//       </ErrorBoundary>
-//     </BrowserRouter>
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// )
-// }
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ErrorBoundary>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </ErrorBoundary>
-    </BrowserRouter>
-  </React.StrictMode>
-)
-
-// ReactDOM.hydrateRoot(
-//   document.getElementById('root') as HTMLElement,
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <ErrorBoundary>
-//         <Provider store={store}>
-//           <App />
-//         </Provider>
-//       </ErrorBoundary>
-//     </BrowserRouter>
-//   </React.StrictMode>
-// )
+const root = document.getElementById('root')
+if (root && root.innerHTML !== '') {
+  ReactDOM.hydrateRoot(
+    document.getElementById('root') as HTMLElement,
+    <React.StrictMode>
+      <BrowserRouter>
+        <ErrorBoundary>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ErrorBoundary>
+      </BrowserRouter>
+    </React.StrictMode>
+  )
+} else {
+  render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <ErrorBoundary>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ErrorBoundary>
+      </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
+  )
+}
 
 if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
   window.addEventListener('load', () => {
