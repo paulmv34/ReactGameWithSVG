@@ -1268,3 +1268,27 @@
   width: 100%;
   margin-top: 85px;
 }
+._section_1y6rn_1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 64px 32px;
+  text-align: center;
+  background-color: var(--color-background);
+}
+._title_1y6rn_12 {
+  margin-bottom: 32px;
+  font-size: 3rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+._text_1y6rn_19 {
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+._emoji_1y6rn_25 {
+  font-size: 5rem;
+}
