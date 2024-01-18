@@ -8,12 +8,14 @@ import React from 'react'
 
 export function render(url) {
   renderToString(
-    <StaticRouter location={url}>
-      <ErrorBoundary>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </ErrorBoundary>
-    </StaticRouter>
+    <React.StrictMode>
+      <StaticRouter location={url}>
+        <ErrorBoundary>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ErrorBoundary>
+      </StaticRouter>
+    </React.StrictMode>
   )
 }

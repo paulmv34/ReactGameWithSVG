@@ -9,11 +9,7 @@ interface HeaderProps {
 const Title: FC<HeaderProps> = (props: HeaderProps) => {
   const { title } = props
 
-  return (
-    <div>
-      <div className={`${styles.headerTitle}`}>{title}</div>
-    </div>
-  )
+  return <div className={`${styles.headerTitle}`}>{title}</div>
 }
 
 export default Title
