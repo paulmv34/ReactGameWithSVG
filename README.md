@@ -1,3 +1,10 @@
+### SSR
+1. cd client
+2. yarn build:ssr
+3. yarm build
+4. cd server
+5. yarn build
+
 ### Как запускать?
 
 1. Убедитесь что у вас установлен `node` и `docker`
