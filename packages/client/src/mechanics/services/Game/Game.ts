@@ -141,6 +141,9 @@ export class Game extends EventEmitter {
     this.state.screen = ScreenType.MainMenu
     this.overlay.show(this.state.screen, this.state.mainMenuItem)
     this.controllerAll
+      .on(ControllerEvent.Fullscreen, () => {
+        this.view.toggleFullScreen()
+      })
       .on(ControllerEvent.Move, (direction: Direction) => {
         if (this.state.screen !== ScreenType.MainMenu) {
           return
@@ -219,6 +222,9 @@ export class Game extends EventEmitter {
         .on(ControllerEvent.Escape, () => {
           this.initMenu()
         })
+        .on(ControllerEvent.Fullscreen, () => {
+          this.view.toggleFullScreen()
+        })
     })
   }
 
@@ -238,6 +244,10 @@ export class Game extends EventEmitter {
         this.state.level = 1
       }
     }
+
+    this.controllerAll.on(ControllerEvent.Fullscreen, () => {
+      this.view.toggleFullScreen()
+    })
 
     this.audioManager.emit('levelIntro')
 
@@ -279,7 +289,12 @@ export class Game extends EventEmitter {
         this.controllerAll.on(ControllerEvent.Shoot, resolve)
       }
 
-      this.controllerAll.on(ControllerEvent.Escape, skip).on(ControllerEvent.Shoot, skip)
+      this.controllerAll
+        .on(ControllerEvent.Fullscreen, () => {
+          this.view.toggleFullScreen()
+        })
+        .on(ControllerEvent.Escape, skip)
+        .on(ControllerEvent.Shoot, skip)
       setTimeout(resolve, this.state.scoreScreenTimeout)
     })
   }

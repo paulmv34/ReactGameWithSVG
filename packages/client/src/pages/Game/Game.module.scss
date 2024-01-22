@@ -1,4 +1,15 @@
-.game {
+.gameWrapper {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.layout__game {
+  user-select: none;
+}
+
+.gamePage {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,6 +17,8 @@
   height: 100vh;
 }
 
-.layout__game {
-  user-select: none;
+.gameRoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
