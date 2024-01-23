@@ -1,11 +1,19 @@
 export enum ControllerEvent {
   Escape = 'ESCAPE',
+  Fullscreen = 'FULLSCREEN',
   Move = 'MOVE',
+  Mute = 'MUTE',
+  Pause = 'PAUSE',
   Shoot = 'SHOOT',
   Stop = 'STOP',
 }
 
+export enum ServiceButtonsName {
+  Fullscreen = 'FULLSCREEN',
+  Mute = 'MUTE',
+  Pause = 'PAUSE',
+}
+
 export enum ControllerElemsClassName {
-  DefaultServiceBtn = 'controller__service-btn',
-  ShootBtn = 'controller__shoot-btn',
+  FullscreenWrapper = '_fullscreenWrapper',
 }

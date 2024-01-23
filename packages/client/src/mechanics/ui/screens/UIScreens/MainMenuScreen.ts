@@ -9,8 +9,8 @@ export class MainMenuScreen extends Screen<MainMenuItem> {
   mainMenuStateXPos = 19
 
   mainMenuStateYPos = {
-    [MainMenuItem.Singleplayer]: 28,
-    [MainMenuItem.Multiplayer]: 33,
+    [MainMenuItem.Singleplayer]: 20,
+    [MainMenuItem.Multiplayer]: 25,
   }
 
   show(menuItem: MainMenuItem) {
@@ -65,7 +65,7 @@ export class MainMenuScreen extends Screen<MainMenuItem> {
 
     this.overlay.renderElement({
       posX: 0,
-      posY: 40,
+      posY: 34,
       width: view.width,
       height: 1,
       color: Color.LightGrey,
@@ -75,7 +75,7 @@ export class MainMenuScreen extends Screen<MainMenuItem> {
 
     this.overlay.renderElement({
       posX: 0,
-      posY: 42,
+      posY: 36,
       width: view.width,
       height: 1,
       color: Color.LightGrey,
@@ -85,7 +85,7 @@ export class MainMenuScreen extends Screen<MainMenuItem> {
 
     this.overlay.renderElement({
       posX: 0,
-      posY: 44,
+      posY: 38,
       width: view.width,
       height: 1,
       color: Color.LightGrey,
@@ -95,7 +95,7 @@ export class MainMenuScreen extends Screen<MainMenuItem> {
 
     this.overlay.renderElement({
       posX: 0,
-      posY: 48,
+      posY: 42,
       width: view.width,
       height: 1,
       color: Color.LightGrey,
@@ -105,7 +105,7 @@ export class MainMenuScreen extends Screen<MainMenuItem> {
 
     this.overlay.renderElement({
       posX: 0,
-      posY: 50,
+      posY: 44,
       width: view.width,
       height: 1,
       color: Color.LightGrey,
@@ -115,11 +115,21 @@ export class MainMenuScreen extends Screen<MainMenuItem> {
 
     this.overlay.renderElement({
       posX: 0,
-      posY: 52,
+      posY: 46,
       width: view.width,
       height: 1,
       color: Color.LightGrey,
       text: '2 - СТРЕЛКИ для движения, ENTER для стрельбы',
+      align: 'center',
+    })
+
+    this.overlay.renderElement({
+      posX: 0,
+      posY: 52,
+      width: view.width,
+      height: 1.5,
+      color: Color.LightGrey,
+      text: 'Нажмите F для игры на полном экране',
       align: 'center',
     })
   }

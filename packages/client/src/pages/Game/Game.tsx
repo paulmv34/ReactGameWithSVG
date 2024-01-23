@@ -2,6 +2,7 @@ import BackLink from '@/components/BackLink/BackLink'
 import styles from './Game.module.scss'
 import clsx from 'clsx'
 import { ROUTES } from '@/types/types'
+import { ControllerElemsClassName } from '@/mechanics/services/Controller/data'
 
 import { createContext, useEffect, useRef, useState } from 'react'
 
@@ -30,13 +31,14 @@ export const Game = () => {
   }, [])
 
   return (
-    <section className={clsx(styles.game, 'page')}>
+    <section className={clsx(styles.gamePage, 'page')}>
       <BackLink to={ROUTES.MAIN} />
       <GameContext.Provider value={{ game, isGameInited }}>
-        <section>
-          <div ref={gameRoot} className="game__root"></div>
-          <div className="desktop-controller"></div>
-        </section>
+        <div className={ControllerElemsClassName.FullscreenWrapper}>
+          <div className={styles.gameWrapper}>
+            <div ref={gameRoot} className={styles.gameRoot}></div>
+          </div>
+        </div>
       </GameContext.Provider>
     </section>
   )

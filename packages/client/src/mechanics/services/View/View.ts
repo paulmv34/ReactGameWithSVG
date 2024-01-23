@@ -12,6 +12,7 @@ import {
   type LayerList,
   type LayerObject,
 } from './types'
+import { ControllerElemsClassName } from '../Controller/data'
 
 export class View extends EventEmitter {
   width = 0
@@ -34,6 +35,14 @@ export class View extends EventEmitter {
     this.game.resources?.on(ResourcesEvent.Loaded, () => {
       this.spriteImg = this.game.resources.getImage(SpriteName.Sprite)
     })
+  }
+
+  toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.querySelector(`.${ControllerElemsClassName.FullscreenWrapper}`)?.requestFullscreen()
+    } else {
+      document.exitFullscreen()
+    }
   }
 
   reset() {
@@ -74,9 +83,7 @@ export class View extends EventEmitter {
     layer.style.zIndex = (this.layerZIndexCount++).toString()
     this.root.appendChild(layer)
     if (this.layers[id]) {
-      this.layers[id].context = layer.getContext(
-        '2d'
-      ) as CanvasRenderingContext2D
+      this.layers[id].context = layer.getContext('2d') as CanvasRenderingContext2D
       this.redrawAllEntitiesOnLayer(id)
     } else {
       this.layers[id] = {
@@ -161,9 +168,7 @@ export class View extends EventEmitter {
 
     if (entityToDelete) {
       this.layers[layerId].entities.delete(entityToDelete)
-      for (const [eventName, callback] of Object.entries(
-        entityToDelete.listeners
-      )) {
+      for (const [eventName, callback] of Object.entries(entityToDelete.listeners)) {
         entity.off(eventName as EntityEvent, callback)
       }
     }
@@ -189,11 +194,7 @@ export class View extends EventEmitter {
     if (elem.align === 'right') {
       posX += elem.width
     }
-    context.fillText(
-      elem.text,
-      this.convertToPixels(posX),
-      this.convertToPixels(elem.posY) + 1
-    )
+    context.fillText(elem.text, this.convertToPixels(posX), this.convertToPixels(elem.posY) + 1)
   }
 
   drawOnLayer(entity: Entity, layerId: keyof LayerList) {
@@ -295,12 +296,7 @@ export class View extends EventEmitter {
       return
     }
     const { context } = this.layers[layerId]
-    context.clearRect(
-      0,
-      0,
-      this.convertToPixels(this.width),
-      this.convertToPixels(this.height)
-    )
+    context.clearRect(0, 0, this.convertToPixels(this.width), this.convertToPixels(this.height))
     this.layers[layerId].entities.clear()
   }
 
@@ -334,15 +330,12 @@ export class View extends EventEmitter {
         if (!isIdleTank) {
           entity.mainSpriteFrame = +!entity.mainSpriteFrame
         }
-        return entity.mainSpriteCoordinates[entity.direction][
-          entity.mainSpriteFrame
-        ]
+        return entity.mainSpriteCoordinates[entity.direction][entity.mainSpriteFrame]
       }
     }
 
     if (animation && Array.isArray(animation.spriteCoordinates)) {
-      spriteCoordinates =
-        animation.spriteCoordinates[animation.spriteFrame || 0]
+      spriteCoordinates = animation.spriteCoordinates[animation.spriteFrame || 0]
 
       return spriteCoordinates
     }
@@ -355,18 +348,14 @@ export class View extends EventEmitter {
     }
     const elapsed = time - animation.lastTime
 
-    if (
-      typeof animation.spriteFrame !== 'number' ||
-      elapsed < animation.delay
-    ) {
+    if (typeof animation.spriteFrame !== 'number' || elapsed < animation.delay) {
       return
     }
 
     animation.lastTime = time
     animation.spriteFrame++
 
-    const isFinishFrame =
-      animation.spriteFrame === animation.spriteCoordinates?.length
+    const isFinishFrame = animation.spriteFrame === animation.spriteCoordinates?.length
 
     if (isFinishFrame && animation.looped) {
       animation.spriteFrame = 0
@@ -390,23 +379,18 @@ export class View extends EventEmitter {
 
     let pixelRatioWidth = window.innerWidth / this.width
 
-    let isCanvasHeightBiggerThanWindow =
-      pixelRatioWidth * this.height > window.innerHeight
+    let isCanvasHeightBiggerThanWindow = pixelRatioWidth * this.height > window.innerHeight
 
     while (isCanvasHeightBiggerThanWindow) {
       pixelRatioWidth -= resizeStep
-      isCanvasHeightBiggerThanWindow =
-        pixelRatioWidth * this.height > window.innerHeight
+      isCanvasHeightBiggerThanWindow = pixelRatioWidth * this.height > window.innerHeight
     }
 
     return Math.floor(pixelRatioWidth / resizeStep) * resizeStep
   }
 
   canvasResizeHandler = () => {
-    if (
-      !(this.root.firstChild instanceof HTMLCanvasElement) ||
-      !this.root.firstChild.width
-    ) {
+    if (!(this.root.firstChild instanceof HTMLCanvasElement) || !this.root.firstChild.width) {
       return
     }
 
