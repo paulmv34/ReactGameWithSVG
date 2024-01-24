@@ -9,15 +9,13 @@ import { store } from '@/store/store'
 
 ReactDOM.hydrateRoot(
   document.getElementById('root') as HTMLElement,
-  <React.StrictMode>
-    <BrowserRouter>
-      <ErrorBoundary>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </ErrorBoundary>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ErrorBoundary>
+  </BrowserRouter>
 )
 
 if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {

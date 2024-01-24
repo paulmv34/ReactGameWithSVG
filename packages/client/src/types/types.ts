@@ -32,3 +32,26 @@ export enum Sizes {
   MEDIUM = 'medium',
   SMALL = 'small',
 }
+
+export interface LeaderboardNewRecord {
+  data: any
+  ratingFieldName: string
+  teamName: string
+}
+
+export interface LeaderboardData {
+  cursor: number
+  limit: number
+  ratingFieldName: string
+}
+
+export interface LeaderboardTeamData {
+  payload: LeaderboardData
+  teamName: string
+}
+
+export interface LeaderboardItem {
+  name: string
+  nickname: string
+  score: number
+}

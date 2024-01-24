@@ -5,6 +5,7 @@ import { ScreenType } from '@/mechanics/ui/screens/data'
 import { MainMenuItem } from '@/mechanics/ui/screens/UIScreens/data'
 import { EventEmitter, sleep } from '@/mechanics/utils'
 import {
+  AudioManager,
   ControllerKeyboard,
   ControllerManager,
   Loop,
@@ -13,10 +14,9 @@ import {
   Scenario,
   ScenarioEvent,
   State,
+  Statistics,
   View,
   Zone,
-  AudioManager,
-  Statistics,
 } from '..'
 import { type Controller, ControllerEvent } from '../Controller'
 import { type BindingConfig, KeyBindingsArrows, KeyBindingsWasd } from '../Controller/KeyBindings'

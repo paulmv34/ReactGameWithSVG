@@ -1,4 +1,6 @@
 export const BASE_URL = 'https://ya-praktikum.tech/api/v2'
+export const LEADERBOARD_URl = 'https://ya-praktikum.tech/api/v2'
+export const TEAM_NAME = 'NoHandlebars'
 
 export enum END_POINTS_URL {
   CHANGE_USER_PASSWORD = '/user/password',
