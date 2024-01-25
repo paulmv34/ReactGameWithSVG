@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import React from 'react'
 
 export function render(url) {
-  renderToString(
+  return renderToString(
     <React.StrictMode>
       <StaticRouter location={url}>
         <ErrorBoundary>

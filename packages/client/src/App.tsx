@@ -28,7 +28,7 @@ import { useAppDispatch } from '@/hooks/useAppDispatch'
 
 function App() {
   const dispatch = useAppDispatch()
-  const [hydrated, setHydrated] = useState(false)
+  //const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
     const fetchServerData = async () => {
@@ -44,13 +44,13 @@ function App() {
 
     fetchServerData()
     getUser()
-    setHydrated(true)
+    //setHydrated(true)
   }, [])
 
-  if (!hydrated) {
-    // Возвращает null при первом рендеринге, поэтому клиент и сервер совпадают
-    return null
-  }
+  // if (!hydrated) {
+  //   // Возвращает null при первом рендеринге, поэтому клиент и сервер совпадают
+  //   return null
+  // }
 
   return (
     <>
