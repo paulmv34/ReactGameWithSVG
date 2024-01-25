@@ -22,6 +22,9 @@ import { type Controller, ControllerEvent } from '../Controller'
 import { type BindingConfig, KeyBindingsArrows, KeyBindingsWasd } from '../Controller/KeyBindings'
 import { GameEvents } from './data'
 import { type StatisticsData } from '../Statistics/types'
+import { store } from '@/store/store'
+import { addUser } from '@/features/leaderboard/leaderboardSlice'
+import { TEAM_NAME } from '@/api/types'
 
 export { type GameMode } from './types'
 
@@ -122,6 +125,18 @@ export class Game extends EventEmitter {
   }
 
   updateLeaderboard(data: StatisticsData) {
+    store.dispatch(
+      addUser({
+        data: {
+          date: new Date().toISOString(),
+          levels: this.state.level,
+          nickname: store.getState().user.user?.display_name || 'Fancy Unicorn',
+          score: data.score,
+        },
+        teamName: TEAM_NAME,
+        ratingFieldName: 'score',
+      })
+    )
     if (this.state.username) {
       this.emit(GameEvents.UpdateLeaderboard, { username: this.state.username, ...data })
     }

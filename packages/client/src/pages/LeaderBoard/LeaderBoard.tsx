@@ -1,16 +1,19 @@
 import { FC, useEffect } from 'react'
+import clsx from 'clsx'
 import LeaderTable from '../../modules/LeaderTable/LeaderTable'
 import styles from './LeaderBoard.module.scss'
 import { ROUTES } from '@/types/types'
-import BackLink from '@/components/BackLink/BackLink'
-import clsx from 'clsx'
-import { useAppDispatch } from '@/hooks/useAppDispatch'
-import { fetchByTeam } from '@/features/leaderboard/leaderboardSlice'
 import { TEAM_NAME } from '@/api/types'
+import { fetchByTeam } from '@/features/leaderboard/leaderboardSlice'
+
+import BackLink from '@/components/BackLink/BackLink'
+import Loader from '@/components/Loader/Loader'
+
+import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useAppSelector } from '@/hooks/useAppSelector'
 
 const LeaderBoard: FC = () => {
-  const records = useAppSelector((state) => state.leaderboard.records)
+  const { isLoading, records } = useAppSelector((state) => state.leaderboard)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -31,7 +34,8 @@ const LeaderBoard: FC = () => {
       <div className="wrapper wrapper-backlink">
         <h2 className={styles.title}>Рейтинг игроков</h2>
         <BackLink to={ROUTES.MAIN} />
-        <LeaderTable records={records} />
+        {isLoading && <Loader />}
+        {records.length > 0 && <LeaderTable records={records} />}
       </div>
     </section>
   )

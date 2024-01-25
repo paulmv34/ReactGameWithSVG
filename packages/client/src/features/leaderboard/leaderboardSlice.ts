@@ -1,29 +1,33 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { State } from '@/features/leaderboard/types'
 import LeaderboardService from '@/services/leaderboard.service'
-import { LeaderboardNewRecord, LeaderboardResponseItem, LeaderboardTeamData } from '@/types/types'
+import { ErrorObject, LeaderboardNewRecord, LeaderboardTeamData } from '@/types/types'
+import { getErrorMessage } from '@/utils/getErrorMessage'
 
 const initialState: State = {
   records: [],
+  isLoading: true,
+  error: null,
 }
 
-export const addUser = createAsyncThunk('leaderboard/addUser', async (payload: LeaderboardNewRecord): Promise<void> => {
-  try {
-    return await LeaderboardService.addUser(payload)
-  } catch (error) {
-    console.error('Cannot add user')
-    throw error
+export const addUser = createAsyncThunk(
+  'leaderboard/addUser',
+  async (payload: LeaderboardNewRecord, { rejectWithValue }) => {
+    try {
+      return await LeaderboardService.addUser(payload)
+    } catch (error: unknown) {
+      return rejectWithValue(getErrorMessage(error))
+    }
   }
-})
+)
 
 export const fetchByTeam = createAsyncThunk(
   'leaderboard/fetchByTeam',
-  async ({ payload, teamName }: LeaderboardTeamData): Promise<LeaderboardResponseItem[]> => {
+  async ({ payload, teamName }: LeaderboardTeamData, { rejectWithValue }) => {
     try {
       return await LeaderboardService.fetchTeamLeaderboard(payload, teamName)
     } catch (error) {
-      console.error('Cannot add user')
-      throw error
+      return rejectWithValue(getErrorMessage(error))
     }
   }
 )
@@ -34,23 +38,15 @@ export const leaderboardSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(addUser.pending, () => {
-        console.log('Pending...')
-      })
-      .addCase(addUser.fulfilled, (state, { payload }) => {
-        console.log(payload)
-      })
-      .addCase(addUser.rejected, () => {
-        console.log('Error')
-      })
-      .addCase(fetchByTeam.pending, () => {
-        console.log('Pending...')
+      .addCase(addUser.rejected, (state, { payload }) => {
+        state.error = payload as ErrorObject
       })
       .addCase(fetchByTeam.fulfilled, (state, { payload }) => {
+        state.isLoading = false
         state.records = payload
       })
-      .addCase(fetchByTeam.rejected, () => {
-        console.log('Error')
+      .addCase(fetchByTeam.rejected, (state, { payload }) => {
+        state.error = payload as ErrorObject
       })
   },
 })

@@ -1,6 +1,7 @@
 export interface RowProps {
   record: {
-    name: string
+    date: string
+    levels: number
     nickname: string
     score: number
   }

@@ -52,8 +52,14 @@ export interface LeaderboardTeamData {
 
 export interface LeaderboardResponseItem {
   data: {
-    name: string
+    date: string
+    levels: number
     nickname: string
     score: number
   }
+}
+
+export interface ErrorObject {
+  code: number
+  message: string
 }
