@@ -1,9 +1,10 @@
 import { handleError } from '@/utils/handleError'
 import LeaderboardAPI from '@/api/Leaderboard/LeaderboardAPI'
-import { LeaderboardData, LeaderboardNewRecord } from '@/types/types'
+import { LeaderboardData, LeaderboardNewRecord, LeaderboardResponseItem } from '@/types/types'
+import { AxiosResponse } from 'axios'
 
 class LeaderboardService {
-  async addUser(data: LeaderboardNewRecord) {
+  async addUser(data: LeaderboardNewRecord): Promise<void> {
     try {
       await LeaderboardAPI.add(data)
     } catch (error) {
@@ -12,18 +13,13 @@ class LeaderboardService {
     }
   }
 
-  async fetchAllData(data: LeaderboardData) {
+  async fetchTeamLeaderboard(data: LeaderboardData, teamName: string): Promise<LeaderboardResponseItem[]> {
     try {
-      await LeaderboardAPI.getAll(data)
-    } catch (error) {
-      handleError(error)
-      throw error
-    }
-  }
-
-  async fetchTeamLeaderboard(data: LeaderboardData, teamName: string) {
-    try {
-      await LeaderboardAPI.getTeamLeaderboard(data, teamName)
+      const response: AxiosResponse<Promise<LeaderboardResponseItem[]>> = await LeaderboardAPI.getTeamLeaderboard(
+        data,
+        teamName
+      )
+      return response.data
     } catch (error) {
       handleError(error)
       throw error

@@ -1,5 +1,7 @@
-import { ScoreData } from '@/types/types'
-
 export interface RowProps {
-  record: ScoreData
+  record: {
+    name: string
+    nickname: string
+    score: number
+  }
 }

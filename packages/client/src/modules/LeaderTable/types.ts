@@ -1,5 +1,5 @@
-import { ScoreData } from '@/types/types'
+import { LeaderboardItem } from '@/types/types'
 
 export interface LeaderboardProps {
-  data: ScoreData[]
+  records: LeaderboardItem[]
 }

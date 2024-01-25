@@ -1,5 +1,5 @@
 import { axiosService } from '../axiosService'
-import { LeaderboardData, LeaderboardItem, LeaderboardNewRecord } from '@/types/types'
+import { LeaderboardData, LeaderboardNewRecord, LeaderboardResponseItem } from '@/types/types'
 import { LEADERBOARD_URl } from '@/api/types'
 
 class LeaderboardAPI {
@@ -14,7 +14,10 @@ class LeaderboardAPI {
   }
 
   getTeamLeaderboard(data: LeaderboardData, teamName: string) {
-    return axiosService.post<Promise<LeaderboardItem>>(`${LEADERBOARD_URl}${this.baseEndpoint}/${teamName}`, data)
+    return axiosService.post<Promise<LeaderboardResponseItem[]>>(
+      `${LEADERBOARD_URl}${this.baseEndpoint}/${teamName}`,
+      data
+    )
   }
 }
 

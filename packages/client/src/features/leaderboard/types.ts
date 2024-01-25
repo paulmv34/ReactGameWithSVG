@@ -1,5 +1,5 @@
-import { LeaderboardItem } from '@/types/types'
+import { LeaderboardResponseItem } from '@/types/types'
 
 export interface State {
-  data: LeaderboardItem[]
+  records: LeaderboardResponseItem[]
 }

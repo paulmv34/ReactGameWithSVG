@@ -50,8 +50,10 @@ export interface LeaderboardTeamData {
   teamName: string
 }
 
-export interface LeaderboardItem {
-  name: string
-  nickname: string
-  score: number
+export interface LeaderboardResponseItem {
+  data: {
+    name: string
+    nickname: string
+    score: number
+  }
 }
