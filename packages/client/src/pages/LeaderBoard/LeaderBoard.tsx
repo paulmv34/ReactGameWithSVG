@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import LeaderTable from '../../modules/LeaderTable/LeaderTable'
 import styles from './LeaderBoard.module.scss'
 import { ROUTES } from '@/types/types'
-import { TEAM_NAME } from '@/api/types'
+import { RATING_FIELD_NAME, TEAM_NAME } from '@/api/types'
 import { fetchByTeam } from '@/features/leaderboard/leaderboardSlice'
 
 import BackLink from '@/components/BackLink/BackLink'
@@ -22,7 +22,7 @@ const LeaderBoard: FC = () => {
         payload: {
           cursor: 0,
           limit: 10,
-          ratingFieldName: 'score',
+          ratingFieldName: RATING_FIELD_NAME,
         },
         teamName: TEAM_NAME,
       })

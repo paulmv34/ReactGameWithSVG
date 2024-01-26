@@ -24,7 +24,7 @@ import { GameEvents } from './data'
 import { type StatisticsData } from '../Statistics/types'
 import { store } from '@/store/store'
 import { addUser } from '@/features/leaderboard/leaderboardSlice'
-import { TEAM_NAME } from '@/api/types'
+import { RATING_FIELD_NAME, TEAM_NAME } from '@/api/types'
 
 export { type GameMode } from './types'
 
@@ -134,7 +134,7 @@ export class Game extends EventEmitter {
           score: data.score,
         },
         teamName: TEAM_NAME,
-        ratingFieldName: 'score',
+        ratingFieldName: RATING_FIELD_NAME,
       })
     )
     if (this.state.username) {

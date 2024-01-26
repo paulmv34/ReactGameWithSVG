@@ -9,10 +9,6 @@ class LeaderboardAPI {
     return axiosService.post(`${BASE_URL}${this.baseEndpoint}`, data)
   }
 
-  getAll(data: LeaderboardData) {
-    return axiosService.post(`${BASE_URL}${this.baseEndpoint}/all`, data)
-  }
-
   getTeamLeaderboard(data: LeaderboardData, teamName: string) {
     return axiosService.post<Promise<LeaderboardResponseItem[]>>(`${BASE_URL}${this.baseEndpoint}/${teamName}`, data)
   }
