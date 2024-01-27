@@ -35,6 +35,9 @@ export enum Sizes {
 
 export interface LeaderboardNewRecord {
   data: any
+}
+
+export interface LeaderboardNewRecordExtended extends LeaderboardNewRecord {
   ratingFieldName: string
   teamName: string
 }
@@ -53,6 +56,7 @@ export interface LeaderboardTeamData {
 export interface LeaderboardResponseItem {
   data: {
     date: string
+    id: string
     levels: number
     nickname: string
     score: number

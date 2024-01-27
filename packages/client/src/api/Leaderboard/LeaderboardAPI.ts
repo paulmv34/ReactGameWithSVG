@@ -1,11 +1,11 @@
 import { axiosService } from '../axiosService'
-import { LeaderboardData, LeaderboardNewRecord, LeaderboardResponseItem } from '@/types/types'
+import { LeaderboardData, LeaderboardNewRecordExtended, LeaderboardResponseItem } from '@/types/types'
 import { BASE_URL } from '@/api/types'
 
 class LeaderboardAPI {
   private readonly baseEndpoint = '/leaderboard'
 
-  add(data: LeaderboardNewRecord) {
+  add(data: LeaderboardNewRecordExtended) {
     return axiosService.post(`${BASE_URL}${this.baseEndpoint}`, data)
   }
 

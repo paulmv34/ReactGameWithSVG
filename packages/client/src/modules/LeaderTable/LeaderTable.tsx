@@ -1,6 +1,5 @@
 import styles from './LeaderTable.module.scss'
 import Row from './components/Row/Row'
-import { v4 as uuidv4 } from 'uuid'
 import { LeaderboardProps } from './types'
 
 const LeaderTable = ({ records }: LeaderboardProps) => {
@@ -13,7 +12,7 @@ const LeaderTable = ({ records }: LeaderboardProps) => {
         <span className={styles.th}>Дата</span>
       </div>
       <div className={styles.rows}>
-        {records.length > 0 && records.map(({ data: record }) => <Row record={record} key={uuidv4()} />)}
+        {records.length > 0 && records.map(({ data: record }) => <Row record={record} key={record.id} />)}
       </div>
     </>
   )

@@ -22,9 +22,6 @@ import { type Controller, ControllerEvent } from '../Controller'
 import { type BindingConfig, KeyBindingsArrows, KeyBindingsWasd } from '../Controller/KeyBindings'
 import { GameEvents } from './data'
 import { type StatisticsData } from '../Statistics/types'
-import { store } from '@/store/store'
-import { addUser } from '@/features/leaderboard/leaderboardSlice'
-import { RATING_FIELD_NAME, TEAM_NAME } from '@/api/types'
 
 export { type GameMode } from './types'
 
@@ -42,8 +39,9 @@ export class Game extends EventEmitter {
   controllerPlayerTwo: Controller
   audioManager: AudioManager
   statistics: Statistics
+  onUpdateLeaderboard: (level: number, score: number) => void
 
-  private constructor() {
+  private constructor(onUpdateLeaderboard: (level: number, score: number) => void) {
     super()
     this.state = new State()
     this.resources = new Resources(this)
@@ -59,11 +57,12 @@ export class Game extends EventEmitter {
     this.controllerPlayerTwo = new ControllerKeyboard(KeyBindingsArrows)
     this.audioManager = new AudioManager(this)
     this.statistics = new Statistics(this)
+    this.onUpdateLeaderboard = onUpdateLeaderboard
   }
 
-  static create() {
+  static create(onUpdateLeaderboard: (level: number, score: number) => void) {
     if (!Game.__instance) {
-      Game.__instance = new Game()
+      Game.__instance = new Game(onUpdateLeaderboard)
     }
     return Game.__instance
   }
@@ -125,18 +124,7 @@ export class Game extends EventEmitter {
   }
 
   updateLeaderboard(data: StatisticsData) {
-    store.dispatch(
-      addUser({
-        data: {
-          date: new Date().toISOString(),
-          levels: this.state.level,
-          nickname: store.getState().user.user?.display_name || 'Fancy Unicorn',
-          score: data.score,
-        },
-        teamName: TEAM_NAME,
-        ratingFieldName: RATING_FIELD_NAME,
-      })
-    )
+    this.onUpdateLeaderboard(this.state.level, data.score)
     if (this.state.username) {
       this.emit(GameEvents.UpdateLeaderboard, { username: this.state.username, ...data })
     }

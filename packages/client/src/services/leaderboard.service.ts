@@ -1,10 +1,10 @@
 import { handleError } from '@/utils/handleError'
 import LeaderboardAPI from '@/api/Leaderboard/LeaderboardAPI'
-import { LeaderboardData, LeaderboardNewRecord, LeaderboardResponseItem } from '@/types/types'
+import { LeaderboardData, LeaderboardNewRecordExtended, LeaderboardResponseItem } from '@/types/types'
 import { AxiosResponse } from 'axios'
 
 class LeaderboardService {
-  async addUser(data: LeaderboardNewRecord): Promise<void> {
+  async addUser(data: LeaderboardNewRecordExtended): Promise<void> {
     try {
       await LeaderboardAPI.add(data)
     } catch (error) {
