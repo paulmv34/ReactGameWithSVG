@@ -5,6 +5,7 @@ import { ScreenType } from '@/mechanics/ui/screens/data'
 import { MainMenuItem } from '@/mechanics/ui/screens/UIScreens/data'
 import { EventEmitter, sleep } from '@/mechanics/utils'
 import {
+  AudioManager,
   ControllerKeyboard,
   ControllerManager,
   Loop,
@@ -13,10 +14,9 @@ import {
   Scenario,
   ScenarioEvent,
   State,
+  Statistics,
   View,
   Zone,
-  AudioManager,
-  Statistics,
 } from '..'
 import { type Controller, ControllerEvent } from '../Controller'
 import { type BindingConfig, KeyBindingsArrows, KeyBindingsWasd } from '../Controller/KeyBindings'
@@ -39,8 +39,9 @@ export class Game extends EventEmitter {
   controllerPlayerTwo: Controller
   audioManager: AudioManager
   statistics: Statistics
+  onUpdateLeaderboard: (level: number, score: number) => void
 
-  private constructor() {
+  private constructor(onUpdateLeaderboard: (level: number, score: number) => void) {
     super()
     this.state = new State()
     this.resources = new Resources(this)
@@ -56,11 +57,12 @@ export class Game extends EventEmitter {
     this.controllerPlayerTwo = new ControllerKeyboard(KeyBindingsArrows)
     this.audioManager = new AudioManager(this)
     this.statistics = new Statistics(this)
+    this.onUpdateLeaderboard = onUpdateLeaderboard
   }
 
-  static create() {
+  static create(onUpdateLeaderboard: (level: number, score: number) => void) {
     if (!Game.__instance) {
-      Game.__instance = new Game()
+      Game.__instance = new Game(onUpdateLeaderboard)
     }
     return Game.__instance
   }
@@ -122,6 +124,7 @@ export class Game extends EventEmitter {
   }
 
   updateLeaderboard(data: StatisticsData) {
+    this.onUpdateLeaderboard(this.state.level, data.score)
     if (this.state.username) {
       this.emit(GameEvents.UpdateLeaderboard, { username: this.state.username, ...data })
     }
