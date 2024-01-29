@@ -20,6 +20,7 @@ ReactDOM.hydrateRoot(
   </React.StrictMode>
 )
 
+/*
 if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('serviceWorker.js', {
@@ -28,3 +29,4 @@ if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
     })
   })
 }
+*/

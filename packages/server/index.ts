@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import dotenv from 'dotenv'
 import cors from 'cors'
-import express from 'express'
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
-import * as fs from 'fs'
-import * as path from 'path'
-import { loadState } from './state/load'
 
 dotenv.config()
+
+import express from 'express'
+import * as fs from 'fs'
+import * as path from 'path'
 
 const isDev = () => process.env.NODE_ENV === 'development'
 
@@ -18,7 +18,6 @@ async function startServer() {
   const port = Number(process.env.SERVER_PORT) || 3001
 
   let vite: ViteDevServer | undefined
-
   const distPath = path.dirname(require.resolve('client/dist/index.html'))
   const srcPath = path.dirname(require.resolve('client'))
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs')
@@ -34,11 +33,14 @@ async function startServer() {
   }
 
   app.get('/api', (_, res) => {
-    res.json('👋 Howdy from the server 😅')
+    res.json('👋 Howdy from the server :)')
   })
 
   if (!isDev()) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
+    app.use('/sounds', express.static(path.resolve(distPath, 'sounds')))
+    app.use('/sprites', express.static(path.resolve(distPath, 'sprites')))
+    app.use('/images', express.static(path.resolve(distPath, 'sprites')))
   }
 
   app.use('*', async (req, res, next) => {
@@ -48,39 +50,28 @@ async function startServer() {
       let template: string
       let render: (url: string) => Promise<string>
 
-      // if (!isDev()) {
-      //   template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8')
-      // } else {
-      //   template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8')
-      //   template = await vite!.transformIndexHtml(url, template)
-      // }
-      //
-      //
-      // if (!isDev()) {
-      //   render = (await import(ssrClientPath)).render(url)
-      // } else {
-      //   render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'))).render
-      // }
-
-      if (isDev()) {
-        // Always read fresh template in development
-        template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8')
-        template = await vite!.transformIndexHtml(url, template)
-        render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'))).render
-      } else {
+      if (!isDev()) {
         template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8')
-        render = (await import(ssrClientPath)).render
+      } else {
+        template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8')
+
+        template = await vite!.transformIndexHtml(url, template)
       }
 
-      const appHtml = await render(url)
-      const preloadedState = loadState()
-      const stringifiedState = JSON.stringify(preloadedState).replace(/</g, '\\u003c')
+      if (!isDev()) {
+        render = (await import(ssrClientPath)).render
+      } else {
+        render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'))).render
+      }
 
-      // eslint-disable-next-line
-      const html = template.replace(
-        `<div id="root"></div>`,
-        `<script>window.__PRELOADED_STATE__ = ${stringifiedState}</script><div id="root">${appHtml}</div>`
-      )
+      const [appHtml, preloadedState] = await render(url)
+
+      const html = template
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace(
+          `<!--state-outlet-->`,
+          `window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}`
+        )
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {

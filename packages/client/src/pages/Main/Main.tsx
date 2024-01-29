@@ -33,7 +33,7 @@ const Main: FC = () => {
       <div className={clsx('wrapper', styles['wrapper-main'])}>
         <MainMenu data={mainMenu} />
         <div className={styles['main-image']}>
-          <img src="/main-tank.png" alt="" />
+          <img src="/images/main-tank.png" alt="" />
         </div>
       </div>
     </section>
