@@ -6,6 +6,7 @@ import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
 import * as fs from 'fs'
 import * as path from 'path'
+import { loadState } from './state/load'
 
 dotenv.config()
 
@@ -72,8 +73,14 @@ async function startServer() {
       }
 
       const appHtml = await render(url)
+      const preloadedState = loadState()
+      const stringifiedState = JSON.stringify(preloadedState).replace(/</g, '\\u003c')
+
       // eslint-disable-next-line
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml)
+      const html = template.replace(
+        `<div id="root"></div>`,
+        `<script>window.__PRELOADED_STATE__ = ${stringifiedState}</script><div id="root">${appHtml}</div>`
+      )
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {

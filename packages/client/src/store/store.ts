@@ -8,7 +8,11 @@ export const store = configureStore({
     user: userReducer,
     leaderboard: leaderboardReducer,
   }),
+  preloadedState: window.__PRELOADED_STATE__,
 })
+
+// Allow the passed state to be garbage-collected
+delete window.__PRELOADED_STATE__
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
