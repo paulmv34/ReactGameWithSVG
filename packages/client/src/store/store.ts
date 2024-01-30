@@ -3,7 +3,6 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import userReducer from '@/features/user/userSlice'
 import leaderboardReducer from '@/features/leaderboard/leaderboardSlice'
 
-// возможно, костыль
 const isClient = typeof window !== 'undefined'
 
 export const store = configureStore({

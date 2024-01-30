@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -28,7 +28,6 @@ import { useAppDispatch } from '@/hooks/useAppDispatch'
 
 function App() {
   const dispatch = useAppDispatch()
-  //const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
     const fetchServerData = async () => {
@@ -44,13 +43,7 @@ function App() {
 
     fetchServerData()
     getUser()
-    //setHydrated(true)
   }, [])
-
-  // if (!hydrated) {
-  //   // Возвращает null при первом рендеринге, поэтому клиент и сервер совпадают
-  //   return null
-  // }
 
   return (
     <>

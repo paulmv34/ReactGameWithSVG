@@ -40,7 +40,8 @@ async function startServer() {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
     app.use('/sounds', express.static(path.resolve(distPath, 'sounds')))
     app.use('/sprites', express.static(path.resolve(distPath, 'sprites')))
-    app.use('/images', express.static(path.resolve(distPath, 'sprites')))
+    app.use('/images', express.static(path.resolve(distPath, 'images')))
+    app.use('/serviceWorker.js', express.static(path.resolve(distPath, 'serviceWorker.js')))
   }
 
   app.use('*', async (req, res, next) => {

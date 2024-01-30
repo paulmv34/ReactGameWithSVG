@@ -16,7 +16,7 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 export const GameContext = createContext<GameCreateContext>({} as GameCreateContext)
 
 export const Game = () => {
-  const { user } = useAppSelector((state) => state)
+  const user = useAppSelector((state) => state.user)
   const dispatch = useAppDispatch()
 
   const onUpdateLeaderboard = (level: number, score: number) => {
@@ -32,22 +32,25 @@ export const Game = () => {
     )
   }
   const gameRoot = useRef(null)
-  const game = Tanchiki.create(onUpdateLeaderboard)
-  const [isGameInited, setIsGameInited] = useState(game.state.inited)
+  const [game, setGame] = useState<Tanchiki | null>(null)
+  const [isGameInited, setIsGameInited] = useState(false)
 
   useEffect(() => {
-    game.init(gameRoot.current)
-    setIsGameInited(game.state.inited)
+    const createdGame = Tanchiki.create(onUpdateLeaderboard)
+    setGame(createdGame)
+    setIsGameInited(createdGame.state.inited)
+
+    gameRoot.current && createdGame.init(gameRoot.current)
 
     document.querySelector('.layout')?.classList.add('layout__game')
     setViewportAttributes({ isScalable: false })
 
     return () => {
-      game.unload()
+      createdGame.unload()
       document.querySelector('.layout')?.classList.remove('layout__game')
       setViewportAttributes({ isScalable: true })
     }
-  }, [])
+  }, [gameRoot])
 
   return (
     <section className={clsx(styles.gamePage, 'page')}>
