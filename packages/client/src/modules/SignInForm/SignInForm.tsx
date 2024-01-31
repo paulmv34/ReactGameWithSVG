@@ -8,9 +8,15 @@ import Button from '@/components/Button/Button'
 import CustomLink from '@/components/CustomLink/CustomLink'
 import { signInValidationSchema } from '@/utils/validationSchema'
 import { useAuth } from '@/hooks/useAuth'
+import AuthService from '@/services/auth.service'
 
 const SignInForm = () => {
   const { signIn } = useAuth()
+
+  const handlerOAuthYandexLogin = async () => {
+    AuthService.oAuthYandexRequestAccess()
+  }
+
   const formik = useFormik({
     initialValues: {
       login: '',
@@ -31,6 +37,7 @@ const SignInForm = () => {
       }
     },
   })
+
   return (
     <form className={styles.form} onSubmit={formik.handleSubmit}>
       <div className="fields-group">
@@ -67,7 +74,7 @@ const SignInForm = () => {
       </CustomLink>
       <div className={styles['yandex-sign-in']}>
         <p>Можно войти с помощью</p>
-        <Button className={styles.button} type="button" text="Яндекс ID" />
+        <Button className={styles.button} type="button" text="Яндекс ID" onClick={handlerOAuthYandexLogin} />
       </div>
     </form>
   )

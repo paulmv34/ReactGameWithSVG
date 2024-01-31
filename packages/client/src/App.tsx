@@ -25,6 +25,8 @@ import GameStart from '@/pages/GameStart/GameStart'
 
 import { fetchUser } from '@/features/user/userSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { getUrlParams } from '@/utils/getUrlParams'
+import AuthService from '@/services/auth.service'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -43,7 +45,15 @@ function App() {
     }
 
     fetchServerData()
-    getUser()
+
+    // На проде заменить аргумент у функции на `code`
+    const oAuthCode = getUrlParams('http://localhost:3000/?code')
+
+    if (oAuthCode) {
+      AuthService.oAuthYandexHandlerLogin(oAuthCode)
+    } else {
+      getUser()
+    }
     setHydrated(true)
   }, [])
 

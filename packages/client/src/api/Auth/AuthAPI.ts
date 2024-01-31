@@ -19,6 +19,17 @@ class AuthAPI {
   logout() {
     return axiosService.post(`${this.baseEndpoint}/logout`)
   }
+
+  getServiceIdYandex(redirectUri: string) {
+    return axiosService.get<{ service_id: string }>(`/oauth/yandex/service-id?redirect_uri=${redirectUri}`)
+  }
+
+  oAuthYandex(data: string) {
+    return axiosService.post(`/oauth/yandex`, {
+      code: data,
+      redirect_uri: window.location.origin,
+    })
+  }
 }
 
 export default new AuthAPI()
