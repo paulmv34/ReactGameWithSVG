@@ -7,15 +7,18 @@ import { Provider } from 'react-redux'
 import React from 'react'
 
 export function render(url) {
-  renderToString(
-    <React.StrictMode>
-      <StaticRouter location={url}>
-        <ErrorBoundary>
-          <Provider store={store}>
-            <App />
-          </Provider>
-        </ErrorBoundary>
-      </StaticRouter>
-    </React.StrictMode>
-  )
+  return [
+    renderToString(
+      <React.StrictMode>
+        <StaticRouter location={url}>
+          <ErrorBoundary>
+            <Provider store={store}>
+              <App />
+            </Provider>
+          </ErrorBoundary>
+        </StaticRouter>
+      </React.StrictMode>
+    ),
+    store.getState(),
+  ]
 }

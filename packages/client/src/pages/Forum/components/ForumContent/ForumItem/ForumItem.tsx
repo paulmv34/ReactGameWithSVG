@@ -11,7 +11,7 @@ const ForumItem: FC<ForumItemProps> = ({ forum }: ForumItemProps) => {
         <div>{forum.title}</div>
         <div className={styles.date}>
           {forum.date}
-          <img src="/message.svg" alt="" className={styles.commentsCountIcon} />
+          <img src="/images/message.svg" alt="" className={styles.commentsCountIcon} />
           <div>{forum.comments.length}</div>
         </div>
       </div>
