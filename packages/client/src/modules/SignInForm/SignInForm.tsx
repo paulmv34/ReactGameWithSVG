@@ -14,7 +14,7 @@ const SignInForm = () => {
   const { signIn } = useAuth()
 
   const handlerOAuthYandexLogin = async () => {
-    AuthService.oAuthYandexRequestAccess()
+    await AuthService.oAuthYandexRequestAccess()
   }
 
   const formik = useFormik({

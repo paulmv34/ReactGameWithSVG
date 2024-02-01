@@ -37,16 +37,19 @@ class AuthService {
       const { data } = await AuthAPI.getServiceIdYandex(origin)
 
       window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${origin}`
-    } catch (e) {
-      console.log('ОШИБКА ДОСТУПА OAUTH YANDEX: ', e)
+    } catch (error) {
+      handleError(error)
+      throw error
     }
   }
 
   async oAuthYandexHandlerLogin(oAuthCode: string) {
     try {
-      authAPI.oAuthYandex(oAuthCode).then(() => (window.location.href = window.location.origin))
-    } catch (e) {
-      console.log('ОШИБКА АВТОРИЗАЦИИ OAUTH YANDEX: ', e)
+      await authAPI.oAuthYandex(oAuthCode)
+      window.location.href = window.location.origin
+    } catch (error) {
+      handleError(error)
+      throw error
     }
   }
 }

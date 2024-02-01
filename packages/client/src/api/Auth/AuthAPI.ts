@@ -1,8 +1,9 @@
 import { axiosService } from '../axiosService'
-import { SignInData, SignUpData, UserInfo } from './types'
+import type { SignInData, SignUpData, UserInfo, YandexServiceId } from './types'
 
 class AuthAPI {
   private readonly baseEndpoint = '/auth'
+  private readonly baseOAuthYandex = '/oauth/yandex'
 
   signup(data: SignUpData) {
     return axiosService.post(`${this.baseEndpoint}/signup`, data)
@@ -21,11 +22,11 @@ class AuthAPI {
   }
 
   getServiceIdYandex(redirectUri: string) {
-    return axiosService.get<{ service_id: string }>(`/oauth/yandex/service-id?redirect_uri=${redirectUri}`)
+    return axiosService.get<YandexServiceId>(`${this.baseOAuthYandex}/service-id?redirect_uri=${redirectUri}`)
   }
 
   oAuthYandex(data: string) {
-    return axiosService.post(`/oauth/yandex`, {
+    return axiosService.post(`${this.baseOAuthYandex}`, {
       code: data,
       redirect_uri: window.location.origin,
     })
