@@ -4,5 +4,5 @@ import { ErrorObject } from '@/types/types'
 export interface UserState {
   error: ErrorObject | null
   isLoggedIn: boolean | null
-  user: null | UserInfo
+  user: UserInfo
 }

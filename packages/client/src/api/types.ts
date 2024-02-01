@@ -3,6 +3,7 @@ export const TEAM_NAME = 'NoHandlebars'
 export const RATING_FIELD_NAME = 'score'
 
 export enum END_POINTS_URL {
+  ADD_REACTION = 'http://localhost:3001/api/comment',
   CHANGE_USER_PASSWORD = '/user/password',
   CHANGE_USER_PROFILE = '/user/profile',
   CHANGE_USER_PROFILE_AVATAR = '/user/profile/avatar',
