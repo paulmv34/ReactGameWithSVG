@@ -20,18 +20,20 @@ const ForumEmoji = ({ comment }: ForumEmojiProps) => {
   const selectEmoji = async (data: any) => {
     console.log('emoji new!')
     setShowEmojiPicker(!showEmojiPicker)
-    const dataReaction: TReaction = {
-      comment_id: comment.id,
-      emoji: data.unified,
-      user_id: user?.id,
-    }
-    if (reactions) {
-      setReactions([...reactions, dataReaction])
-    } else {
-      setReactions([dataReaction])
-    }
+    if (user) {
+      const dataReaction: TReaction = {
+        comment_id: comment.id,
+        emoji: data.unified,
+        user_id: user?.id,
+      }
+      if (reactions) {
+        setReactions([...reactions, dataReaction])
+      } else {
+        setReactions([dataReaction])
+      }
 
-    await forumApi.addReaction(dataReaction)
+      await forumApi.addReaction(dataReaction)
+    }
   }
 
   const arr = duplicate(reactions)
