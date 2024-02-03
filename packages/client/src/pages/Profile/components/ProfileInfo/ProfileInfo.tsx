@@ -3,6 +3,7 @@ import Title from '../../../../components/Title/Title'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import { useFormik } from 'formik'
+import { toast } from 'react-toastify'
 
 import styles from './ProfileInfo.module.scss'
 import { Link } from 'react-router-dom'
@@ -11,31 +12,32 @@ import Input from '@/components/Input/Input'
 import { TUserData } from './types'
 import { userApi } from '@/api/userApi'
 import { profileValidationSchema } from '@/utils/validationSchema'
+import { useAppSelector } from '@/hooks/useAppSelector'
 
 const ProfileInfo: FC = () => {
+  const initialValues = {
+    first_name: '',
+    second_name: '',
+    display_name: '',
+    phone: '',
+    login: '',
+    email: '',
+  }
+
+  const user = useAppSelector((state) => state.user.user) || initialValues
+
   const formik = useFormik({
-    initialValues: {
-      first_name: '',
-      second_name: '',
-      display_name: '',
-      phone: '',
-      login: '',
-      email: '',
-    },
+    initialValues: user,
     validateOnChange: false,
     validateOnBlur: true,
     validationSchema: profileValidationSchema,
-    onSubmit: (values: TUserData, { resetForm, setSubmitting }) => {
+    onSubmit: async (values: TUserData, { setSubmitting }) => {
       setSubmitting(true)
       userApi
         .changeUserProfileData(values)
-        .catch((err) => {
-          console.log('Profile updating failed', err)
-        })
-        .finally(() => {
-          setSubmitting(false)
-          resetForm({})
-        })
+        .then(() => toast.success('Данные успешно обновились'))
+        .catch((err) => toast.error(err))
+        .finally(() => setSubmitting(false))
     },
   })
 
@@ -56,7 +58,7 @@ const ProfileInfo: FC = () => {
             label="Логин"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            value={formik.values.login}
+            value={formik.values.login || ''}
             errorText={formik.touched.login && formik.errors.login ? formik.errors.login : ''}
             error={formik.touched.login && !!formik.errors.login}
           />
@@ -69,7 +71,7 @@ const ProfileInfo: FC = () => {
             label="Имя"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            value={formik.values.first_name}
+            value={formik.values.first_name || ''}
             errorText={formik.touched.first_name && formik.errors.first_name ? formik.errors.first_name : ''}
             error={formik.touched.first_name && !!formik.errors.first_name}
           />
@@ -82,7 +84,7 @@ const ProfileInfo: FC = () => {
             label="Фамилия"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            value={formik.values.second_name}
+            value={formik.values.second_name || ''}
             errorText={formik.touched.second_name && formik.errors.second_name ? formik.errors.second_name : ''}
             error={formik.touched.second_name && !!formik.errors.second_name}
           />
@@ -95,7 +97,7 @@ const ProfileInfo: FC = () => {
             label="Имя в системе"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            value={formik.values.display_name}
+            value={formik.values.display_name || ''}
             errorText={formik.touched.display_name && formik.errors.display_name ? formik.errors.display_name : ''}
             error={formik.touched.display_name && !!formik.errors.display_name}
           />
@@ -108,7 +110,7 @@ const ProfileInfo: FC = () => {
             label="Email"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            value={formik.values.email}
+            value={formik.values.email || ''}
             errorText={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
             error={formik.touched.email && !!formik.errors.email}
           />
@@ -121,7 +123,7 @@ const ProfileInfo: FC = () => {
             label="Телефон"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            value={formik.values.phone}
+            value={formik.values.phone || ''}
             errorText={formik.touched.phone && formik.errors.phone ? formik.errors.phone : ''}
             error={formik.touched.phone && !!formik.errors.phone}
           />
