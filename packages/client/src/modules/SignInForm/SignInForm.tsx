@@ -13,7 +13,7 @@ import AuthService from '@/services/auth.service'
 const SignInForm = () => {
   const { signIn } = useAuth()
 
-  const handlerOAuthYandexLogin = async () => {
+  const handleOAuthYandexLogin = async () => {
     await AuthService.oAuthYandexRequestAccess()
   }
 
@@ -74,7 +74,7 @@ const SignInForm = () => {
       </CustomLink>
       <div className={styles['yandex-sign-in']}>
         <p>Можно войти с помощью</p>
-        <Button className={styles.button} type="button" text="Яндекс ID" onClick={handlerOAuthYandexLogin} />
+        <Button className={styles.button} type="button" text="Яндекс ID" onClick={handleOAuthYandexLogin} />
       </div>
     </form>
   )
