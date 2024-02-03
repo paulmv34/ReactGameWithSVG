@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { ErrorObject, UserState } from '@/features/user/types'
+import { UserState } from '@/features/user/types'
 import authAPI from '@/api/Auth/AuthAPI'
-import { AxiosError } from 'axios'
+import { ErrorObject } from '@/types/types'
+import { getErrorMessage } from '@/utils/getErrorMessage'
 
 const initialState: UserState = {
   user: null,
@@ -13,17 +14,8 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async (_, { rejectWi
   try {
     const { data: user } = await authAPI.getUser()
     return user
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return rejectWithValue({
-        code: error.response?.status || 500,
-        message: error.message,
-      })
-    }
-    return rejectWithValue({
-      code: 500,
-      message: 'An error occurred',
-    })
+  } catch (error: unknown) {
+    return rejectWithValue(getErrorMessage(error))
   }
 })
 
