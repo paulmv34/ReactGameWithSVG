@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -25,14 +25,15 @@ import GameStart from '@/pages/GameStart/GameStart'
 
 import { fetchUser } from '@/features/user/userSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { getUrlParams } from '@/utils/getUrlParams'
+import AuthService from '@/services/auth.service'
 
 function App() {
   const dispatch = useAppDispatch()
-  const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
     const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
+      const url = `http://localhost:${__SERVER_PORT__}/api`
       const response = await fetch(url)
       const data = await response
       console.log(data)
@@ -43,14 +44,16 @@ function App() {
     }
 
     fetchServerData()
-    getUser()
-    setHydrated(true)
-  }, [])
 
-  if (!hydrated) {
-    // Возвращает null при первом рендеринге, поэтому клиент и сервер совпадают
-    return null
-  }
+    // На проде заменить аргумент у функции на `code`
+    const oAuthCode = getUrlParams('http://localhost:3000/?code')
+
+    if (oAuthCode) {
+      AuthService.oAuthYandexHandlerLogin(oAuthCode)
+    } else {
+      getUser()
+    }
+  }, [])
 
   return (
     <>

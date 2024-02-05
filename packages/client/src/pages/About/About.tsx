@@ -22,7 +22,7 @@ const About: FC = () => {
           </p>
 
           <div className="image-row">
-            <img src="/about-image-1.jpg"></img>
+            <img src="/images/about-image-1.jpg"></img>
           </div>
 
           <h3>Управление</h3>
@@ -49,7 +49,7 @@ const About: FC = () => {
           </p>
 
           <div className="image-row">
-            <img src="/about-image-2.jpg"></img>
+            <img src="/images/about-image-2.jpg"></img>
           </div>
 
           <p>
@@ -62,7 +62,7 @@ const About: FC = () => {
           </p>
 
           <div className="image-row">
-            <img src="/about-image-3.jpg"></img>
+            <img src="/images/about-image-3.jpg"></img>
           </div>
 
           <h3>Совместная игра</h3>

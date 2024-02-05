@@ -68,6 +68,7 @@ exports[`should be equal to snapshot 1`] = `
           Можно войти с помощью
         </p>
         <button
+          onClick={[Function]}
           type="button"
         >
           Яндекс ID

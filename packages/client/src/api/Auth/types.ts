@@ -22,3 +22,7 @@ export interface UserInfo {
   phone: string
   second_name: string
 }
+
+export interface YandexServiceId {
+  service_id: number
+}

@@ -16,7 +16,7 @@ const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }: CommentTopic
           <div>{comment.author}</div>
           <div className={styles.dateComment}>
             {comment.date}
-            <img src="/message.svg" alt="" className={styles.commentsCountIcon} />
+            <img src="/images/message.svg" alt="" className={styles.commentsCountIcon} />
             <div>Ответить</div>
           </div>
         </div>
