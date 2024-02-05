@@ -6,7 +6,7 @@ import smile from '../../../public/smiley-plus.svg'
 import { EmojiData, EmojiItem, ForumEmojiProps } from './types'
 
 import styles from './ForumEmoji.module.scss'
-import { duplicate } from '@/utils/duplicate'
+import { emojiCounter } from '@/utils/emojiCounter'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { forumApi } from '@/api/forumApi'
 import { TReaction } from '@/pages/Forum/components/ForumContent/ForumItem/types'
@@ -34,7 +34,7 @@ const ForumEmoji = ({ comment }: ForumEmojiProps) => {
     }
   }
 
-  const arr = duplicate(reactions)
+  const arr = emojiCounter(reactions)
 
   return (
     <div className={styles.reactions}>

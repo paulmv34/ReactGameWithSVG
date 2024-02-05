@@ -1,6 +1,6 @@
 import { TReaction } from '@/pages/Forum/components/ForumContent/ForumItem/types'
 
-export const duplicate = (data: TReaction[]) => {
+export const emojiCounter = (data: TReaction[]) => {
   if (!data) {
     return []
   }
