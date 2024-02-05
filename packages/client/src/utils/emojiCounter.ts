@@ -6,7 +6,7 @@ export const emojiCounter = (data: TReaction[]) => {
   }
   const counter: Record<string, number> = data?.reduce((obj, i) => {
     const res: Record<string, number> = { ...obj }
-    if (!Object.prototype.hasOwnProperty.call(res, i.emoji)) {
+    if (!(i.emoji in res)) {
       res[i.emoji] = 0
     }
     res[i.emoji]++
