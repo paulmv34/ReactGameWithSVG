@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
 import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 
 import smile from '../../../public/smiley-plus.svg'
-import { ForumEmojiProps } from './types'
+import { EmojiData, EmojiItem, ForumEmojiProps } from './types'
 
 import styles from './ForumEmoji.module.scss'
 import { duplicate } from '@/utils/duplicate'
@@ -14,11 +13,10 @@ import { TReaction } from '@/pages/Forum/components/ForumContent/ForumItem/types
 
 const ForumEmoji = ({ comment }: ForumEmojiProps) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-  const [reactions, setReactions] = useState<any>(comment.reactions)
+  const [reactions, setReactions] = useState<TReaction[]>(comment.reactions)
   const { user } = useAppSelector((state) => state.user)
 
-  const selectEmoji = async (data: any) => {
-    console.log('emoji new!')
+  const selectEmoji = async (data: EmojiData) => {
     setShowEmojiPicker(!showEmojiPicker)
     if (user) {
       const dataReaction: TReaction = {
@@ -42,7 +40,7 @@ const ForumEmoji = ({ comment }: ForumEmojiProps) => {
     <div className={styles.reactions}>
       <div className={styles.reactionsContainer}>
         {comment &&
-          arr.map((item: any, index: any) => {
+          arr.map((item: EmojiItem, index: number) => {
             return (
               <div className={styles.emojiWrapper} key={index}>
                 <span className={styles.emojiSpan}>{String.fromCodePoint(parseInt(item.emoji, 16))}</span>

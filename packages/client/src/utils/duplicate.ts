@@ -1,15 +1,11 @@
 import { TReaction } from '@/pages/Forum/components/ForumContent/ForumItem/types'
 
-interface IObj {
-  [key: string]: number
-}
 export const duplicate = (data: TReaction[]) => {
   if (!data) {
     return []
   }
-  console.log(data)
-  const counter: IObj = data?.reduce((obj, i) => {
-    const res: IObj = { ...obj }
+  const counter: Record<string, number> = data?.reduce((obj, i) => {
+    const res: Record<string, number> = { ...obj }
     if (!Object.prototype.hasOwnProperty.call(res, i.emoji)) {
       res[i.emoji] = 0
     }
