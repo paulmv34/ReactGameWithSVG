@@ -17,6 +17,7 @@ const TopicForumContent: FC<TopicForumProps> = ({ forum }: TopicForumProps) => {
       body: newComment,
       date: new Date().getDate().toString(),
       author: 'Автор 1',
+      reactions: [],
     }
     const tmplComments = comments
     tmplComments.push(comment)

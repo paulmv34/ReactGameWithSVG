@@ -1,8 +1,8 @@
 export interface ForumItemProps {
-  forum: ForumItem
+  forum: IForumItem
 }
 
-export interface ForumItem {
+export interface IForumItem {
   author: string
   body: string
   comments: CommentItem[]
@@ -16,4 +16,11 @@ export interface CommentItem {
   body: string
   date: string
   id: number
+  reactions: TReaction[]
+}
+
+export type TReaction = {
+  comment_id: number | string
+  emoji: string
+  user_id: number | null
 }

@@ -1,8 +1,9 @@
 import { FC } from 'react'
 import { CommentTopicForumProps } from './types'
+import { Avatar } from '@mui/material'
+import ForumEmoji from '@/components/ForumEmoji/ForumEmoji'
 
 import styles from './CommentTopicForum.module.scss'
-import { Avatar } from '@mui/material'
 
 const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }: CommentTopicForumProps) => {
   return (
@@ -20,6 +21,7 @@ const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }: CommentTopic
           </div>
         </div>
         <div className={styles.bodyComment}>{comment.body}</div>
+        <ForumEmoji comment={comment} />
       </div>
     </div>
   )
