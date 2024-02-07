@@ -6,6 +6,7 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "sourceMap": true,
+    "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,
     "removeComments": true,
@@ -17,11 +18,20 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es2019", "dom", "esnext.asynciterable"],
-    "types": ["node", "jest"],
+    "lib": [
+      "es2019",
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "types": [
+      "node",
+      "jest"
+    ],
     "baseUrl": ".",
     "paths": {
-      "*": ["types/*"]
+      "*": [
+        "types/*"
+      ]
     },
     "outDir": "dist"
   }
