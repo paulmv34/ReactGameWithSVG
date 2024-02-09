@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import dotenv from 'dotenv'
 import cors from 'cors'
-import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
-
-dotenv.config()
-
+import { createServer as createViteServer } from 'vite'
 import express from 'express'
 import * as fs from 'fs'
 import * as path from 'path'
+
+dotenv.config()
 
 const isDev = () => process.env.NODE_ENV === 'development'
 
@@ -18,14 +17,17 @@ async function startServer() {
   const port = Number(process.env.SERVER_PORT) || 3001
 
   let vite: ViteDevServer | undefined
-  const distPath = path.dirname(require.resolve('client/dist/index.html'))
-  const srcPath = path.dirname(require.resolve('client'))
-  const ssrClientPath = require.resolve('client/ssr-dist/client.cjs')
+  const distIndexPathname = isDev() ? 'client/dist/index.html' : './client/dist/index.html'
+  const ssrClientPathname = isDev() ? 'client/ssr-dist/client.cjs' : './client/ssr-dist/client.cjs'
+  const srcPathname = isDev() ? 'client' : './client'
+  const distPath = path.dirname(require.resolve(distIndexPathname))
+  const ssrClientPath = require.resolve(ssrClientPathname)
+  const srcPath = () => path.dirname(require.resolve(srcPathname))
 
   if (isDev()) {
     vite = await createViteServer({
       server: { middlewareMode: true },
-      root: srcPath,
+      root: srcPath(),
       appType: 'custom',
     })
 
@@ -54,7 +56,7 @@ async function startServer() {
       if (!isDev()) {
         template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8')
       } else {
-        template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8')
+        template = fs.readFileSync(path.resolve(srcPath(), 'index.html'), 'utf-8')
 
         template = await vite!.transformIndexHtml(url, template)
       }
@@ -62,7 +64,7 @@ async function startServer() {
       if (!isDev()) {
         render = (await import(ssrClientPath)).render
       } else {
-        render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'))).render
+        render = (await vite!.ssrLoadModule(path.resolve(srcPath(), 'ssr.tsx'))).render
       }
 
       const [appHtml, preloadedState] = await render(url)

@@ -12,6 +12,7 @@
     "test": "jest ."
   },
   "dependencies": {
+    "@vitejs/plugin-react": "2.0.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.2",
@@ -19,7 +20,8 @@
     "express": "^4.18.1",
     "pg": "^8.8.0",
     "prettier": "^2.7.1",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "vite": "3.0.7"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
