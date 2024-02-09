@@ -4,10 +4,7 @@ import { ControllerEvent } from './data'
 import { type Binding } from './KeyBindings'
 import { type ControlEvent, type Controller } from './types'
 
-export abstract class ControllerBase
-  extends EventEmitter<ControllerEvent>
-  implements Controller
-{
+export abstract class ControllerBase extends EventEmitter<ControllerEvent> implements Controller {
   activeDirection: Partial<Record<Direction, boolean>> = {}
   shootProcess: ReturnType<typeof setInterval> | null = null
   shootIntervalMs = 200

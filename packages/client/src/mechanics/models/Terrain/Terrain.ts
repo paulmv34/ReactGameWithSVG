@@ -1,11 +1,7 @@
 import { Color } from '@/mechanics/services/View/colors'
 import { spriteCoordinates } from '@/mechanics/services/View/spriteCoordinates'
 import { Entity } from '..'
-import {
-  type DamageSettings,
-  type EntitySettings,
-  EntityEvent,
-} from '../Entity/types'
+import { type DamageSettings, type EntitySettings, EntityEvent } from '../Entity/types'
 import { type TerrainVariant } from './types'
 
 export class Terrain extends Entity {
@@ -26,15 +22,13 @@ export class Terrain extends Entity {
         this.crossable = false
         this.hittable = true
         this.color = Color.Brown
-        this.mainSpriteCoordinates =
-          spriteCoordinates['terrain.brick'][this.variant]
+        this.mainSpriteCoordinates = spriteCoordinates['terrain.brick'][this.variant]
         break
       case 'concreteWall':
         this.crossable = false
         this.hittable = true
         this.color = Color.LightGrey
-        this.mainSpriteCoordinates =
-          spriteCoordinates['terrain.concrete'][this.variant]
+        this.mainSpriteCoordinates = spriteCoordinates['terrain.concrete'][this.variant]
         break
       case 'trees':
         this.crossable = true

@@ -1,7 +1,1 @@
-export type PowerupVariant =
-  | 'STAR'
-  | 'TANK'
-  | 'HELMET'
-  | 'GRENADE'
-  | 'SHOVEL'
-  | 'CLOCK'
+export type PowerupVariant = 'STAR' | 'TANK' | 'HELMET' | 'GRENADE' | 'SHOVEL' | 'CLOCK'

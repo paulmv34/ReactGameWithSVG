@@ -39,9 +39,7 @@ export abstract class Entity extends EventEmitter<EntityEvent> {
   damagedBy: Entity | null = null
   destroyedBy: Entity | null = null
   invincible = false
-  mainSpriteCoordinates:
-    | SpriteCoordinatesNoAnimations
-    | SpriteCoordinatesWithAnimations = null
+  mainSpriteCoordinates: SpriteCoordinatesNoAnimations | SpriteCoordinatesWithAnimations = null
   mainSpriteFrame = 0
   animationList: Animations = []
   backImg: HTMLImageElement | HTMLCanvasElement | null = null
@@ -132,19 +130,14 @@ export abstract class Entity extends EventEmitter<EntityEvent> {
     this.emit(EntityEvent.AnimationStarted, settings.name)
 
     if (settings.stopTimer) {
-      this.setLoopDelay(
-        this.cancelAnimation.bind(this, 'showEntity', settings.name),
-        settings.stopTimer
-      )
+      this.setLoopDelay(this.cancelAnimation.bind(this, 'showEntity', settings.name), settings.stopTimer)
     }
   }
 
   cancelAnimation(type: CancelAnimation = 'eraseEntity', name: string) {
     this.clearLoopInterval(name)
 
-    const animationIndex = this.animationList.findIndex(
-      (animation) => animation.name === name
-    )
+    const animationIndex = this.animationList.findIndex((animation) => animation.name === name)
     this.animationList.splice(animationIndex, 1)
 
     this.emit(EntityEvent.AnimationEnded, name)

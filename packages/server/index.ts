@@ -6,14 +6,20 @@ import { createServer as createViteServer } from 'vite'
 import express from 'express'
 import * as fs from 'fs'
 import * as path from 'path'
+import { initPostgre } from './utils/database'
+import { apiRoute } from './routes/Api'
 
 dotenv.config()
 
 const isDev = () => process.env.NODE_ENV === 'development'
 
+// initPostgre()
+
 async function startServer() {
+  await initPostgre()
   const app = express()
-  app.use(cors())
+  app.use(cors()).use('/api', apiRoute)
+
   const port = Number(process.env.SERVER_PORT) || 3001
 
   let vite: ViteDevServer | undefined

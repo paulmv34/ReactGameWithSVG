@@ -7,7 +7,7 @@
   padding: 1px;
   background: conic-gradient(#0000 10%, var(--color-text-dark)) content-box;
   -webkit-mask: repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 21deg 36deg),
-  radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 calc(100% - 8px));
+    radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 calc(100% - 8px));
   -webkit-mask-composite: destination-in;
   mask-composite: intersect;
   animation: spin 1s infinite steps(10);
@@ -15,6 +15,6 @@
 
 @keyframes spin {
   to {
-    transform: rotate(1turn)
+    transform: rotate(1turn);
   }
 }

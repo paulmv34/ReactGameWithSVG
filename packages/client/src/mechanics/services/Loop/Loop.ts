@@ -77,10 +77,7 @@ export class Loop {
 
       if (timeDifference >= this.loopTimeMs) {
         if (this.lastTimestamp !== 0) {
-          const ticksCount = Math.min(
-            Math.round(timeDifference / this.loopTimeMs),
-            this.maxConsecutiveLoops
-          )
+          const ticksCount = Math.min(Math.round(timeDifference / this.loopTimeMs), this.maxConsecutiveLoops)
 
           for (let i = ticksCount; i > 0; --i) {
             this.tick()
