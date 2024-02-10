@@ -27,6 +27,7 @@ import { fetchUser } from '@/features/user/userSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { getUrlParams } from '@/utils/getUrlParams'
 import AuthService from '@/services/auth.service'
+import { getSections } from '@/features/forum/forumSlice'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -53,6 +54,10 @@ function App() {
     } else {
       getUser()
     }
+  }, [])
+
+  useEffect(() => {
+    dispatch(getSections())
   }, [])
 
   return (

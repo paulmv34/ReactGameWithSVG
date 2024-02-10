@@ -67,3 +67,12 @@ export interface ErrorObject {
   code: number
   message: string
 }
+
+export interface ForumSection {
+  created_at: string
+  id: number
+  messages: number
+  name: string
+  topicCount: number
+  updated_at: string
+}
