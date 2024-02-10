@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 
 import data from '../Forum/MockData.json'
 import TopicForumHeader from './components/TopicForumHeader/TopicForumHeader'
@@ -8,7 +8,7 @@ import styles from './TopicForum.module.scss'
 import BackLink from '@/components/BackLink/BackLink'
 import { ROUTES } from '@/types/types'
 import NewTopic from './components/NewTopic/NewTopic'
-import { useLocation } from 'react-router'
+import { useLocation, useParams } from 'react-router'
 import { IForumItem } from '../Forum/components/ForumContent/ForumItem/types'
 
 const TopicForum: FC = () => {

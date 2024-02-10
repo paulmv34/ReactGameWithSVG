@@ -27,7 +27,8 @@ import { fetchUser } from '@/features/user/userSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { getUrlParams } from '@/utils/getUrlParams'
 import AuthService from '@/services/auth.service'
-import { getSections } from '@/features/forum/forumSlice'
+import NewTopic from '@/pages/TopicForum/components/NewTopic/NewTopic'
+import SectionForum from '@/components/SectionsForum/SectionForum'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -56,10 +57,6 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    dispatch(getSections())
-  }, [])
-
   return (
     <>
       <Routes>
@@ -72,10 +69,12 @@ function App() {
             <Route path={ROUTES.GAME_START} element={<GameStart />} />
             <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
             <Route path={ROUTES.FORUM} element={<Forum />} />
-            <Route path={ROUTES.TOPIC_FORUM} element={<TopicForum />} />
+            <Route path={ROUTES.FORUM_TOPIC_NEW} element={<NewTopic />} />
+            <Route path={ROUTES.FORUM_SECTION} element={<SectionForum />} />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.PROFILE_PASSWORD} element={<ChangePassword />} />
             <Route path={ROUTES.PROFILE_AVATAR} element={<ChangeAvatar />} />
+            <Route path={ROUTES.PROFILE_AVATAR} element={<div>id</div>} />
           </Route>
           <Route path="*" element={<Error codeError={404} />} />
           <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />

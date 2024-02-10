@@ -2,6 +2,8 @@ export enum ROUTES {
   ABOUT = '/about',
   ERROR_500 = '/500',
   FORUM = '/forum',
+  FORUM_SECTION = '/forum/:idSection',
+  FORUM_TOPIC_NEW = '/forum/new',
   GAME = '/game',
   GAME_START = '/game/start',
   LEADERBOARD = '/leaderboard',
@@ -11,8 +13,6 @@ export enum ROUTES {
   PROFILE_AVATAR = '/profile/changeAvatar',
   PROFILE_PASSWORD = '/profile/changePassword',
   REGISTRATION = '/sign-up',
-  TOPIC_FORUM = '/forum/*',
-  TOPIC_NEW = '/forum/new',
 }
 
 export interface ScoreData {

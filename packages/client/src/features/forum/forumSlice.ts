@@ -1,50 +1,21 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { State } from '@/features/forum/types'
 import { forumApi } from '@/api/forumApi'
 import { getErrorMessage } from '@/utils/getErrorMessage'
 
 const initialState: State = {
-  isLoading: false,
-  error: null,
-  sections: [
-    {
-      id: 1,
-      name: 'Игра',
-      created_at: '2024-02-10T11:13:10.888Z',
-      updated_at: '2024-02-10T11:13:10.888Z',
-      topicCount: 0,
-      messages: 0,
-    },
-    {
-      id: 2,
-      name: 'Обратная связь',
-      created_at: '2024-02-10T11:13:10.888Z',
-      updated_at: '2024-02-10T11:13:10.888Z',
-      topicCount: 0,
-      messages: 0,
-    },
-    {
-      id: 3,
-      name: 'Как попасть в топ???',
-      created_at: '2024-02-10T11:13:10.888Z',
-      updated_at: '2024-02-10T11:13:10.888Z',
-      topicCount: 0,
-      messages: 0,
-    },
-    {
-      id: 4,
-      name: 'Механики игры',
-      created_at: '2024-02-10T11:13:10.888Z',
-      updated_at: '2024-02-10T11:13:10.888Z',
-      topicCount: 0,
-      messages: 0,
-    },
-  ],
+  sectionData: {
+    isLoading: true,
+    error: null,
+    sections: [],
+    selectedSection: null,
+  },
 }
 
 export const getSections = createAsyncThunk('forum/getSections', async (_, { rejectWithValue }) => {
   try {
-    return await forumApi.getSections()
+    const { data } = await forumApi.getSections()
+    return data
   } catch (error: unknown) {
     return rejectWithValue(getErrorMessage(error))
   }
@@ -53,13 +24,19 @@ export const getSections = createAsyncThunk('forum/getSections', async (_, { rej
 export const forumSlice = createSlice({
   name: 'forum',
   initialState,
-  reducers: {},
+  reducers: {
+    handleSelectionAction: (state, { payload }: PayloadAction<number>) => {
+      const targetSelected = state.sectionData.sections.find((section) => section.id === payload) || null
+      state.sectionData.selectedSection = targetSelected
+    },
+  },
   extraReducers(builder) {
     builder.addCase(getSections.fulfilled, (state, { payload }) => {
-      state.isLoading = false
-      state.sections = payload.data
+      state.sectionData.isLoading = false
+      state.sectionData.sections = payload
     })
   },
 })
 
 export default forumSlice.reducer
+export const { handleSelectionAction } = forumSlice.actions

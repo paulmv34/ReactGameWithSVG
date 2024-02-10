@@ -11,6 +11,7 @@ export class ForumTopic extends Model {
   @Column
   name!: string
 
+  @ForeignKey(() => ForumSection)
   @AllowNull(false)
   @Column
   section_id!: number

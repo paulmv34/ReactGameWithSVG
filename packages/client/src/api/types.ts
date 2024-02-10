@@ -8,6 +8,7 @@ export enum END_POINTS_URL {
   CHANGE_USER_PASSWORD = '/user/password',
   CHANGE_USER_PROFILE = '/user/profile',
   CHANGE_USER_PROFILE_AVATAR = '/user/profile/avatar',
+  CREATE_FORUM_TOPIC = '/api/forum/topic',
   GET_FORUM_SECTIONS = '/api/forum/section',
 }
 

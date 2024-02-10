@@ -19,4 +19,10 @@ export const forumApi = {
   getSections() {
     return axiosServiceLocal.get<ForumSection[]>(`${END_POINTS_URL.GET_FORUM_SECTIONS}`)
   },
+  getSectionsById(id: string) {
+    return axiosServiceLocal.get<ForumSection>(`${END_POINTS_URL.GET_FORUM_SECTIONS}/${id}`)
+  },
+  createTopic(body: any) {
+    return axiosServiceLocal.post(`${END_POINTS_URL.CREATE_FORUM_TOPIC}`, body)
+  },
 }
