@@ -3,26 +3,18 @@ import { type SequelizeOptions, Sequelize } from 'sequelize-typescript'
 
 import { ForumSection } from '../models/ForumSection'
 
-// const { POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER } = process.env
+const { POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER } = process.env
 
 export const initPostgre = async (): Promise<Sequelize | undefined> => {
   let client
 
-  console.log(process.env.POSTGRES_DB)
-
   try {
     const sequelizeOptions: SequelizeOptions = {
-      // username: POSTGRES_USER,
-      // host: 'localhost',
-      // database: POSTGRES_DB,
-      // password: POSTGRES_PASSWORD,
-      // port: Number(POSTGRES_PORT),
-      // dialect: 'postgres',
-      username: 'postgres',
+      username: POSTGRES_USER,
       host: 'localhost',
-      database: 'postgres',
-      password: 'postgres',
-      port: 5432,
+      database: POSTGRES_DB,
+      password: POSTGRES_PASSWORD,
+      port: Number(POSTGRES_PORT),
       dialect: 'postgres',
     }
 
