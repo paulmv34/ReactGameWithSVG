@@ -1,10 +1,8 @@
-import dotenv from 'dotenv'
 import * as path from 'path'
 import { type SequelizeOptions, Sequelize } from 'sequelize-typescript'
 
 import { ForumSection } from '../models/ForumSection'
 
-dotenv.config()
 const { POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER } = process.env
 
 export const initPostgre = async (): Promise<Sequelize | undefined> => {
