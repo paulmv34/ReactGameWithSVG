@@ -14,5 +14,5 @@ apiRoute
   .use('/forum/topic', forumTopicRoute)
   .use('/forum/message', forumMessageRoute)
   .use('/theme', themizationRoute)
-  .use(errorHandler)
   .use('/', proxyMiddleware)
+  .use(errorHandler)
