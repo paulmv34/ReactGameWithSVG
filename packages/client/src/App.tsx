@@ -75,7 +75,6 @@ function App() {
             <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.PROFILE_PASSWORD} element={<ChangePassword />} />
             <Route path={ROUTES.PROFILE_AVATAR} element={<ChangeAvatar />} />
-            <Route path={ROUTES.PROFILE_AVATAR} element={<div>id</div>} />
           </Route>
           <Route path="*" element={<Error codeError={404} />} />
           <Route path={ROUTES.ERROR_500} element={<Error codeError={500} />} />
