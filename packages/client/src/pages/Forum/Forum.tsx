@@ -42,14 +42,6 @@ const Forum: FC = () => {
       ) : (
         <Loader />
       )}
-
-      {/*{selectedSection && (*/}
-      {/*  <>*/}
-      {/*    <ForumHeader />*/}
-      {/*    <ForumContent />*/}
-      {/*    <BackLink to={ROUTES.MAIN} />*/}
-      {/*  </>*/}
-      {/*)}*/}
     </div>
   )
 }

@@ -25,7 +25,7 @@ export const forumApi = {
   createTopic(data: CreateTopic) {
     return axiosServiceLocal.post<CreateTopic>(`${END_POINTS_URL.CREATE_FORUM_TOPIC}`, data)
   },
-  getTopics(sectionId: number) {
+  getTopics(sectionId: string) {
     return axiosServiceLocal.get<PartialTopic[]>(`${END_POINTS_URL.CREATE_FORUM_TOPIC}?section_id=${sectionId}`)
   },
   getTopic(topicId: string) {

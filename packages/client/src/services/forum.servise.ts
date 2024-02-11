@@ -29,7 +29,7 @@ class ForumService {
       throw error
     }
   }
-  async getTopicsFromSection(sectionId: number) {
+  async getTopicsFromSection(sectionId: string) {
     try {
       const { data } = await forumApi.getTopics(sectionId)
       return data

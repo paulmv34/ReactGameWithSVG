@@ -15,11 +15,11 @@ const SectionForum = () => {
   const { idSection } = useParams()
 
   const getSection = async (id: string) => {
-    const sectionsData = await forumService.getSectionData(id)
-    setSection(sectionsData)
+    const sectionData = await forumService.getSectionData(id)
+    setSection(sectionData)
   }
 
-  const getTopics = async (id: number) => {
+  const getTopics = async (id: string) => {
     const topicsData = await forumService.getTopicsFromSection(id)
     setTopics(topicsData)
   }
@@ -27,7 +27,7 @@ const SectionForum = () => {
   useEffect(() => {
     if (idSection) {
       getSection(idSection)
-      getTopics(+idSection)
+      getTopics(idSection)
     }
   }, [idSection])
 

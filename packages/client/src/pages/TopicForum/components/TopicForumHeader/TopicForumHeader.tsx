@@ -8,7 +8,7 @@ const TopicForumHeader: FC<TopicForumHeaderProps> = ({ topic }) => {
   return (
     <div className={styles['header-container']}>
       <div className={styles['top']}>
-        <Title title={`Тема: ${topic.name}`} />
+        <Title title={`${topic.name}`} />
         <div>{`Автор: ${topic.user.display_name}`}</div>
       </div>
       <div className={styles['bottom']}>{topic.content}</div>

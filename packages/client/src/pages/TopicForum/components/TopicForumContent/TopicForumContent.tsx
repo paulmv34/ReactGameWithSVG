@@ -1,31 +1,15 @@
 import { FC, useEffect, useState } from 'react'
-import { TopicForumHeaderProps } from '../../types'
 import CommentTopicForum from './CommentTopicForum/CommentTopicForum'
 import Button from '@/components/Button/Button'
 import TextField from '@/components/TextField/TextField'
 
 import styles from './TopicForumContent.module.scss'
-import { CommentItem } from '@/pages/Forum/components/ForumContent/ForumItem/types'
 import { TopicForumContentProps } from '@/pages/TopicForum/components/TopicForumContent/types'
 import { toast } from 'react-toastify'
 
 const TopicForumContent: FC<TopicForumContentProps> = ({ createMessage, topic }) => {
-  const { messages } = topic
   const [newComment, setNewComment] = useState('')
   const [comments, setComments] = useState(topic.messages)
-
-  // const addComment = () => {
-  //   const comment: CommentItem = {
-  //     id: forum.comments.length + 1,
-  //     body: newComment,
-  //     date: new Date().getDate().toString(),
-  //     author: 'Автор 1',
-  //     reactions: [],
-  //   }
-  //   const tmplComments = comments
-  //   tmplComments.push(comment)
-  //   setComments(tmplComments)
-  // }
 
   const sendComment = async () => {
     if (newComment) {
@@ -36,10 +20,6 @@ const TopicForumContent: FC<TopicForumContentProps> = ({ createMessage, topic })
       toast.error('Комментарий не может быть пустой!')
     }
   }
-
-  useEffect(() => {
-    console.log(comments)
-  }, [comments])
 
   return (
     <div className={styles.container}>
