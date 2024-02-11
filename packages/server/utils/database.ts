@@ -2,6 +2,7 @@ import * as path from 'path'
 import { type SequelizeOptions, Sequelize } from 'sequelize-typescript'
 
 import { ForumSection } from '../models/ForumSection'
+import { Themes } from '../models/Themes'
 
 const { POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER } = process.env
 
@@ -34,6 +35,10 @@ export const initPostgre = async (): Promise<Sequelize | undefined> => {
           ignoreDuplicates: true,
         }
       )
+
+      await Themes.bulkCreate([{ theme_name: 'system' }, { theme_name: 'light' }, { theme_name: 'dark' }], {
+        ignoreDuplicates: true,
+      })
     }
 
     console.log('Connected to the Postgres database')
