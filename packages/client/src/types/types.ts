@@ -15,13 +15,6 @@ export enum ROUTES {
   REGISTRATION = '/sign-up',
 }
 
-export interface ScoreData {
-  date: string
-  levels: number
-  nickname: string
-  score: number
-}
-
 export interface MenuItemData {
   link: ROUTES
   title: string

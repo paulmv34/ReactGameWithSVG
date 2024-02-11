@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import CommentTopicForum from './CommentTopicForum/CommentTopicForum'
 import Button from '@/components/Button/Button'
 import TextField from '@/components/TextField/TextField'

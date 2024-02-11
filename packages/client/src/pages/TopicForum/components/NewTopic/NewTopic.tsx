@@ -1,6 +1,6 @@
 import Button from '@/components/Button/Button'
 import TextField from '@/components/TextField/TextField'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './NewTopic.module.scss'
