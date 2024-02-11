@@ -1,4 +1,4 @@
-import { AllowNull, BelongsTo, Column, ForeignKey, HasMany, Model, NotEmpty, Table } from 'sequelize-typescript'
+import { AllowNull, BelongsTo, Column, ForeignKey, HasMany, Model, NotEmpty, Table, Index } from 'sequelize-typescript'
 
 import { ForumMessage } from './ForumMessage'
 import { ForumSection } from './ForumSection'
@@ -11,7 +11,7 @@ export class ForumTopic extends Model {
   @Column
   name!: string
 
-  @ForeignKey(() => ForumSection)
+  @Index({ name: 'idx_section_id' })
   @AllowNull(false)
   @Column
   section_id!: number

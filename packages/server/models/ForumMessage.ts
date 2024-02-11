@@ -1,4 +1,4 @@
-import { AllowNull, BelongsTo, Column, ForeignKey, Model, NotEmpty, Table } from 'sequelize-typescript'
+import { AllowNull, BelongsTo, Column, ForeignKey, Model, NotEmpty, Table, Index } from 'sequelize-typescript'
 
 import { ForumTopic } from './ForumTopic'
 import { User } from './User'
@@ -10,6 +10,7 @@ export class ForumMessage extends Model {
   @Column
   user_id!: number
 
+  @Index({ name: 'idx_topic_id' })
   @AllowNull(false)
   @Column
   topic_id!: number
