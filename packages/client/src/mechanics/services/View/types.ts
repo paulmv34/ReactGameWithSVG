@@ -31,9 +31,7 @@ export type AnimationSettings = {
   looped: boolean
   name?: string
   showMainSprite?: boolean
-  spriteCoordinates:
-    | SpriteCoordinatesWithAnimations
-    | SpriteCoordinatesNoAnimations
+  spriteCoordinates: SpriteCoordinatesWithAnimations | SpriteCoordinatesNoAnimations
   spriteFrame?: number
   stopTimer?: number
 }

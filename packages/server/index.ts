@@ -1,19 +1,26 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import dotenv from 'dotenv'
-import cors from 'cors'
+
+dotenv.config()
+
+import { corsMiddleware, requestDataSaverMiddleware } from './middlewares'
 import type { ViteDevServer } from 'vite'
 import { createServer as createViteServer } from 'vite'
 import express from 'express'
 import * as fs from 'fs'
 import * as path from 'path'
-
-dotenv.config()
+import { initPostgre } from './utils/database'
+import { apiRoute } from './routes/Api'
 
 const isDev = () => process.env.NODE_ENV === 'development'
 
+// initPostgre()
+
 async function startServer() {
+  await initPostgre()
   const app = express()
-  app.use(cors())
+  app.use([corsMiddleware(), requestDataSaverMiddleware]).use('/api', apiRoute)
+
   const port = Number(process.env.SERVER_PORT) || 3001
 
   let vite: ViteDevServer | undefined

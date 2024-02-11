@@ -1,7 +1,7 @@
 .button {
   padding: 16px 30px;
 
-  font-family: "Press Start 2P", serif;
+  font-family: 'Press Start 2P', serif;
   color: var(--color-text-light);
 
   cursor: pointer;
@@ -11,7 +11,8 @@
 
   transition: opacity 0.2s ease;
 
-  &:hover, &:focus-visible {
+  &:hover,
+  &:focus-visible {
     opacity: 0.8;
   }
 

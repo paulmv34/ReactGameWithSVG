@@ -44,12 +44,7 @@ export class ControllerKeyboard extends ControllerBase {
   }
 
   preventDefaultEvent(event: ControlEvent) {
-    if (
-      event instanceof KeyboardEvent &&
-      !event.ctrlKey &&
-      !event.shiftKey &&
-      !event.altKey
-    ) {
+    if (event instanceof KeyboardEvent && !event.ctrlKey && !event.shiftKey && !event.altKey) {
       event.preventDefault()
     }
   }

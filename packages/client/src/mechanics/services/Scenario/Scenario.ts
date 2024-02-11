@@ -10,11 +10,7 @@ import {
   TankPlayer,
   Terrain,
 } from '@/mechanics/models'
-import {
-  type Direction,
-  type EntitySettings,
-  EntityEvent,
-} from '@/mechanics/models/Entity/types'
+import { type Direction, type EntitySettings, EntityEvent } from '@/mechanics/models/Entity/types'
 import { EventEmitter } from '@/mechanics/utils'
 import { type Game, IndicatorManager, MapManager } from '..'
 import { ControllerEvent } from '../Controller/data'
@@ -94,8 +90,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
       type: 'boundary',
       width: settings.boundarySize + settings.indicatorsSidebarSize,
       height: settings.height - settings.boundarySize * 2,
-      posX:
-        settings.width - settings.boundarySize - settings.indicatorsSidebarSize,
+      posX: settings.width - settings.boundarySize - settings.indicatorsSidebarSize,
       posY: settings.boundarySize,
     })
   }
@@ -124,10 +119,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
   }
 
   canCreateTankEnemy() {
-    return (
-      this.activeEnemies.length < this.maxActiveEnemies &&
-      this.enemiesSpawnCounter < this.maxTotalEnemies
-    )
+    return this.activeEnemies.length < this.maxActiveEnemies && this.enemiesSpawnCounter < this.maxTotalEnemies
   }
 
   createTankEnemy() {
@@ -137,9 +129,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
 
     const tankEnemySettings = {
       variant: this.mapManager.getMapTankEnemyVariant(this.enemiesSpawnCounter),
-      flashing: this.game.state.flashingEnemyTanksWithPowerups.includes(
-        this.enemiesSpawnCounter
-      ),
+      flashing: this.game.state.flashingEnemyTanksWithPowerups.includes(this.enemiesSpawnCounter),
     }
 
     if (tankEnemySettings.flashing && this.activePowerup) {
@@ -161,9 +151,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
           this.createPowerup()
         }
 
-        this.activeEnemies = this.activeEnemies.filter(
-          (enemy) => enemy !== entity
-        )
+        this.activeEnemies = this.activeEnemies.filter((enemy) => enemy !== entity)
 
         if (!this.canCreateTankEnemy() && this.activeEnemies.length === 0) {
           this.emit(ScenarioEvent.MissionAccomplished)
@@ -176,16 +164,10 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
   trySpawnTankEnemy(entity: TankEnemy) {
     /** Выбираем случайным образом одну из 3 позиций противника. */
     const spawnPlaceKey = Math.floor(Math.random() * spawnPlaces[0].length)
-    const spawnPlace = this.mapManager.coordsToRect(
-      spawnPlaces[0][spawnPlaceKey],
-      0
-    )
+    const spawnPlace = this.mapManager.coordsToRect(spawnPlaces[0][spawnPlaceKey], 0)
 
     if (!entity.spawn(spawnPlace)) {
-      this.game.loop.setLoopDelay(
-        this.trySpawnTankEnemy.bind(this, entity),
-        this.game.state.tankRespawnRetryInterval
-      )
+      this.game.loop.setLoopDelay(this.trySpawnTankEnemy.bind(this, entity), this.game.state.tankRespawnRetryInterval)
     }
   }
 
@@ -221,9 +203,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
         --playerState.lives
 
         const playerOneIsOut = this.game.state.playerOne.lives < 0
-        const playerTwoIsOut =
-          this.game.state.mode === 'SINGLEPLAYER' ||
-          this.game.state.playerTwo.lives < 0
+        const playerTwoIsOut = this.game.state.mode === 'SINGLEPLAYER' || this.game.state.playerTwo.lives < 0
 
         if (playerOneIsOut && playerTwoIsOut) {
           this.emit(ScenarioEvent.GameOver)
@@ -270,17 +250,12 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
   trySpawnTankPlayer(entity: TankPlayer) {
     entity.spawn()
     if (!entity.spawned) {
-      this.game.loop.setLoopDelay(
-        this.trySpawnTankPlayer.bind(this, entity),
-        this.game.state.tankRespawnRetryInterval
-      )
+      this.game.loop.setLoopDelay(this.trySpawnTankPlayer.bind(this, entity), this.game.state.tankRespawnRetryInterval)
     }
   }
 
   getPlayerState(playerType: Player | PlayerVariant) {
-    return playerType === Player.Player1
-      ? this.game.state.playerOne
-      : this.game.state.playerTwo
+    return playerType === Player.Player1 ? this.game.state.playerOne : this.game.state.playerTwo
   }
 
   getPlayerController(playerType: Player) {
@@ -343,10 +318,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
 
       if (powerup.variant === 'TANK' && playerState.lives < 9) {
         ++playerState.lives
-        this.indicatorManager.renderPlayerLives(
-          playerType as Player,
-          playerState.lives
-        )
+        this.indicatorManager.renderPlayerLives(playerType as Player, playerState.lives)
       }
 
       if (powerup.variant === 'GRENADE') {
@@ -359,9 +331,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
         const freezeIntervalName = 'ENEMY_FREEZE_INTERVAL'
         // Делаем заморозку через каждые 100 мс, чтобы работало и для врагов, которые отспавнились позже
         let freezeTicksLeft = 100
-        const freezeSubDuration = Math.round(
-          this.game.state.freezePowerupDuration / freezeTicksLeft
-        )
+        const freezeSubDuration = Math.round(this.game.state.freezePowerupDuration / freezeTicksLeft)
 
         const setAllEnemiesFrozen = (frozen: boolean) => {
           this.activeEnemies.forEach((enemyTank) => {
@@ -396,11 +366,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
         const constructWalls = (wallMaterial: 'Brick' | 'Concrete') => {
           for (const [cellVariant, y, x] of wallCells) {
             const cell = Cell[(wallMaterial + cellVariant) as keyof typeof Cell]
-            const settings = this.mapManager.cellToEntitySettings(
-              cell,
-              x as number,
-              y as number
-            )
+            const settings = this.mapManager.cellToEntitySettings(cell, x as number, y as number)
             if (!settings) {
               continue
             }
@@ -424,8 +390,7 @@ export class Scenario extends EventEmitter<ScenarioEvent> {
             this.game.loop.clearLoopInterval(mainIntervalName)
             this.game.loop.setLoopInterval(
               () => {
-                const shouldPlaceConcreteWalls =
-                  --finishingIntervalCountdown % 2 === 0
+                const shouldPlaceConcreteWalls = --finishingIntervalCountdown % 2 === 0
                 if (finishingIntervalCountdown <= 0) {
                   this.game.loop.clearLoopInterval(finishingIntervalName)
                 } else if (shouldPlaceConcreteWalls) {

@@ -1,10 +1,5 @@
 import { Entity } from '..'
-import {
-  type PosState,
-  type Rect,
-  Direction,
-  EntityEvent,
-} from '../Entity/types'
+import { type PosState, type Rect, Direction, EntityEvent } from '../Entity/types'
 import { type EntityDynamicSettings } from './types'
 
 export abstract class EntityDynamic extends Entity {
@@ -73,8 +68,7 @@ export abstract class EntityDynamic extends Entity {
       return
     }
 
-    const isStandingStill =
-      !this.moving && !this.stopping && !this.shouldBeDestroyed
+    const isStandingStill = !this.moving && !this.stopping && !this.shouldBeDestroyed
     if (isStandingStill) {
       return
     }
@@ -85,9 +79,7 @@ export abstract class EntityDynamic extends Entity {
       return
     }
 
-    const hasNewDirection = this.stopping
-      ? false
-      : this.direction !== this.nextDirection
+    const hasNewDirection = this.stopping ? false : this.direction !== this.nextDirection
     const canTurnWithoutInterrupt = this.moveLoops > this.getMoveSteps()
     if (hasNewDirection) {
       canTurnWithoutInterrupt ? this.turn() : this.turnWithInterrupt()

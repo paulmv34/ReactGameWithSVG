@@ -18,9 +18,7 @@ export abstract class EventEmitter<T extends string = string> {
   }
 
   off(eventName: T, callback: Fn) {
-    this.listeners[eventName] = this.listeners[eventName]?.filter(
-      (listener: Fn) => listener !== callback
-    )
+    this.listeners[eventName] = this.listeners[eventName]?.filter((listener: Fn) => listener !== callback)
     return this
   }
 

@@ -21,9 +21,7 @@ export class TankEnemy extends Tank {
   moveUpChance = 1
   moveDownChance = 6
   moveSidewaysChance = 3
-  secondarySpriteCoordinates:
-    | SpriteCoordinatesNoAnimations
-    | SpriteCoordinatesWithAnimations = null
+  secondarySpriteCoordinates: SpriteCoordinatesNoAnimations | SpriteCoordinatesWithAnimations = null
 
   constructor(props: TankEnemySettings) {
     super({ posX: 0, posY: 0 })
@@ -36,30 +34,26 @@ export class TankEnemy extends Tank {
         this.setMoveSpeed(Speed.High)
         this.setShootSpeed(Speed.Medium)
         this.mainSpriteCoordinates = spriteCoordinates['tank.enemy.default.b']
-        this.secondarySpriteCoordinates =
-          spriteCoordinates['tank.enemy.danger.b']
+        this.secondarySpriteCoordinates = spriteCoordinates['tank.enemy.danger.b']
         break
       case 'POWER':
         this.setMoveSpeed(Speed.Medium)
         this.setShootSpeed(Speed.High)
         this.mainSpriteCoordinates = spriteCoordinates['tank.enemy.default.c']
-        this.secondarySpriteCoordinates =
-          spriteCoordinates['tank.enemy.danger.c']
+        this.secondarySpriteCoordinates = spriteCoordinates['tank.enemy.danger.c']
         break
       case 'ARMOR':
         this.setMoveSpeed(Speed.Low)
         this.setShootSpeed(Speed.Medium)
         this.durability = 4
         this.mainSpriteCoordinates = spriteCoordinates['tank.enemy.secondary.d']
-        this.secondarySpriteCoordinates =
-          spriteCoordinates['tank.enemy.danger.d']
+        this.secondarySpriteCoordinates = spriteCoordinates['tank.enemy.danger.d']
         break
       default:
         this.setMoveSpeed(Speed.Low)
         this.setShootSpeed(Speed.Low)
         this.mainSpriteCoordinates = spriteCoordinates['tank.enemy.default.a']
-        this.secondarySpriteCoordinates =
-          spriteCoordinates['tank.enemy.danger.a']
+        this.secondarySpriteCoordinates = spriteCoordinates['tank.enemy.danger.a']
     }
 
     this.registerTankEnemyEvents()
@@ -136,10 +130,7 @@ export class TankEnemy extends Tank {
   }
 
   getRandomAction() {
-    const actions = [
-      ...new Array(this.turnChance).fill('turn'),
-      ...new Array(this.keepMovingChance).fill('move'),
-    ]
+    const actions = [...new Array(this.turnChance).fill('turn'), ...new Array(this.keepMovingChance).fill('move')]
 
     return actions[Math.floor(Math.random() * actions.length)]
   }

@@ -4,10 +4,7 @@ import { type Game } from '..'
 import { ControllerEvent } from './data'
 import { type ControlEvent, type Controller } from './types'
 
-export class ControllerManager
-  extends EventEmitter<ControllerEvent>
-  implements Controller
-{
+export class ControllerManager extends EventEmitter<ControllerEvent> implements Controller {
   controllersList: Controller[] = []
 
   constructor(private game: Game, controllers: Controller[]) {
@@ -75,15 +72,11 @@ export class ControllerManager
   }
 
   startControlByEvent(event: ControlEvent) {
-    this.controllersList.forEach((controller) =>
-      controller.startControlByEvent(event)
-    )
+    this.controllersList.forEach((controller) => controller.startControlByEvent(event))
   }
 
   stopControlByEvent(event: ControlEvent) {
-    this.controllersList.forEach((controller) =>
-      controller.stopControlByEvent(event)
-    )
+    this.controllersList.forEach((controller) => controller.stopControlByEvent(event))
   }
 
   stopControlForce() {
