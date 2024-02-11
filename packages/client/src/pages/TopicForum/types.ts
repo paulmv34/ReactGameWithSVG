@@ -1,5 +1,5 @@
-import { IForumItem } from '../Forum/components/ForumContent/ForumItem/types'
+import { Topic } from '@/types/types'
 
-export interface TopicForumProps {
-  forum: IForumItem
+export interface TopicForumHeaderProps {
+  topic: Topic
 }

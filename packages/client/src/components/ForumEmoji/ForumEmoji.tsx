@@ -13,7 +13,7 @@ import { TReaction } from '@/pages/Forum/components/ForumContent/ForumItem/types
 
 const ForumEmoji = ({ comment }: ForumEmojiProps) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-  const [reactions, setReactions] = useState<TReaction[]>(comment.reactions)
+  const [reactions, setReactions] = useState<TReaction[]>([])
   const { user } = useAppSelector((state) => state.user)
 
   const selectEmoji = async (data: EmojiData) => {

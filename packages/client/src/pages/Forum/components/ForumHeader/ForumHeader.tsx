@@ -7,11 +7,11 @@ import Title from '@/components/Title/Title'
 import { ROUTES } from '@/types/types'
 import { ForumHeaderProps } from '@/pages/Forum/components/ForumHeader/types'
 
-const ForumHeader: FC<ForumHeaderProps> = ({ title }) => {
+const ForumHeader: FC<ForumHeaderProps> = ({ idSection, title }) => {
   return (
     <div className={styles.containerForumHeader}>
       <Title title={title} />
-      <Link to={ROUTES.FORUM_TOPIC_NEW}>
+      <Link to={`/forum/new/${idSection}`}>
         <Button text="Добавить тему" type="button" />
       </Link>
     </div>

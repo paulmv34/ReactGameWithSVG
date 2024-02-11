@@ -1,5 +1,7 @@
+import { PartialTopic } from '@/types/types'
+
 export interface ForumItemProps {
-  forum: IForumItem
+  topic: PartialTopic
 }
 
 export interface IForumItem {

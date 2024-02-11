@@ -2,7 +2,6 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import userReducer from '@/features/user/userSlice'
 import leaderboardReducer from '@/features/leaderboard/leaderboardSlice'
-import forumSlice from '@/features/forum/forumSlice'
 
 const isClient = typeof window !== 'undefined'
 
@@ -10,7 +9,6 @@ export const store = configureStore({
   reducer: combineReducers({
     user: userReducer,
     leaderboard: leaderboardReducer,
-    forum: forumSlice,
   }),
   preloadedState: isClient ? window.__PRELOADED_STATE__ : {},
 })

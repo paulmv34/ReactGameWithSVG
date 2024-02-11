@@ -1,21 +1,25 @@
 import { FC } from 'react'
-import { ForumItemProps } from './types'
 
 import styles from './ForumItem.module.scss'
 import { Link } from 'react-router-dom'
+import { ROUTES } from '@/types/types'
+import { ForumItemProps } from '@/pages/Forum/components/ForumContent/ForumItem/types'
+import { formatDate } from '@/utils/formatDate'
 
-const ForumItem: FC<ForumItemProps> = ({ forum }: ForumItemProps) => {
+const ForumItem: FC<ForumItemProps> = ({ topic }) => {
+  const { content, created_at, id, name, section_id } = topic
+
   return (
-    <Link to={`/forum/${forum.id}`} className={styles.containerForumItem}>
+    <Link to={`${id}`} className={styles.containerForumItem}>
       <div className={styles.headerContainer}>
-        <div>{forum.title}</div>
+        <div>{name}</div>
         <div className={styles.date}>
-          {forum.date}
-          <img src="/images/message.svg" alt="" className={styles.commentsCountIcon} />
-          <div>{forum.comments.length}</div>
+          {formatDate(created_at)}
+          {/*<img src="/images/message.svg" alt="" className={styles.commentsCountIcon} />*/}
+          {/*<div>{forum.comments.length}</div>*/}
         </div>
       </div>
-      <div className={styles.bodyForum}>{forum.body}</div>
+      <div className={styles.bodyForum}>{content}</div>
     </Link>
   )
 }

@@ -69,8 +69,9 @@ function App() {
             <Route path={ROUTES.GAME_START} element={<GameStart />} />
             <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
             <Route path={ROUTES.FORUM} element={<Forum />} />
-            <Route path={ROUTES.FORUM_TOPIC_NEW} element={<NewTopic />} />
-            <Route path={ROUTES.FORUM_SECTION} element={<SectionForum />} />
+            <Route path={`${ROUTES.FORUM_TOPIC_NEW}/:idSection`} element={<NewTopic />} />
+            <Route path={`${ROUTES.FORUM_SECTION}/:idSection`} element={<SectionForum />} />
+            <Route path={`${ROUTES.FORUM_SECTION}/:idSection/:idTopic`} element={<TopicForum />} />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.PROFILE_PASSWORD} element={<ChangePassword />} />
             <Route path={ROUTES.PROFILE_AVATAR} element={<ChangeAvatar />} />

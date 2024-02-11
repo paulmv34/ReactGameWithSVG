@@ -1,5 +1,6 @@
 import { handleError } from '@/utils/handleError'
 import { forumApi } from '@/api/forumApi'
+import { CreateTopic, CreateTopicMessage } from '@/types/types'
 
 class ForumService {
   async getSectionsData() {
@@ -13,22 +14,43 @@ class ForumService {
   }
   async getSectionData(id: string) {
     try {
-      const { data } = await forumApi.getSectionsById(id)
+      const { data } = await forumApi.getSection(id)
       return data
     } catch (error) {
       handleError(error)
       throw error
     }
   }
-  async createTopic() {
+  async createTopic(body: CreateTopic) {
     try {
-      const body = {
-        name: 'Тестовый топик',
-        section_id: 1,
-        content: 'Контент топика',
-      }
-      const { data } = await forumApi.createTopic(body)
-      console.log(data)
+      await forumApi.createTopic(body)
+    } catch (error) {
+      handleError(error)
+      throw error
+    }
+  }
+  async getTopicsFromSection(sectionId: number) {
+    try {
+      const { data } = await forumApi.getTopics(sectionId)
+      return data
+    } catch (error) {
+      handleError(error)
+      throw error
+    }
+  }
+  async getTopicById(topicId: string) {
+    try {
+      const { data } = await forumApi.getTopic(topicId)
+      return data
+    } catch (error) {
+      handleError(error)
+      throw error
+    }
+  }
+  async createTopicMessageById(body: CreateTopicMessage) {
+    try {
+      const { data } = await forumApi.createTopicMessage(body)
+      return data
     } catch (error) {
       handleError(error)
       throw error

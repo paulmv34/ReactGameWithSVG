@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://ya-praktikum.tech/api/v2'
+export const BASE_URL = 'http://localhost:3001/api'
 export const LOCAL_URL = 'http://localhost:3001'
 export const TEAM_NAME = 'NoHandlebars'
 export const RATING_FIELD_NAME = 'score'
@@ -10,6 +10,7 @@ export enum END_POINTS_URL {
   CHANGE_USER_PROFILE_AVATAR = '/user/profile/avatar',
   CREATE_FORUM_TOPIC = '/api/forum/topic',
   GET_FORUM_SECTIONS = '/api/forum/section',
+  TOPIC_MESSAGE = '/api/forum/message',
 }
 
 export type TUserData = {
