@@ -16,11 +16,7 @@ const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }) => {
       <div className={styles.containerComment}>
         <div className={styles.header}>
           <div>{`${user.display_name || ''} (${user.login})`}</div>
-          <div className={styles.dateComment}>
-            {formatDate(created_at)}
-            {/*<img src="/images/message.svg" alt="" className={styles.commentsCountIcon} />*/}
-            {/*<div>Ответить</div>*/}
-          </div>
+          <div className={styles.dateComment}>{formatDate(created_at)}</div>
         </div>
         <div className={styles.bodyComment}>{content}</div>
         <ForumEmoji comment={comment} />

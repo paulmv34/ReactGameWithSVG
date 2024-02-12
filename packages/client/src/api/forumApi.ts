@@ -17,19 +17,19 @@ export const forumApi = {
     return axiosService.get(`${END_POINTS_URL.ADD_REACTION}/${comment_id}/reactions`)
   },
   getSections() {
-    return axiosServiceLocal.get<ForumSection[]>(`${END_POINTS_URL.GET_FORUM_SECTIONS}`)
+    return axiosServiceLocal.get<ForumSection[]>(`${END_POINTS_URL.FORUM_SECTIONS}`)
   },
   getSection(id: string) {
-    return axiosServiceLocal.get<ForumSection>(`${END_POINTS_URL.GET_FORUM_SECTIONS}/${id}`)
+    return axiosServiceLocal.get<ForumSection>(`${END_POINTS_URL.FORUM_SECTIONS}/${id}`)
   },
   createTopic(data: CreateTopic) {
-    return axiosServiceLocal.post<CreateTopic>(`${END_POINTS_URL.CREATE_FORUM_TOPIC}`, data)
+    return axiosServiceLocal.post<CreateTopic>(`${END_POINTS_URL.FORUM_TOPIC}`, data)
   },
   getTopics(sectionId: string) {
-    return axiosServiceLocal.get<PartialTopic[]>(`${END_POINTS_URL.CREATE_FORUM_TOPIC}?section_id=${sectionId}`)
+    return axiosServiceLocal.get<PartialTopic[]>(`${END_POINTS_URL.FORUM_TOPIC}?section_id=${sectionId}`)
   },
   getTopic(topicId: string) {
-    return axiosServiceLocal.get<Topic>(`${END_POINTS_URL.CREATE_FORUM_TOPIC}/${topicId}`)
+    return axiosServiceLocal.get<Topic>(`${END_POINTS_URL.FORUM_TOPIC}/${topicId}`)
   },
   createTopicMessage(data: CreateTopicMessage) {
     return axiosServiceLocal.post<TopicMessage>(`${END_POINTS_URL.TOPIC_MESSAGE}`, data)

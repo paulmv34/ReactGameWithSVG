@@ -6,18 +6,23 @@ import TextField from '@/components/TextField/TextField'
 import styles from './TopicForumContent.module.scss'
 import { TopicForumContentProps } from '@/pages/TopicForum/components/TopicForumContent/types'
 import { toast } from 'react-toastify'
+import { handleError } from '@/utils/handleError'
 
 const TopicForumContent: FC<TopicForumContentProps> = ({ createMessage, topic }) => {
   const [newComment, setNewComment] = useState('')
   const [comments, setComments] = useState(topic.messages)
 
   const sendComment = async () => {
-    if (newComment) {
-      const comment = await createMessage({ content: newComment, topic_id: topic.id })
-      setComments((state) => [...state, comment])
-      toast.success('Комментарий добавлен')
-    } else {
-      toast.error('Комментарий не может быть пустой!')
+    try {
+      if (newComment) {
+        const comment = await createMessage({ content: newComment, topic_id: topic.id })
+        setComments((state) => [...state, comment])
+        toast.success('Комментарий добавлен')
+      } else {
+        toast.error('Комментарий не может быть пустой!')
+      }
+    } catch (err) {
+      handleError(err)
     }
   }
 

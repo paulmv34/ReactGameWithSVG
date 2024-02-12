@@ -12,11 +12,7 @@ const ForumItem: FC<ForumItemProps> = ({ topic }) => {
     <Link to={`${id}`} className={styles.containerForumItem}>
       <div className={styles.headerContainer}>
         <div>{name}</div>
-        <div className={styles.date}>
-          {formatDate(created_at)}
-          {/*<img src="/images/message.svg" alt="" className={styles.commentsCountIcon} />*/}
-          {/*<div>{forum.comments.length}</div>*/}
-        </div>
+        <div className={styles.date}>{formatDate(created_at)}</div>
       </div>
       <div className={styles.bodyForum}>{content}</div>
     </Link>

@@ -4,16 +4,22 @@ import BackLink from '@/components/BackLink/BackLink'
 import { ForumSection, ROUTES } from '@/types/types'
 import Loader from '@/components/Loader/Loader'
 import Title from '@/components/Title/Title'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import forumService from '@/services/forum.servise'
 
 const Forum: FC = () => {
+  const [isLoading, setIsLoading] = useState(true)
   const [sections, setSections] = useState<ForumSection[]>([])
+  const navigate = useNavigate()
 
   const getSections = async () => {
-    const sectionsData = await forumService.getSectionsData()
-
-    setSections(sectionsData)
+    try {
+      const sectionsData = await forumService.getSectionsData()
+      setSections(sectionsData)
+      setIsLoading(false)
+    } catch (e) {
+      navigate(ROUTES.ERROR_500)
+    }
   }
 
   useEffect(() => {
@@ -23,7 +29,8 @@ const Forum: FC = () => {
   return (
     <div className={styles['container-forum']}>
       <Title title="Форум" className={styles['title']} />
-      {sections.length ? (
+      {isLoading && <Loader />}
+      {sections.length && (
         <>
           <ul className={styles['list']}>
             {sections.map((section) => (
@@ -39,8 +46,6 @@ const Forum: FC = () => {
           </ul>
           <BackLink to={ROUTES.MAIN} />
         </>
-      ) : (
-        <Loader />
       )}
     </div>
   )
