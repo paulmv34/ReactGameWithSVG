@@ -1,6 +1,8 @@
 .container {
   display: flex;
+
   flex-direction: column;
+
   width: 610px;
 
   .headerForm {
@@ -9,11 +11,14 @@
 
   .inputAvatar {
     position: relative;
+
     display: flex;
+
     align-items: center;
 
-    border: 1px solid var(--color-text-dark);
     padding: 18px 33px;
+
+    border: 1px solid var(--color-text-dark);
 
     input::-webkit-file-upload-button {
       display: none;
@@ -29,28 +34,29 @@
   }
 
   .button {
-    margin-top: 24px;
     padding: 16px 0;
+    margin-top: 24px;
   }
 
   .buttonFile {
+    flex-shrink: 0;
+
     padding: 12px 36px;
     margin-right: 33px;
-    flex-shrink: 0;
   }
 
   .buttonFile,
   .button {
     font-family: 'Press Start 2P', serif;
+    font-size: 1.25rem;
+    line-height: 1;
     color: var(--color-text-light);
+    text-transform: none;
 
     background-color: var(--color-text-dark);
     border: none;
     border-radius: 0;
 
-    font-size: 1.25rem;
-    line-height: 1;
-    text-transform: none;
     &:hover {
       background-color: var(--color-text-dark);
     }
@@ -59,14 +65,14 @@
   .error {
     position: absolute;
     top: calc(100% + 1px);
-    left: 0;
     right: 0;
-    text-align: left;
+    left: 0;
 
     padding: 1px 0;
 
     font-family: Inter, sans-serif;
     font-size: 0.85rem;
     color: var(--color-text-error);
+    text-align: left;
   }
 }

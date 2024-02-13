@@ -1,24 +1,29 @@
 .gameWrapper {
   display: flex;
-  height: 100%;
+
   align-items: center;
   justify-content: center;
+
+  height: 100%;
 }
 
-.layout__game {
+.layoutGame {
   user-select: none;
 }
 
 .gamePage {
   display: flex;
+
   align-items: center;
   justify-content: center;
-  margin-bottom: 64px;
+
   height: 100vh;
+  margin-bottom: 64px;
 }
 
 .gameRoot {
   display: flex;
+
   align-items: center;
   justify-content: center;
 }

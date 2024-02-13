@@ -1,4 +1,4 @@
-.page-error {
+.pageError {
   display: flex;
 
   flex-direction: column;
@@ -6,7 +6,7 @@
   align-items: stretch;
 }
 
-.wrapper-error {
+.wrapperError {
   display: flex;
 
   flex-direction: column;
@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-.code-error {
+.codeError {
   margin: 0;
 
   font-size: 128px;
@@ -26,7 +26,7 @@
   color: var(--color-text-dark);
 }
 
-.description-error {
+.descriptionError {
   margin-top: 28px;
 
   font-size: 24px;
@@ -35,7 +35,7 @@
   text-align: center;
 }
 
-.link-error {
+.linkError {
   margin-top: 110px;
 
   font-size: 32px;

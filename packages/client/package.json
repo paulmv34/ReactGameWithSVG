@@ -8,7 +8,7 @@
     "build:ssr": "tsc && vite build --config ssr.config.ts",
     "preview": "vite preview",
     "lint": "eslint .",
-    "lint:styles": "style:sslint --fix '**/*.module.scss'",
+    "lint:styles": "stylelint --fix \"**/*.module.scss\"",
     "format": "prettier --write .",
     "test": "jest ./"
   },
@@ -35,6 +35,7 @@
     "react-router-dom": "^6.20.1",
     "react-toastify": "^9.1.3",
     "rimraf": "^5.0.5",
+    "vite-plugin-svgr": "^4.2.0",
     "yup": "^1.3.3"
   },
   "devDependencies": {

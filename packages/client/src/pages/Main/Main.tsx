@@ -29,10 +29,10 @@ const mainMenu: MenuItemData[] = [
 
 const Main: FC = () => {
   return (
-    <section className={clsx('page', styles['page-main'])}>
-      <div className={clsx('wrapper', styles['wrapper-main'])}>
+    <section className={clsx('page', styles.pageMain)}>
+      <div className={clsx('wrapper', styles.wrapperMain)}>
         <MainMenu data={mainMenu} />
-        <div className={styles['main-image']}>
+        <div className={styles.mainImage}>
           <img src="/images/main-tank.png" alt="" />
         </div>
       </div>

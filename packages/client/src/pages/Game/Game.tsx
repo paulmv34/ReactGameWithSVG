@@ -42,12 +42,12 @@ export const Game = () => {
 
     gameRoot.current && createdGame.init(gameRoot.current)
 
-    document.querySelector('.layout')?.classList.add('layout__game')
+    document.querySelector('.layout')?.classList.add('layoutGame')
     setViewportAttributes({ isScalable: false })
 
     return () => {
       createdGame.unload()
-      document.querySelector('.layout')?.classList.remove('layout__game')
+      document.querySelector('.layout')?.classList.remove('layoutGame')
       setViewportAttributes({ isScalable: true })
     }
   }, [gameRoot])

@@ -10,6 +10,8 @@ export const themizationRoute = Router()
   .use('/', checkAuthMiddleware)
   .get('/', async (_req: Request, res: Response): Promise<Response> => {
     if (res.locals.user && res.locals.user.id) {
+      const defaultTheme = 'system'
+
       const userId = res.locals.user.id
 
       const userTheme: UserThemes | null = await UserThemes.findOne({
@@ -20,24 +22,27 @@ export const themizationRoute = Router()
       if (userTheme && userTheme.theme.theme_name) {
         return res.status(200).json(userTheme.theme.theme_name)
       }
-      return res.status(404).json('user theme not found')
+      return res.status(200).json(defaultTheme)
     } else {
       return res.status(400).json('Доступ запрещен')
     }
   })
   .post('/', async (req: Request, res: Response): Promise<Response> => {
-    const { themeName } = req.body
-    const userId = res.locals.user.id
-
-    const theme: Themes | null = await Themes.findOne({ where: { theme_name: themeName } })
-
-    if (theme) {
-      const userTheme: [UserThemes, null | boolean] = await UserThemes.upsert({ theme_id: theme.id, user_id: userId })
-
-      if (userTheme) {
-        return res.status(201).json(userTheme)
+    if (res.locals.user && res.locals.user.id) {
+      const { themeName } = req.body
+      if (!themeName) {
+        return res.status(500).json('invalid data')
       }
+      const userId = res.locals.user.id
+      const theme: Themes | null = await Themes.findOne({ where: { theme_name: themeName } })
+      if (theme) {
+        const userTheme: [UserThemes, null | boolean] = await UserThemes.upsert({ theme_id: theme.id, user_id: userId })
+        if (userTheme && userTheme[0]) {
+          return res.status(201).json(themeName)
+        }
+      }
+      return res.status(500).json('invalid data or DB error')
+    } else {
+      return res.status(400).json('Доступ запрещен')
     }
-
-    return res.status(500).json('invalid data or DB error')
   })

@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { CommentTopicForumProps } from './types'
 import { Avatar } from '@mui/material'
 import ForumEmoji from '@/components/ForumEmoji/ForumEmoji'
+import MessageIcon from '@/assets/images/message.svg?react'
 
 import styles from './CommentTopicForum.module.scss'
 
@@ -16,7 +17,7 @@ const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }: CommentTopic
           <div>{comment.author}</div>
           <div className={styles.dateComment}>
             {comment.date}
-            <img src="/images/message.svg" alt="" className={styles.commentsCountIcon} />
+            <MessageIcon className={styles.commentsCountIcon} />
             <div>Ответить</div>
           </div>
         </div>
