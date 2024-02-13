@@ -27,18 +27,18 @@ const Forum: FC = () => {
   }, [])
 
   return (
-    <div className={styles['container-forum']}>
-      <Title title="Форум" className={styles['title']} />
+    <div className={styles.containerForum}>
+      <Title title="Форум" className={styles.title} />
       {isLoading && <Loader />}
       {sections.length && (
         <>
-          <ul className={styles['list']}>
+          <ul className={styles.list}>
             {sections.map((section) => (
-              <li className={styles['item']}>
-                <Link to={`${section.id}`} className={styles['link']}>
-                  <button className={styles['button']}>
+              <li className={styles.item}>
+                <Link to={`${section.id}`} className={styles.link}>
+                  <button className={styles.button}>
                     <span>{section.name}</span>
-                    <span className={styles['topic-text']}>{section.topicCount} топиков</span>
+                    <span className={styles.topicText}>{section.topicCount} топиков</span>
                   </button>
                 </Link>
               </li>

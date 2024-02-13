@@ -35,6 +35,7 @@
   width: 100%;
   padding: 20px 8px;
 
+  color: var(--color-text-dark);
   cursor: pointer;
 
   background-color: transparent;
@@ -43,7 +44,7 @@
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: #c7c6be;
+    background-color: var(--color-hover);
   }
 }
 

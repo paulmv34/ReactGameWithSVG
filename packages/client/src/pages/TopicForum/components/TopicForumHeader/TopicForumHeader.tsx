@@ -6,12 +6,12 @@ import Title from '@/components/Title/Title'
 
 const TopicForumHeader: FC<TopicForumHeaderProps> = ({ topic }) => {
   return (
-    <div className={styles['header-container']}>
-      <div className={styles['top']}>
+    <div className={styles.headerContainer}>
+      <div className={styles.top}>
         <Title title={`${topic.name}`} />
         <div>{`Автор: ${topic.user.display_name}`}</div>
       </div>
-      <div className={styles['bottom']}>{topic.content}</div>
+      <div className={styles.bottom}>{topic.content}</div>
     </div>
   )
 }

@@ -8,7 +8,7 @@ const Button = ({ className = '', disabled, onClick, size = Sizes.MEDIUM, text, 
   return (
     <button
       className={clsx(styles.button, className, {
-        [styles['button-transparent']]: transparent,
+        [styles.buttonTransparent]: transparent,
         [styles[`button-${size}`]]: size,
       })}
       type={type}
