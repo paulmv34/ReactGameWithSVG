@@ -1,7 +1,6 @@
 import BackLink from '@/components/BackLink/BackLink'
 import { FC } from 'react'
 import styles from './GameStart.module.scss'
-import keyboardImage from '@/assets/images/keyboard.png'
 import { ROUTES } from '@/types/types'
 
 // Components
@@ -30,7 +29,7 @@ const GameStart: FC = () => {
           </p>
           <p className={styles['text']}>2.Выстрел: Используйте клавишу пробела для стрельбы из танка.</p>
 
-          <img className={styles['keyboard-image']} src={keyboardImage} alt="" width="562px" height="212px" />
+          <img className={styles['keyboard-image']} src="/images/keyboard.png" alt="" width="562px" height="212px" />
 
           <CustomLink className={styles.link} to={ROUTES.GAME}>
             В бой

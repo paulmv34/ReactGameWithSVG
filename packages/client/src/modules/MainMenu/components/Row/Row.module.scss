@@ -26,7 +26,7 @@
   transition: none;
 }
 
-.main-menu-item a::before {
+.main-menu-item .bullet {
   position: absolute;
   top: calc(50% - 5px);
   left: -89px;
@@ -36,15 +36,15 @@
 
   content: '';
 
-  background: url("data:image/svg+xml,%3Csvg width='56' height='11' viewBox='0 0 56 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.444443 10.5V0.5L3.22222 0.5V10.5H0.444443ZM33.7778 8L42.1111 8V3L33.7778 3L29.6111 0.5L6 0.5V10.5L29.6111 10.5L33.7778 8ZM56 5.5C56 5.5 53.2222 3 47.6667 3H44.8889V8L47.6667 8C47.6667 8 53.2222 8 56 5.5Z' fill='%23181818'/%3E%3C/svg%3E")
-    no-repeat center / contain;
   opacity: 0;
 
   transition: opacity 300ms ease 0ms;
 }
 
-.main-menu-item a:hover::before {
+.main-menu-item a:hover .bullet {
   opacity: 1;
 
   transition: none;
+
+  color: var(--color-text-dark);
 }

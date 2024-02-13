@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 
-import smile from '../../../public/smiley-plus.svg'
+import Smile from '@/assets/images/smiley-plus.svg?react'
 import { EmojiData, EmojiItem, ForumEmojiProps } from './types'
 
 import styles from './ForumEmoji.module.scss'
@@ -50,12 +50,7 @@ const ForumEmoji = ({ comment }: ForumEmojiProps) => {
           })}
       </div>
       <div className={styles.pickerContainer}>
-        <img
-          src={smile}
-          alt="smile icon"
-          className={styles.pickerImage}
-          onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-        />
+        <Smile className={styles.pickerImage} onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
         <div className={styles.emojiPicker}>
           {showEmojiPicker && <Picker data={data} onEmojiSelect={selectEmoji} />}
         </div>

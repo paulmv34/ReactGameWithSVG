@@ -67,3 +67,9 @@ export interface ErrorObject {
   code: number
   message: string
 }
+
+export type Themes = 'system' | 'dark' | 'light'
+
+export type ThemesPayload = {
+  theme: Themes
+}
