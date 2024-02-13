@@ -2,6 +2,7 @@ export enum ROUTES {
   ABOUT = '/about',
   ERROR_500 = '/500',
   FORUM = '/forum',
+  FORUM_NEW = '/forum/new',
   FORUM_SECTION = '/forum',
   FORUM_TOPIC_NEW = '/forum/new',
   GAME = '/game',
@@ -114,6 +115,7 @@ export interface Topic extends PartialTopic {
 export interface CreateTopicMessage {
   content: string
   topic_id: number
+}
 
 export type Themes = 'system' | 'dark' | 'light'
 

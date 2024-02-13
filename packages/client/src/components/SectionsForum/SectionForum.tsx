@@ -22,10 +22,7 @@ const SectionForum = () => {
 
   useEffect(() => {
     if (idSection) {
-      const promiseSection = getSection(idSection)
-      const promiseTopics = getTopics(idSection)
-
-      Promise.all([promiseSection, promiseTopics])
+      Promise.all([getSection(idSection), getTopics(idSection)])
         .then(([sectionData, topicsData]) => {
           setSection(sectionData)
           setTopics(topicsData)
