@@ -1,7 +1,7 @@
-import { CommentItem } from '@/pages/Forum/components/ForumContent/ForumItem/types'
+import { TopicMessage } from '@/types/types'
 
 export interface ForumEmojiProps {
-  comment: CommentItem
+  comment: TopicMessage
 }
 
 export interface EmojiData {

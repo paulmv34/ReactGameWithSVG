@@ -1,5 +1,5 @@
-import { CommentItem } from '@/pages/Forum/components/ForumContent/ForumItem/types'
+import { TopicMessage } from '@/types/types'
 
 export interface CommentTopicForumProps {
-  comment: CommentItem
+  comment: TopicMessage
 }

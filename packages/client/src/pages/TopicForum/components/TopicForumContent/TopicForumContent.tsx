@@ -1,33 +1,35 @@
 import { FC, useState } from 'react'
-import { TopicForumProps } from '../../types'
 import CommentTopicForum from './CommentTopicForum/CommentTopicForum'
 import Button from '@/components/Button/Button'
 import TextField from '@/components/TextField/TextField'
 
 import styles from './TopicForumContent.module.scss'
-import { CommentItem } from '@/pages/Forum/components/ForumContent/ForumItem/types'
+import { TopicForumContentProps } from '@/pages/TopicForum/components/TopicForumContent/types'
+import { toast } from 'react-toastify'
+import { handleError } from '@/utils/handleError'
 
-const TopicForumContent: FC<TopicForumProps> = ({ forum }: TopicForumProps) => {
+const TopicForumContent: FC<TopicForumContentProps> = ({ createMessage, topic }) => {
   const [newComment, setNewComment] = useState('')
-  const [comments, setComments] = useState(forum.comments)
+  const [comments, setComments] = useState(topic.messages)
 
-  const addComment = () => {
-    const comment: CommentItem = {
-      id: forum.comments.length + 1,
-      body: newComment,
-      date: new Date().getDate().toString(),
-      author: 'Автор 1',
-      reactions: [],
+  const sendComment = async () => {
+    try {
+      if (newComment) {
+        const comment = await createMessage({ content: newComment, topic_id: topic.id })
+        setComments((state) => [...state, comment])
+        toast.success('Комментарий добавлен')
+      } else {
+        toast.error('Комментарий не может быть пустой!')
+      }
+    } catch (err) {
+      handleError(err)
     }
-    const tmplComments = comments
-    tmplComments.push(comment)
-    setComments(tmplComments)
   }
 
   return (
     <div className={styles.container}>
       <div>
-        {comments.length !== 0 ? (
+        {comments.length ? (
           comments.map((comment) => {
             return <CommentTopicForum comment={comment} key={comment.id} />
           })
@@ -44,7 +46,7 @@ const TopicForumContent: FC<TopicForumProps> = ({ forum }: TopicForumProps) => {
           label="Комментарий"
           className={styles.textField}
         />
-        <Button text="Добавить комментарий" type="button" className={styles.button} onClick={addComment} />
+        <Button text="Добавить комментарий" type="button" className={styles.button} onClick={sendComment} />
       </div>
     </div>
   )
