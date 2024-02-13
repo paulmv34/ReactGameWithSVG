@@ -16,8 +16,8 @@ const MainMenu = ({ data }: MenuProps) => {
   }
 
   return (
-    <nav className={styles['main-menu']}>
-      <ul className={styles['main-menu-list']}>
+    <nav className={styles.mainMenu}>
+      <ul className={styles.mainMenuList}>
         {data?.length > 0 && data.map((record) => <Row record={record} key={uuidv4()} />)}
         <li>
           <Button onClick={handleLogout} type="button" text="Выход" size={Sizes.LARGE} transparent />

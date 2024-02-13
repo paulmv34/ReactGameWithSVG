@@ -114,4 +114,9 @@ export interface Topic extends PartialTopic {
 export interface CreateTopicMessage {
   content: string
   topic_id: number
+
+export type Themes = 'system' | 'dark' | 'light'
+
+export type ThemesPayload = {
+  theme: Themes
 }

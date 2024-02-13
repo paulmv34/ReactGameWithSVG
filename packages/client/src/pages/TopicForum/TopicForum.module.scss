@@ -1,6 +1,9 @@
 .containerTopicForum {
-  width: var(--content-size-forum);
   display: flex;
+
   flex-direction: column;
+
   justify-content: start;
+
+  width: var(--content-size-forum);
 }

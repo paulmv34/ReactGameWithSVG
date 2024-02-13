@@ -29,23 +29,15 @@ import { getUrlParams } from '@/utils/getUrlParams'
 import AuthService from '@/services/auth.service'
 import NewTopic from '@/pages/TopicForum/components/NewTopic/NewTopic'
 import SectionForum from '@/components/SectionsForum/SectionForum'
+import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
 
 function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}/api`
-      const response = await fetch(url)
-      const data = await response
-      console.log(data)
-    }
-
     const getUser = async () => {
       dispatch(fetchUser())
     }
-
-    fetchServerData()
 
     // На проде заменить аргумент у функции на `code`
     const oAuthCode = getUrlParams('http://localhost:3000/?code')
@@ -81,6 +73,7 @@ function App() {
         </Route>
         <Route path={ROUTES.GAME} element={<Game />} />
       </Routes>
+      <ThemeSwitcher />
       <ToastContainer />
     </>
   )

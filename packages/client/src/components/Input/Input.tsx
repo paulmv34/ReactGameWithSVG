@@ -18,13 +18,13 @@ const Input = ({
   value,
 }: InputProps) => {
   return (
-    <div className={styles['input-container']}>
+    <div className={styles.inputContainer}>
       <label className={styles.label} htmlFor={id}>
         {label}
         {required && <sup>*</sup>}
       </label>
       <input
-        className={clsx(styles.input, className, { [styles['input-error']]: error })}
+        className={clsx(styles.input, className, { [styles.inputError]: error })}
         type={type}
         placeholder={placeholder}
         name={name}

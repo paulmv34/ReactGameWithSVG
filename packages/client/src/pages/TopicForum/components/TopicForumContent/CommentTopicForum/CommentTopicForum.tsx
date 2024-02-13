@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { CommentTopicForumProps } from './types'
 import { Avatar } from '@mui/material'
 import ForumEmoji from '@/components/ForumEmoji/ForumEmoji'
+import MessageIcon from '@/assets/images/message.svg?react'
 
 import styles from './CommentTopicForum.module.scss'
 import { formatDate } from '@/utils/formatDate'

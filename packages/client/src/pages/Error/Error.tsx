@@ -14,11 +14,11 @@ const Error: FC<ErrorPageProps> = (props) => {
   const { codeError, textError } = props
 
   return (
-    <section className={clsx('page', styles['page-error'])}>
-      <div className={clsx('wrapper', styles['wrapper-error'])}>
-        <h1 className={styles['code-error']}>{codeError}</h1>
-        <p className={styles['description-error']}>{textError || typesErrors[codeError]}</p>
-        <Link className={styles['link-error']} to={ROUTES.MAIN}>
+    <section className={clsx('page', styles.pageError)}>
+      <div className={clsx('wrapper', styles.wrapperError)}>
+        <h1 className={styles.codeError}>{codeError}</h1>
+        <p className={styles.descriptionError}>{textError || typesErrors[codeError]}</p>
+        <Link className={styles.linkError} to={ROUTES.MAIN}>
           На главную
         </Link>
       </div>

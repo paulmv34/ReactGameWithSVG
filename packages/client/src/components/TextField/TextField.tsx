@@ -4,7 +4,7 @@ import { TextFieldProps } from './types'
 
 const TextField = ({ className = '', id, label, name, onChange, placeholder, value }: TextFieldProps) => {
   return (
-    <div className={styles['input-container']}>
+    <div className={styles.inputContainer}>
       {label && (
         <label className={styles.label} htmlFor={id}>
           {label}

@@ -68,11 +68,11 @@ const SignInForm = () => {
           error={formik.touched.password && !!formik.errors.password}
         />
       </div>
-      <Button className={styles['submit-button']} type="submit" text="Войти" disabled={formik.isSubmitting} />
+      <Button className={styles.submitButton} type="submit" text="Войти" disabled={formik.isSubmitting} />
       <CustomLink className={styles.link} to={ROUTES.REGISTRATION}>
         Регистрация
       </CustomLink>
-      <div className={styles['yandex-sign-in']}>
+      <div className={styles.yandexSignIn}>
         <p>Можно войти с помощью</p>
         <Button className={styles.button} type="button" text="Яндекс ID" onClick={handleOAuthYandexLogin} />
       </div>
