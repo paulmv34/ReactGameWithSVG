@@ -8,7 +8,7 @@
     "build:ssr": "tsc && vite build --config ssr.config.ts",
     "preview": "vite preview",
     "lint": "eslint .",
-    "lint:styles": "style:sslint --fix '**/*.module.scss'",
+    "lint:styles": "stylelint --fix \"**/*.module.scss\"",
     "format": "prettier --write .",
     "test": "jest ./"
   },

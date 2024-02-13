@@ -1,50 +1,65 @@
 .reactionsContainer {
   display: flex;
-  gap: 4px;
+
   flex-wrap: wrap;
+
+  gap: 4px;
 }
 
 .reactions {
   display: flex;
+
   margin-top: 15px;
 }
 
 .emojiWrapper {
   display: flex;
-  align-items: center;
-  border-radius: 16px;
-  border: 1px solid;
+
   gap: 1px;
+
+  align-items: center;
+
   padding: 0 10px 5px 5px;
+
+  border: 1px solid;
+  border-radius: 16px;
 }
 
 .emojiSpan {
-  cursor: pointer;
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   width: 25px;
   height: 25px;
+
+  cursor: pointer;
 }
 
 .emojiCount {
+  padding-top: 8px;
+  margin-left: 5px;
+
   font-size: 14px;
   text-align: center;
-  margin-left: 5px;
-  padding-top: 8px;
 }
 
 .pickerContainer {
   position: relative;
-  margin-left: 10px;
+
   display: flex;
+
   align-items: center;
+
   padding-bottom: 4px;
+  margin-left: 10px;
 }
 
 .pickerImage {
-  cursor: pointer;
   width: 25px;
+
+  cursor: pointer;
 
   &:hover {
     opacity: 0.7;

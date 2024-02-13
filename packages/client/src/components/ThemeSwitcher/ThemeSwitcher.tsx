@@ -10,7 +10,6 @@ import { fetchTheme, getThemeLocal, setTheme, setThemeLocal } from '@/features/t
 import { Themes } from '@/types/types'
 import { useAuth } from '@/hooks/useAuth'
 import { ThemeList } from '@/components/ThemeSwitcher/types'
-import { v4 as uuidv4 } from 'uuid'
 
 const themes: ThemeList = [
   {
@@ -60,7 +59,7 @@ const ThemeSwitcher: FC = () => {
           <button
             className={clsx(styles.switcherItem, { [styles.switcherItemActive]: theme.name === themeState.theme })}
             onClick={() => onSetTheme(theme.name)}
-            key={uuidv4()}>
+            key={theme.name}>
             <theme.icon className={styles.switcherIcon} />
           </button>
         ))}

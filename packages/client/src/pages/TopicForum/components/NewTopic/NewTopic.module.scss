@@ -1,5 +1,6 @@
 .containerNewTopic {
   display: flex;
+
   flex-direction: column;
 }
 
@@ -9,8 +10,11 @@
 
 .formGroup {
   display: flex;
+
   flex-direction: column;
+
   justify-content: space-between;
+
   margin-bottom: 64px;
 }
 
@@ -19,6 +23,6 @@
 }
 
 .textField {
-  margin-bottom: 40px;
   height: 230px;
+  margin-bottom: 40px;
 }

@@ -1,4 +1,4 @@
-.wrapper-main {
+.wrapperMain {
   display: flex;
 
   flex-grow: 1;
@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.page-main {
+.pageMain {
   display: flex;
 
   flex: 1;
@@ -14,13 +14,13 @@
   padding-bottom: 64px;
 }
 
-.main-image {
+.mainImage {
   flex-grow: 1;
 
   margin-left: 80px;
 }
 
-.main-image img {
+.mainImage img {
   width: 100%;
   height: 100%;
   object-fit: contain;

@@ -6,10 +6,10 @@ import Bullet from '@/assets/images/bullet.svg?react'
 const Row = ({ record }: MenuItemProps) => {
   const { link, title } = record ?? {}
   return (
-    <li className={styles['main-menu-item']}>
+    <li className={styles.mainMenuItem}>
       <Link to={link}>
         {title}
-        <Bullet className={styles['bullet']} />
+        <Bullet className={styles.bullet} />
       </Link>
     </li>
   )

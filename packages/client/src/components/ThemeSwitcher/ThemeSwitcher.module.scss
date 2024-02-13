@@ -1,26 +1,38 @@
 .switcherContainer {
   position: absolute;
-  right: 30px;
   top: 30px;
-  padding: 8px;
+  right: 30px;
+
   display: flex;
+
   gap: 8px;
+
+  padding: 8px;
+
   background: var(--color-dark-transparent-background);
 }
+
 .switcherItem {
-  border: none;
+  flex-shrink: 0;
+
   width: 44px;
   height: 44px;
-  flex-shrink: 0;
-  background: var(--color-dark-transparent-background);
   padding: 10px;
-  cursor: pointer;
+
   color: var(--color-text-dark);
+
+  cursor: pointer;
+
+  background: var(--color-dark-transparent-background);
+  border: none;
+
   &:hover {
     background: transparent;
   }
 }
+
 .switcherItemActive {
-  background: var(--color-text-light);
   pointer-events: none;
+
+  background: var(--color-text-light);
 }

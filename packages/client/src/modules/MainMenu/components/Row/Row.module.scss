@@ -1,4 +1,4 @@
-.main-menu-item {
+.mainMenuItem {
   padding: 0;
   margin-bottom: 41px;
 
@@ -7,11 +7,11 @@
   color: var(--color-text-dark);
 }
 
-.main-menu-item:last-child {
+.mainMenuItem:last-child {
   margin-bottom: 0;
 }
 
-.main-menu-item a {
+.mainMenuItem a {
   position: relative;
 
   color: var(--color-text-dark);
@@ -20,13 +20,13 @@
   transition: color 300ms ease 0ms;
 }
 
-.main-menu-item a:hover {
+.mainMenuItem a:hover {
   color: var(--color-hover);
 
   transition: none;
 }
 
-.main-menu-item .bullet {
+.mainMenuItem .bullet {
   position: absolute;
   top: calc(50% - 5px);
   left: -89px;
@@ -41,10 +41,10 @@
   transition: opacity 300ms ease 0ms;
 }
 
-.main-menu-item a:hover .bullet {
+.mainMenuItem a:hover .bullet {
+  color: var(--color-text-dark);
+
   opacity: 1;
 
   transition: none;
-
-  color: var(--color-text-dark);
 }

@@ -126,12 +126,7 @@ const SignUpForm = () => {
           error={formik.touched.confirm_password && !!formik.errors.confirm_password}
         />
       </div>
-      <Button
-        className={styles['submit-button']}
-        type="submit"
-        text="Зарегистрироваться"
-        disabled={formik.isSubmitting}
-      />
+      <Button className={styles.submitSutton} type="submit" text="Зарегистрироваться" disabled={formik.isSubmitting} />
       <CustomLink className={styles.link} to={ROUTES.LOGIN}>
         Вход
       </CustomLink>

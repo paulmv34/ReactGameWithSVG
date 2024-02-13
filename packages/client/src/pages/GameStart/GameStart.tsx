@@ -8,28 +8,26 @@ import CustomLink from '@/components/CustomLink/CustomLink'
 
 const GameStart: FC = () => {
   return (
-    <section className={styles['game-start']}>
+    <section className={styles.gameStart}>
       <BackLink to={ROUTES.MAIN} />
-      <div className={styles['window']}>
-        <div className={styles['wrapper-text']}>
-          <h2 className={styles['title']}>Цель игры:</h2>
-          <p className={styles['text']}>
-            1.Уничтожить всех вражеских танков на уровне и защитить свою базу от их атак.
-          </p>
-          <p className={styles['text']}>
+      <div className={styles.window}>
+        <div className={styles.wrapperText}>
+          <h2 className={styles.title}>Цель игры:</h2>
+          <p className={styles.text}>1.Уничтожить всех вражеских танков на уровне и защитить свою базу от их атак.</p>
+          <p className={styles.text}>
             2.Проходите через несколько уровней, где уровень сложности и количество врагов увеличиваются.
           </p>
         </div>
 
-        <div className={styles['wrapper-text']}>
-          <h2 className={styles['title']}>Управление:</h2>
-          <p className={styles['text']}>
+        <div className={styles.wrapperText}>
+          <h2 className={styles.title}>Управление:</h2>
+          <p className={styles.text}>
             1.Движение танка: Используйте стрелки на клавиатуре для перемещения танка вверх, вниз, влево и вправо по
             игровому полю.
           </p>
-          <p className={styles['text']}>2.Выстрел: Используйте клавишу пробела для стрельбы из танка.</p>
+          <p className={styles.text}>2.Выстрел: Используйте клавишу пробела для стрельбы из танка.</p>
 
-          <img className={styles['keyboard-image']} src="/images/keyboard.png" alt="" width="562px" height="212px" />
+          <img className={styles.keyboardImage} src="/images/keyboard.png" alt="" width="562px" height="212px" />
 
           <CustomLink className={styles.link} to={ROUTES.GAME}>
             В бой
