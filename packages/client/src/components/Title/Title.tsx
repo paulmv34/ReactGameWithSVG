@@ -1,15 +1,17 @@
 import { FC } from 'react'
 
 import styles from './Title.module.scss'
+import clsx from 'clsx'
 
-interface HeaderProps {
+interface TitleProps {
+  className?: string
   title: string
 }
 
-const Title: FC<HeaderProps> = (props: HeaderProps) => {
-  const { title } = props
+const Title: FC<TitleProps> = (props) => {
+  const { className = '', title } = props
 
-  return <div className={`${styles.headerTitle}`}>{title}</div>
+  return <div className={clsx(styles.headerTitle, className)}>{title}</div>
 }
 
 export default Title

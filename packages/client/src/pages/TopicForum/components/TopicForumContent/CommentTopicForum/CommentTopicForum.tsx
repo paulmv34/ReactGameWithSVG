@@ -5,8 +5,10 @@ import ForumEmoji from '@/components/ForumEmoji/ForumEmoji'
 import MessageIcon from '@/assets/images/message.svg?react'
 
 import styles from './CommentTopicForum.module.scss'
+import { formatDate } from '@/utils/formatDate'
 
-const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }: CommentTopicForumProps) => {
+const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }) => {
+  const { content, created_at, user } = comment
   return (
     <div className={styles.container}>
       <div>
@@ -14,14 +16,10 @@ const CommentTopicForum: FC<CommentTopicForumProps> = ({ comment }: CommentTopic
       </div>
       <div className={styles.containerComment}>
         <div className={styles.header}>
-          <div>{comment.author}</div>
-          <div className={styles.dateComment}>
-            {comment.date}
-            <MessageIcon className={styles.commentsCountIcon} />
-            <div>Ответить</div>
-          </div>
+          <div>{`${user.display_name || ''} (${user.login})`}</div>
+          <div className={styles.dateComment}>{formatDate(created_at)}</div>
         </div>
-        <div className={styles.bodyComment}>{comment.body}</div>
+        <div className={styles.bodyComment}>{content}</div>
         <ForumEmoji comment={comment} />
       </div>
     </div>

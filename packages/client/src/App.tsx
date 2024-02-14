@@ -27,6 +27,8 @@ import { fetchUser } from '@/features/user/userSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { getUrlParams } from '@/utils/getUrlParams'
 import AuthService from '@/services/auth.service'
+import NewTopic from '@/pages/TopicForum/components/NewTopic/NewTopic'
+import SectionForum from '@/components/SectionsForum/SectionForum'
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
 
 function App() {
@@ -59,7 +61,9 @@ function App() {
             <Route path={ROUTES.GAME_START} element={<GameStart />} />
             <Route path={ROUTES.LEADERBOARD} element={<LeaderBoard />} />
             <Route path={ROUTES.FORUM} element={<Forum />} />
-            <Route path={ROUTES.TOPIC_FORUM} element={<TopicForum />} />
+            <Route path={`${ROUTES.FORUM_TOPIC_NEW}/:idSection`} element={<NewTopic />} />
+            <Route path={`${ROUTES.FORUM_SECTION}/:idSection`} element={<SectionForum />} />
+            <Route path={`${ROUTES.FORUM_SECTION}/:idSection/:idTopic`} element={<TopicForum />} />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.PROFILE_PASSWORD} element={<ChangePassword />} />
             <Route path={ROUTES.PROFILE_AVATAR} element={<ChangeAvatar />} />
