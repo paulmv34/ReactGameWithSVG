@@ -27,9 +27,9 @@ import { fetchUser } from '@/features/user/userSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { getUrlParams } from '@/utils/getUrlParams'
 import AuthService from '@/services/auth.service'
-import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
 import NewTopic from '@/pages/TopicForum/components/NewTopic/NewTopic'
 import SectionForum from '@/components/SectionsForum/SectionForum'
+import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
 
 function App() {
   const dispatch = useAppDispatch()

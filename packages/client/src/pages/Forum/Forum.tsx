@@ -27,7 +27,7 @@ const Forum: FC = () => {
   }, [])
 
   return (
-    <div className={styles.containerForum}>
+    <div className={styles.headerContainer}>
       <Title title="Форум" className={styles.title} />
       {isLoading && <Loader />}
       {sections.length && (

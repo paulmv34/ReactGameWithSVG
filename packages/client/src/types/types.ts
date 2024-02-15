@@ -2,6 +2,7 @@ export enum ROUTES {
   ABOUT = '/about',
   ERROR_500 = '/500',
   FORUM = '/forum',
+  FORUM_NEW = '/forum/new',
   FORUM_SECTION = '/forum',
   FORUM_TOPIC_NEW = '/forum/new',
   GAME = '/game',
