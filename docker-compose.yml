@@ -26,14 +26,18 @@ services:
       dockerfile: Dockerfile.server
       args:
         SERVER_PORT: ${SERVER_PORT}
+        POSTGRES_HOST: postgres
     restart: always
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     environment:
-      SERVER_PORT: ${SERVER_PORT}
+      SERVER_PORT: ${SERVER_PORT},
+      POSTGRES_HOST: postgres
     networks:
       - awesome
     depends_on:
+      - postgres
+    links:
       - postgres
 
   pgadmin:
@@ -47,10 +51,12 @@ services:
       - "8080:80"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-    depends_on:
-      - postgres
     networks:
       - awesome
+    depends_on:
+      - postgres
+    links:
+      - postgres
 
 
 volumes:
