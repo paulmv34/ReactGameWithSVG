@@ -20,11 +20,12 @@ ReactDOM.hydrateRoot(
   </React.StrictMode>
 )
 
-if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/serviceWorker.js', {
-      scope: '/',
-      type: 'module',
-    })
-  })
-}
+// TODO решить проблему сервисворкера - перехватывает запросы
+// if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker.register('/serviceWorker.js', {
+//       scope: '/',
+//       type: 'module',
+//     })
+//   })
+// }
