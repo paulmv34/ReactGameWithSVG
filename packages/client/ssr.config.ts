@@ -1,7 +1,7 @@
-import { defineConfig, PluginOption } from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import * as path from 'path'
-import svgr from '@svgr/rollup'
+import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
     },
   },
-  plugins: [react(), svgr() as PluginOption],
+  plugins: [react(), svgr()],
   build: {
     lib: {
       entry: path.resolve(__dirname, 'ssr.tsx'),

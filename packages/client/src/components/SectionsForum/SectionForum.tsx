@@ -9,7 +9,6 @@ import forumService from '@/services/forum.servise'
 import Loader from '@/components/Loader/Loader'
 import Title from '@/components/Title/Title'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
 
 const SectionForum = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -33,8 +32,8 @@ const SectionForum = () => {
   }, [idSection])
 
   return (
-    <div className={styles['container-forum']}>
-      <Title title="Форум" className={styles['title']} />
+    <div className={styles.containerForum}>
+      <Title title="Форум" className={styles.title} />
       {isLoading && <Loader />}
       {section && <ForumHeader title={section.name} idSection={section.id} />}
       {topics && <ForumContent topics={topics} />}
