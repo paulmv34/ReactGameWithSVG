@@ -1,16 +1,16 @@
-export const BASE_URL = 'http://localhost:3001/api'
-export const LOCAL_URL = 'http://localhost:3001'
+export const API_URL = '/api'
+export const LOCAL_URL = ''
 export const TEAM_NAME = 'NoHandlebars'
 export const RATING_FIELD_NAME = 'score'
 
 export enum END_POINTS_URL {
-  ADD_REACTION = '/api/commentAddReaction',
+  ADD_REACTION = '/commentAddReaction',
   CHANGE_USER_PASSWORD = '/user/password',
   CHANGE_USER_PROFILE = '/user/profile',
   CHANGE_USER_PROFILE_AVATAR = '/user/profile/avatar',
-  FORUM_SECTIONS = '/api/forum/section',
-  FORUM_TOPIC = '/api/forum/topic',
-  TOPIC_MESSAGE = '/api/forum/message',
+  FORUM_SECTIONS = '/forum/section',
+  FORUM_TOPIC = '/forum/topic',
+  TOPIC_MESSAGE = '/forum/message',
 }
 
 export type TUserData = {

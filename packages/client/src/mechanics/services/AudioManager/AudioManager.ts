@@ -31,7 +31,6 @@ export class AudioManager extends EventEmitter {
     this.isMuteKeyPressed = false
     this.isPauseKeyPressed = false
     this.reset()
-    console.log('loaded')
   }
 
   unload() {
@@ -162,8 +161,6 @@ export class AudioManager extends EventEmitter {
 
   /** Проигрывает конкретный AudioElement из Resources.soundList. */
   playSound(sound: keyof typeof SoundPathList, resumeTime = 0) {
-    console.log('played')
-
     if (this.isStopped) {
       return
     }
