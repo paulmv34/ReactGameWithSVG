@@ -1,5 +1,5 @@
 import { TReaction } from '@/pages/Forum/components/ForumContent/ForumItem/types'
-import { axiosService, axiosServiceLocal } from './axiosService'
+import { axiosService } from './axiosService'
 
 // Types
 import { END_POINTS_URL } from './types'
@@ -17,21 +17,21 @@ export const forumApi = {
     return axiosService.get(`${END_POINTS_URL.ADD_REACTION}/${comment_id}/reactions`)
   },
   getSections() {
-    return axiosServiceLocal.get<ForumSection[]>(`${END_POINTS_URL.FORUM_SECTIONS}`)
+    return axiosService.get<ForumSection[]>(`${END_POINTS_URL.FORUM_SECTIONS}`)
   },
   getSection(id: string) {
-    return axiosServiceLocal.get<ForumSection>(`${END_POINTS_URL.FORUM_SECTIONS}/${id}`)
+    return axiosService.get<ForumSection>(`${END_POINTS_URL.FORUM_SECTIONS}/${id}`)
   },
   createTopic(data: CreateTopic) {
-    return axiosServiceLocal.post<CreateTopic>(`${END_POINTS_URL.FORUM_TOPIC}`, data)
+    return axiosService.post<CreateTopic>(`${END_POINTS_URL.FORUM_TOPIC}`, data)
   },
   getTopics(sectionId: string) {
-    return axiosServiceLocal.get<PartialTopic[]>(`${END_POINTS_URL.FORUM_TOPIC}?section_id=${sectionId}`)
+    return axiosService.get<PartialTopic[]>(`${END_POINTS_URL.FORUM_TOPIC}?section_id=${sectionId}`)
   },
   getTopic(topicId: string) {
-    return axiosServiceLocal.get<Topic>(`${END_POINTS_URL.FORUM_TOPIC}/${topicId}`)
+    return axiosService.get<Topic>(`${END_POINTS_URL.FORUM_TOPIC}/${topicId}`)
   },
   createTopicMessage(data: CreateTopicMessage) {
-    return axiosServiceLocal.post<TopicMessage>(`${END_POINTS_URL.TOPIC_MESSAGE}`, data)
+    return axiosService.post<TopicMessage>(`${END_POINTS_URL.TOPIC_MESSAGE}`, data)
   },
 }
