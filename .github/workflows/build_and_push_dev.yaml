@@ -35,4 +35,4 @@ jobs:
           context: .
           file: Dockerfile.server
           push: true
-          tags: ghcr.io/${{ env.OWNER_LC }}/${{ env.REPO_NAME_LC }}/server:${{ github.sha }}
+          tags: ghcr.io/${{ env.OWNER_LC }}/${{ env.REPO_NAME_LC }}/server-dev:${{ github.sha }}
