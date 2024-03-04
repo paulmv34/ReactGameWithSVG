@@ -15,7 +15,6 @@ export const proxyMiddleware: RequestHandler = (req, res, next) => {
     target: YANDEX_API,
     pathRewrite: { '^/api': '' },
     changeOrigin: true,
-    secure: false,
     cookieDomainRewrite: { 'ya-praktikum.tech': req.hostname },
     selfHandleResponse: true,
     logLevel: 'error',
