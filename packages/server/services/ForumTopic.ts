@@ -6,6 +6,7 @@ import { ForumSection } from '../models/ForumSection'
 import { ForumTopic } from '../models/ForumTopic'
 import { User } from '../models/User'
 import { throwIfError } from '../utils/throwIf'
+import { xssErrorHandler, xssValidator } from '../middlewares/xssValidation'
 
 export const forumTopicRoute = Router()
   .use(express.json())
@@ -25,7 +26,7 @@ export const forumTopicRoute = Router()
       .then((topic) => res.status(200).json(topic))
       .catch(next)
   })
-  .post('/', (req: Request, res: Response, next) => {
+  .post('/', xssValidator(), xssErrorHandler, (req: Request, res: Response, next) => {
     if (res.locals.user && res.locals.user.id) {
       req.body.user_id = res.locals.user.id
       ForumTopic.create(req.body)
@@ -35,7 +36,7 @@ export const forumTopicRoute = Router()
       res.status(500).send({ type: 'error', message: 'Нет доступа' })
     }
   })
-  .put('/:id', (req: Request, res: Response, next) => {
+  .put('/:id', xssValidator(), xssErrorHandler, (req: Request, res: Response, next) => {
     if (res.locals.user && res.locals.user.id) {
       ForumTopic.update(req.body, { where: { id: req.params.id, user_id: res.locals.user.id }, returning: true })
         .then((result) => {
