@@ -1,4 +1,4 @@
-import { axiosService } from '../axiosService'
+import { axiosYandexService as axiosService } from '../axiosService'
 import type { SignInData, SignUpData, UserInfo, YandexServiceId } from './types'
 
 class AuthAPI {

@@ -1,5 +1,5 @@
 import { END_POINTS_URL, TUserData, TUserPassword } from './types'
-import { axiosService } from './axiosService'
+import { axiosYandexService as axiosService } from './axiosService'
 import { handleError } from '@/utils/handleError'
 
 export const userApi = {

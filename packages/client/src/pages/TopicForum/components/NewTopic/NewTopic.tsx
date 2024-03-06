@@ -10,8 +10,10 @@ import { useParams } from 'react-router'
 import forumService from '@/services/forum.servise'
 import { toast } from 'react-toastify'
 import { ROUTES } from '@/types/types'
+import { useAppSelector } from '@/hooks/useAppSelector'
 
 const NewTopic: FC = () => {
+  const userID = useAppSelector((state) => state.user.user?.id) || 0
   const [nameTopic, setNameTopic] = useState('')
   const [questTopic, setQuestTopic] = useState('')
 
@@ -26,7 +28,7 @@ const NewTopic: FC = () => {
         section_id: +idSection,
       }
 
-      await forumService.createTopic(data)
+      await forumService.createTopic(userID, data)
 
       navigate(`${ROUTES.FORUM_SECTION}/${idSection}`)
     } else {

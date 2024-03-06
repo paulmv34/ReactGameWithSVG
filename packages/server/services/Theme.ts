@@ -9,6 +9,7 @@ export const themizationRoute = Router()
   .use(express.json())
   .use('/', checkAuthMiddleware)
   .get('/', async (_req: Request, res: Response): Promise<Response> => {
+    console.log(res)
     if (res.locals.user && res.locals.user.id) {
       const defaultTheme = 'system'
 

@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { State } from '@/features/theme/types'
-import { ErrorObject, Themes, ThemesPayload } from '@/types/types'
+import { ErrorObject, FetchThemePayload, SetThemePayload, Themes } from '@/types/types'
 import { getErrorMessage } from '@/utils/getErrorMessage'
 import ThemeService from '@/services/theme.service'
 
-export const setTheme = createAsyncThunk('theme/setTheme', async (payload: ThemesPayload, { rejectWithValue }) => {
+export const setTheme = createAsyncThunk('theme/setTheme', async (payload: SetThemePayload, { rejectWithValue }) => {
   try {
-    const result = await ThemeService.setTheme(payload.theme)
+    const result = await ThemeService.setTheme(payload.userId, payload.theme)
     localStorage.setItem('theme', result)
     return { theme: result }
   } catch (error: unknown) {
@@ -14,15 +14,18 @@ export const setTheme = createAsyncThunk('theme/setTheme', async (payload: Theme
   }
 })
 
-export const fetchTheme = createAsyncThunk('theme/fetchTheme', async (_, { rejectWithValue }) => {
-  try {
-    const result = await ThemeService.getTheme()
-    localStorage.setItem('theme', result)
-    return { theme: result }
-  } catch (error) {
-    return rejectWithValue(getErrorMessage(error))
+export const fetchTheme = createAsyncThunk(
+  'theme/fetchTheme',
+  async (payload: FetchThemePayload, { rejectWithValue }) => {
+    try {
+      const result = await ThemeService.getTheme(payload.userId)
+      localStorage.setItem('theme', result)
+      return { theme: result }
+    } catch (error) {
+      return rejectWithValue(getErrorMessage(error))
+    }
   }
-})
+)
 
 const defaultTheme = 'system'
 

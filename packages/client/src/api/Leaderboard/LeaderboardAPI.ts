@@ -1,4 +1,4 @@
-import { axiosService } from '../axiosService'
+import { axiosYandexService as axiosService } from '../axiosService'
 import { LeaderboardData, LeaderboardNewRecordExtended, LeaderboardResponseItem } from '@/types/types'
 
 class LeaderboardAPI {

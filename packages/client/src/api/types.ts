@@ -1,3 +1,4 @@
+export const YANDEX_API_URL = 'https://ya-praktikum.tech/api/v2'
 export const API_URL = '/api'
 export const LOCAL_URL = ''
 export const TEAM_NAME = 'NoHandlebars'

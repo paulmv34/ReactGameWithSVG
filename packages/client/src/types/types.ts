@@ -126,6 +126,11 @@ export interface CreateTopicMessage {
 
 export type Themes = 'system' | 'dark' | 'light'
 
-export type ThemesPayload = {
+export type SetThemePayload = {
   theme: Themes
+  userId: number
+}
+
+export type FetchThemePayload = {
+  userId: number
 }

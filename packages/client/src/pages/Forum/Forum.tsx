@@ -6,15 +6,17 @@ import Loader from '@/components/Loader/Loader'
 import Title from '@/components/Title/Title'
 import { Link, useNavigate } from 'react-router-dom'
 import forumService from '@/services/forum.servise'
+import { useAppSelector } from '@/hooks/useAppSelector'
 
 const Forum: FC = () => {
+  const userID = useAppSelector((state) => state.user.user?.id) || 0
   const [isLoading, setIsLoading] = useState(true)
   const [sections, setSections] = useState<ForumSection[]>([])
   const navigate = useNavigate()
 
   const getSections = async () => {
     try {
-      const sectionsData = await forumService.getSectionsData()
+      const sectionsData = await forumService.getSectionsData(userID)
       setSections(sectionsData)
       setIsLoading(false)
     } catch (e) {

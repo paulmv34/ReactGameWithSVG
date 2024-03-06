@@ -18,6 +18,7 @@ export class AudioManager extends EventEmitter {
     super()
 
     this.registerGlobalEvents()
+
     this.context = this.game.resources.audioContext
   }
 
@@ -180,7 +181,8 @@ export class AudioManager extends EventEmitter {
     /**  Регулировка громкости звука. */
     const gainNode = this.context.createGain()
     const islowVolumeSound = sound === 'idle' || sound === 'move' || sound === 'ice'
-    gainNode.gain.value = islowVolumeSound ? 0.4 : 1
+    //gainNode.gain.value = islowVolumeSound ? 0.4 : 1
+    gainNode.gain.value = islowVolumeSound ? 0.1 : 0.3
 
     /**  Подключаем звук к выходу с учетом громкости. */
     audio.connect(gainNode)

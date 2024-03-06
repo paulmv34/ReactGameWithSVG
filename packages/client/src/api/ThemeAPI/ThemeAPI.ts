@@ -3,12 +3,12 @@ import { axiosService } from '../axiosService'
 class ThemeAPI {
   private readonly baseEndpoint = '/theme'
 
-  get() {
-    return axiosService.get(`${this.baseEndpoint}`)
+  get(userId: number) {
+    return axiosService.get(`${this.baseEndpoint}?user_id=${userId}`)
   }
 
-  set(themeName: string) {
-    return axiosService.post<Promise<string>>(`${this.baseEndpoint}`, { themeName })
+  set(userId: number, themeName: string) {
+    return axiosService.post<Promise<string>>(`${this.baseEndpoint}?user_id=${userId}`, { themeName })
   }
 }
 

@@ -10,19 +10,21 @@ import BackLink from '@/components/BackLink/BackLink'
 import { CreateTopicMessage, ROUTES, Topic, TopicMessage } from '@/types/types'
 import { useParams } from 'react-router'
 import Loader from '@/components/Loader/Loader'
+import { useAppSelector } from '@/hooks/useAppSelector'
 
 const TopicForum: FC = () => {
+  const userID = useAppSelector((state) => state.user.user?.id) || 0
   const [topic, setTopic] = useState<Topic | null>(null)
   const { idSection, idTopic } = useParams()
   const navigate = useNavigate()
 
   const createMessage = async (data: CreateTopicMessage): Promise<TopicMessage> => {
-    return forumService.createTopicMessageById(data)
+    return forumService.createTopicMessageById(userID, data)
   }
 
   const getTopicById = async (id: string) => {
     try {
-      const topicData = await forumService.getTopicById(id)
+      const topicData = await forumService.getTopicById(userID, id)
       setTopic(topicData)
     } catch (e) {
       navigate(ROUTES.ERROR_500)

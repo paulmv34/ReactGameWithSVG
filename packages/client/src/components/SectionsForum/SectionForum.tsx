@@ -9,15 +9,17 @@ import forumService from '@/services/forum.servise'
 import Loader from '@/components/Loader/Loader'
 import Title from '@/components/Title/Title'
 import { toast } from 'react-toastify'
+import { useAppSelector } from '@/hooks/useAppSelector'
 
 const SectionForum = () => {
+  const userID = useAppSelector((state) => state.user.user?.id) || 0
   const [isLoading, setIsLoading] = useState(true)
   const [section, setSection] = useState<ForumSection | null>(null)
   const [topics, setTopics] = useState<PartialTopic[]>([])
   const { idSection } = useParams()
-  const getSection = async (id: string) => forumService.getSectionData(id)
+  const getSection = async (id: string) => forumService.getSectionData(userID, id)
 
-  const getTopics = async (id: string) => forumService.getTopicsFromSection(id)
+  const getTopics = async (id: string) => forumService.getTopicsFromSection(userID, id)
 
   useEffect(() => {
     if (idSection) {

@@ -7,6 +7,7 @@ import { ROUTES } from './types/types'
 
 import Layout from './components/Layout/Layout'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import userService from '@/services/user.service'
 
 // Pages
 import Error from './pages/Error/Error'
@@ -30,9 +31,19 @@ import AuthService from '@/services/auth.service'
 import NewTopic from '@/pages/TopicForum/components/NewTopic/NewTopic'
 import SectionForum from '@/components/SectionsForum/SectionForum'
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
+import { useAuth } from '@/hooks/useAuth'
+import { useAppSelector } from '@/hooks/useAppSelector'
 
 function App() {
+  const user = useAppSelector((state) => state.user.user) || false
+  const { isLoggedIn } = useAuth()
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      if (user) userService.set(user)
+    }
+  }, [isLoggedIn])
 
   useEffect(() => {
     const getUser = async () => {
@@ -40,7 +51,7 @@ function App() {
     }
 
     // На проде заменить аргумент у функции на `code`
-    const oAuthCode = getUrlParams('http://localhost:3000/?code')
+    const oAuthCode = getUrlParams('http://handlebars.ya-praktikum.tech/?code')
 
     if (oAuthCode) {
       AuthService.oAuthYandexHandlerLogin(oAuthCode)

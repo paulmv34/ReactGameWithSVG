@@ -27,6 +27,7 @@ const themes: ThemeList = [
 ]
 
 const ThemeSwitcher: FC = () => {
+  const userId = useAppSelector((state) => state.user.user?.id) || 0
   const themeState = useAppSelector((state) => state.theme)
 
   const dispatch = useAppDispatch()
@@ -34,7 +35,7 @@ const ThemeSwitcher: FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(fetchTheme())
+      dispatch(fetchTheme({ userId }))
     } else {
       dispatch(getThemeLocal())
     }
@@ -46,7 +47,7 @@ const ThemeSwitcher: FC = () => {
 
   const onSetTheme = (newTheme: Themes) => {
     if (isLoggedIn) {
-      dispatch(setTheme({ theme: newTheme }))
+      dispatch(setTheme({ userId: userId, theme: newTheme }))
     } else {
       dispatch(setThemeLocal({ theme: newTheme }))
     }

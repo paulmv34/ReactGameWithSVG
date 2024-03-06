@@ -3,18 +3,18 @@ import { AxiosResponse } from 'axios'
 import ThemeAPI from '@/api/ThemeAPI/ThemeAPI'
 
 class ThemeService {
-  async getTheme(): Promise<string> {
+  async getTheme(userId: number): Promise<string> {
     try {
-      const response: AxiosResponse<Promise<string>> = await ThemeAPI.get()
+      const response: AxiosResponse<Promise<string>> = await ThemeAPI.get(userId)
       return response.data
     } catch (error) {
       handleError(error)
       throw error
     }
   }
-  async setTheme(themeName: string): Promise<string> {
+  async setTheme(userId: number, themeName: string): Promise<string> {
     try {
-      const response: AxiosResponse<Promise<string>> = await ThemeAPI.set(themeName)
+      const response: AxiosResponse<Promise<string>> = await ThemeAPI.set(userId, themeName)
       return response.data
     } catch (error) {
       handleError(error)
